@@ -12,7 +12,7 @@ const recipes = [
       { id: "paprika", name: "Paprika", singular: "paprika", plural: "paprika's", unit: "", amount: 2 }
     ],
     instructions: [
-      { text: "Kook {spaghetti}." },
+      { text: "Kook {spaghetti}. test" },
       { text: "Bak {gehakt}." },
       { text: "Snijd {ui}." },
       { text: "Voeg {paprika} toe." },
