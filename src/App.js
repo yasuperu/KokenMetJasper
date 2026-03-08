@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/kokenmetjasper" element={<Home />} />
         <Route path="/recipe/:id" element={<RecipePage />} />
       </Routes>
     </Router>
