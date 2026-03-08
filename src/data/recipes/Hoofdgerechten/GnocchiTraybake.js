@@ -21,7 +21,7 @@ const recipe = {
     { id: "basilicum", name: "gedroogde basilicum", amount: 1, unit: "tl" },
     { id: "dille", name: "dille", amount: 1, unit: "tl" },
     { id: "oregano", name: "oregano", amount: 1, unit: "tl" },
-    { id: "chilipoeder", name: "chilipoeder", amount: 1, unit: "naar smaak" }
+    { id: "chilipoeder", name: "chilipoeder", amount: 0.25, unit: "tl" }
   ],
 
   instructions: [
