@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/KokenMetJasper/static/css/main.73b32acc.css",
-    "main.js": "/KokenMetJasper/static/js/main.8f831f41.js",
+    "main.css": "/KokenMetJasper/static/css/main.5d303e64.css",
+    "main.js": "/KokenMetJasper/static/js/main.bbfdff6a.js",
+    "static/media/surinaamse-roti-kip-masala-1611503768.jpg": "/KokenMetJasper/static/media/surinaamse-roti-kip-masala-1611503768.f44d5929132db0af1857.jpg",
     "index.html": "/KokenMetJasper/index.html",
-    "main.73b32acc.css.map": "/KokenMetJasper/static/css/main.73b32acc.css.map",
-    "main.8f831f41.js.map": "/KokenMetJasper/static/js/main.8f831f41.js.map"
+    "main.5d303e64.css.map": "/KokenMetJasper/static/css/main.5d303e64.css.map",
+    "main.bbfdff6a.js.map": "/KokenMetJasper/static/js/main.bbfdff6a.js.map"
   },
   "entrypoints": [
-    "static/css/main.73b32acc.css",
-    "static/js/main.8f831f41.js"
+    "static/css/main.5d303e64.css",
+    "static/js/main.bbfdff6a.js"
   ]
 }
