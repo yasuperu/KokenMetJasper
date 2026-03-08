@@ -1,50 +1,263 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #fafafa;
+/* -----------------------------
+GLOBAL
+----------------------------- */
+
+:root {
+  --sage: #8fae9b;
+  --sage-dark: #6f8f7c;
+  --sage-light: #dfe9e3;
+
+  --background: #f6f8f6;
+  --card: #ffffff;
+
+  --text-main: #2c2c2c;
+  --text-soft: #6b6b6b;
+
+  --radius: 14px;
+  --shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--background);
+  color: var(--text-main);
+}
+
+
+/* -----------------------------
+NAVBAR
+----------------------------- */
+
 .navbar {
-  background: #ff7043;
-  padding: 1rem;
+  background: white;
+  padding: 18px 32px;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 .logo {
-  color: white;
   font-size: 1.5rem;
+  font-weight: 600;
   text-decoration: none;
+  color: var(--sage-dark);
 }
 
+
+/* -----------------------------
+CONTAINER
+----------------------------- */
+
 .container {
-  padding: 2rem;
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
 }
+
+
+/* -----------------------------
+SEARCH BAR
+----------------------------- */
+
+.search-bar {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 1px solid #e2e2e2;
+  font-size: 16px;
+  margin-bottom: 30px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: var(--sage);
+}
+
+
+/* -----------------------------
+RECIPE GRID
+----------------------------- */
 
 .recipe-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 26px;
 }
 
+
+/* -----------------------------
+RECIPE CARD
+----------------------------- */
+
 .recipe-card {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.recipe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.12);
 }
 
 .recipe-card img {
   width: 100%;
-  border-radius: 6px;
+  height: 180px;
+  object-fit: cover;
+}
+
+.recipe-card-content {
+  padding: 16px 18px 20px 18px;
+}
+
+.recipe-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.recipe-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.recipe-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+
+/* -----------------------------
+TAGS
+----------------------------- */
+
+.tags {
+  margin-top: 10px;
 }
 
 .tags span {
-  background: #eee;
-  padding: 4px 8px;
-  margin-right: 5px;
-  font-size: 0.8rem;
+  display: inline-block;
+  background: var(--sage-light);
+  color: var(--sage-dark);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  margin-right: 6px;
 }
 
-.search-bar {
+
+/* -----------------------------
+RECIPE PAGE
+----------------------------- */
+
+.recipe-page {
+  max-width: 850px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.recipe-page h1 {
+  margin-bottom: 20px;
+}
+
+.recipe-image {
   width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 2rem;
+  border-radius: var(--radius);
+  margin-bottom: 30px;
+  box-shadow: var(--shadow);
+}
+
+/* -----------------------------
+SERVINGS SELECTOR
+----------------------------- */
+
+.servings {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.servings button {
+  background: var(--sage);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.servings button:hover {
+  background: var(--sage-dark);
+}
+
+.servings span {
+  font-weight: 500;
+}
+
+
+/* -----------------------------
+INGREDIENT LIST
+----------------------------- */
+
+.recipe-page ul {
+  background: white;
+  padding: 18px 22px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  list-style: none;
+}
+
+.recipe-page ul li {
+  padding: 6px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.recipe-page ul li:last-child {
+  border-bottom: none;
+}
+
+
+/* -----------------------------
+INSTRUCTIONS
+----------------------------- */
+
+.recipe-page ol {
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+.recipe-page ol li {
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+
+/* -----------------------------
+MOBILE
+----------------------------- */
+
+@media (max-width: 700px) {
+
+  .container {
+    padding: 30px 16px;
+  }
+
+  .recipe-grid {
+    gap: 18px;
+  }
+
+  .recipe-card img {
+    height: 160px;
+  }
+
 }
