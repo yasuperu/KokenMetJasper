@@ -1,6 +1,6 @@
 {
-  "id": "aardappelkroket-chili-crisp-halloumi-salade",
-  "title": "Aardappelkroket & Chili Crisp Halloumi Salade",
+  "id": "aardappelkroket-salade",
+  "title": "Aardappelkroket Salade met Halloumi",
   "category": "Salade",
   "tags": [
     "Vegetarisch",
@@ -8,7 +8,7 @@
   ],
   "servings": 4,
   "image": "",
-  "description": "Salade met krokante aardappelkroketjes, halloumi met honing en chili crisp-olie en een frisse dilledressing.",
+  "description": "Een frisse salade met krokante aardappelkroketjes, chili crisp halloumi en een romige dilledressing!",
   "source": {
     "type": "social",
     "url": "https://www.instagram.com/reel/DNK1z8LoKcw/",
@@ -132,11 +132,12 @@
     }
   ],
   "instructions": [
-    "Verwarm de oven voor op 220 graden. Verdeel {aardappelkroketjes} over een met bakpapier beklede bakplaat.",
-    "Snijd {halloumi} in kleine blokjes en meng deze met {honing} en {crispyChiliOlie}. Verdeel de blokjes {halloumi:naam} ook over de bakplaat.",
-    "Bak alles 15-20 minuten in de oven en hussel halverwege voorzichtig door. Je kunt de {aardappelkroketjes:naam} ook los van de {halloumi:naam} in de airfryer bereiden, dan worden ze iets knapperiger.",
-    "Maak ondertussen de dressing: blend {verseDille}, {verseKoriander}, {knoflook}, {griekseYoghurt}, {mayonaise}, {augurkenvocht}, {zout} en {peper:naam} fijn met een staafmixer of foodprocessor.",
-    "Snijd {komkommer}, {bosui}, {avocado} en {augurk} en doe ze samen met {ingelegdeRodeUi} in een schaal.",
-    "Serveer de salade met de {aardappelkroketjes:naam}, de {halloumi:naam} en de dilledressing."
+    "Verwarm de oven voor op 220 graden.",
+    "Verdeel {aardappelkroketjes} over een bakplaat met bakpapier.",
+    "Snijd {halloumi} in kleine blokjes en meng met {honing} en {crispyChiliOlie}. Verdeel de {halloumi:naam} ook over de bakplaat.",
+    "Bak 15-20 minuten in de oven en schep halverwege voorzichtig om. Tip: bak de {aardappelkroketjes:naam} los in de airfryer, dan worden ze nog knapperiger.",
+    "Snijd ondertussen {komkommer}, {bosui}, {avocado} en {augurk} en doe alles samen met {ingelegdeRodeUi} in een schaal.",
+    "Blend voor de dressing {verseDille}, {verseKoriander}, {knoflook}, {griekseYoghurt}, {mayonaise}, {augurkenvocht}, {zout} en {peper:naam} fijn met een staafmixer.",
+    "Serveer de salade met de {aardappelkroketjes:naam}, de {halloumi:naam} en de dressing."
   ]
 }
