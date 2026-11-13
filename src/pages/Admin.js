@@ -8,6 +8,7 @@ import { slugify } from "../utils/recipeTools";
 import RecipeEditor, { draftIngredients, recipeToDraft } from "../components/admin/RecipeEditor";
 import useSeo from "../hooks/useSeo";
 import { recipePath } from "../utils/seo";
+import { decryptSteps, encryptSteps } from "../utils/gate";
 
 const TOKEN_KEY = "kmj-gh-token";
 
@@ -299,6 +300,9 @@ function Admin() {
   async function startEdit(entry) {
     setMessage("");
     let content = null;
+    if (entry.data.gatedSteps) {
+      content = { ingredients: entry.data.ingredients, instructions: await decryptSteps(entry.data.gatedSteps) };
+    }
     if (entry.data.locked) {
       if (!bookPassword) {
         setMessage("Ontgrendel eerst het kookboek-wachtwoord om dit recept te bewerken.");
@@ -362,12 +366,18 @@ function Admin() {
         recipe.source = { type: "book", ...pick(["book", "author", "page", "url"]) };
         recipe.locked = await encryptJSON({ ingredients, instructions }, bookPassword);
       } else {
+        const gate = draft.sourceType === "social" && draft.gate;
         if (draft.sourceType === "social") {
           recipe.source = { type: "social", ...pick(["url", "creator"]) };
-          if (draft.gate) recipe.gate = true;
+          if (gate) recipe.gate = true;
         }
         recipe.ingredients = ingredients;
-        recipe.instructions = instructions;
+        if (gate) {
+          // Bereiding versleuteld met de sitesleutel: op GitHub onleesbaar, na de klik voor iedereen zichtbaar
+          recipe.gatedSteps = await encryptSteps(instructions);
+        } else {
+          recipe.instructions = instructions;
+        }
       }
 
       const path = `${GITHUB.recipesDir}/${id}.json`;

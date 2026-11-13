@@ -7,7 +7,7 @@ import LockedContent from "../components/LockedContent";
 import SourceNote from "../components/SourceNote";
 import { checkPassword, decryptJSON } from "../utils/crypto";
 import StepsGate from "../components/StepsGate";
-import { hasVisitedPost, isGated, markPostVisited } from "../utils/gate";
+import { decryptSteps, hasVisitedPost, isGated, markPostVisited } from "../utils/gate";
 import passwordLock from "../data/lock.json";
 import { forgetPassword, getPassword, setPassword } from "../utils/passwordStore";
 import { imageUrl } from "../config";
@@ -22,7 +22,7 @@ function RecipePage() {
   const [servings, setServings] = useState(recipe ? recipe.servings : 1);
   const [printPhoto, setPrintPhoto] = useState(false);
   const [content, setContent] = useState(
-    recipe && !recipe.locked ? { ingredients: recipe.ingredients, instructions: recipe.instructions } : null
+    recipe && !recipe.locked ? { ingredients: recipe.ingredients, instructions: recipe.instructions || [] } : null
   );
   const gated = isGated(recipe);
   const [stepsVisible, setStepsVisible] = useState(() => !gated || hasVisitedPost(recipe.id));
@@ -44,6 +44,23 @@ function RecipePage() {
         }
       : { noindex: true }
   );
+
+  // Versleutelde bereiding (social media) pas ontsleutelen als hij getoond mag worden
+  const [stepsReady, setStepsReady] = useState(!recipe?.gatedSteps);
+  useEffect(() => {
+    if (!stepsVisible || !recipe?.gatedSteps || stepsReady) return;
+    let cancelled = false;
+    decryptSteps(recipe.gatedSteps)
+      .then((instructions) => {
+        if (cancelled) return;
+        setContent((c) => ({ ...c, instructions }));
+        setStepsReady(true);
+      })
+      .catch(() => !cancelled && setGateError("De bereiding kon niet geladen worden."));
+    return () => {
+      cancelled = true;
+    };
+  }, [stepsVisible, stepsReady, recipe]);
 
   // Automatisch ontgrendelen met een onthouden wachtwoord
   useEffect(() => {
@@ -130,7 +147,8 @@ function RecipePage() {
           <SourceNote source={recipe.source} />
           {unlocked && (
             <p className="recipe-meta">
-              {content.ingredients.length} ingrediënten · {content.instructions.length} stappen
+              {content.ingredients.length} ingrediënten
+              {stepsReady && <> · {content.instructions.length} stappen</>}
               <span className="print-only"> · voor {servings} {servings === 1 ? "persoon" : "personen"}</span>
             </p>
           )}
@@ -175,7 +193,7 @@ function RecipePage() {
           servings={servings}
           factor={factor}
           stepsReplacement={
-            stepsVisible ? null : (
+            stepsVisible && stepsReady ? null : (
               <StepsGate
                 source={recipe.source}
                 onVisit={visitPost}

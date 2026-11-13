@@ -40,10 +40,10 @@ async function deriveKey(password, salt, iterations) {
 }
 
 /** Versleutel een willekeurig JSON-object met een wachtwoord. */
-export async function encryptJSON(value, password) {
+export async function encryptJSON(value, password, iterations = ITERATIONS) {
   const salt = globalThis.crypto.getRandomValues(new Uint8Array(16));
   const iv = globalThis.crypto.getRandomValues(new Uint8Array(12));
-  const key = await deriveKey(password, salt, ITERATIONS);
+  const key = await deriveKey(password, salt, iterations);
   const data = await subtle().encrypt(
     { name: "AES-GCM", iv },
     key,
@@ -51,7 +51,7 @@ export async function encryptJSON(value, password) {
   );
   return {
     v: 1,
-    iterations: ITERATIONS,
+    iterations,
     salt: toBase64(salt),
     iv: toBase64(iv),
     data: toBase64(new Uint8Array(data)),

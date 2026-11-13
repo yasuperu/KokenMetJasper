@@ -12,7 +12,7 @@ Ga naar **https://kokenmetjasper.nl/jk** (zet er een bladwijzer van; er staat ne
 
 - **Eigen recept**: gewoon openbaar.
 - **Social media of website**: openbaar, met een link naar de post (Instagram, TikTok, YouTube, …) en optioneel de maker.
-  Met *Bereiding pas tonen nadat de bezoeker de post heeft bekeken* (`"gate": true`) blijven de ingrediënten zichtbaar, maar verschijnt de bereiding pas na een klik naar de post (of met het kookboek-wachtwoord). Zo krijgt de maker de klik. Dit is een beleefdheid, geen beveiliging; Google krijgt de bereiding van zulke recepten niet te zien.
+  Met *Bereiding pas tonen nadat de bezoeker de post heeft bekeken* (`"gate": true`) blijven de ingrediënten zichtbaar, maar verschijnt de bereiding pas na een klik naar de post (of met het kookboek-wachtwoord). Zo krijgt de maker de klik. De bereiding staat dan versleuteld in de repo (`gatedSteps`), met een sleutel die in de site zelf zit: op GitHub onleesbaar, na de klik voor iedere bezoeker zichtbaar. Dit is een beleefdheid, geen beveiliging; Google krijgt de bereiding van zulke recepten niet te zien.
 - **Uit een kookboek**: versleuteld, zie hieronder.
 
 ### Recepten uit kookboeken

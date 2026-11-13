@@ -132,13 +132,11 @@
       "note": "fijngemalen"
     }
   ],
-  "instructions": [
-    "Verwarm de oven voor op 220 graden.",
-    "Verdeel {aardappelkroketjes} over een bakplaat met bakpapier.",
-    "Snijd {halloumi} in kleine blokjes en meng met {honing} en {crispyChiliOlie}. Verdeel de {halloumi:naam} ook over de bakplaat.",
-    "Bak 15-20 minuten in de oven en schep halverwege voorzichtig om. Tip: bak de {aardappelkroketjes:naam} los in de airfryer, dan worden ze nog knapperiger.",
-    "Snijd ondertussen {komkommer}, {bosui}, {avocado} en {augurk} en doe alles samen met {ingelegdeRodeUi} in een schaal.",
-    "Blend voor de dressing {verseDille}, {verseKoriander}, {knoflook}, {griekseYoghurt}, {mayonaise}, {augurkenvocht}, {zout} en {peper:naam} fijn met een staafmixer.",
-    "Serveer de salade met de {aardappelkroketjes:naam}, de {halloumi:naam} en de dressing."
-  ]
+  "gatedSteps": {
+    "v": 1,
+    "iterations": 1000,
+    "salt": "H/N5AUHRskuDCPWG53uGMQ==",
+    "iv": "Ly5B4A/sxqcv/sIM",
+    "data": "Lf0t9o0VjCK0kiq8jruyIHqVOfQp2/kbzLWLL3Cy3VD6GorUYwLPwPN21/fpf7g8ES6SuWNUfkm9mS9pPw5yhNoVPHFUVk2K4N/ibYE/Qp+oAMSIMpXKLWOZguQHzOgDU7E9DqUimcuaG8vgsY/WlcZdCatiDAgJPKq1iW+mS+E0+iSS6q38j0+esMnhTZjmU8hyAci32/Er+70Gwm9macZazFst/OEOYJh1RNzlYkrVZ+RTazOSFFlAPl8J7HXa5u56luZ5kNvsjr8Hhbi9c3MeBTSKCjkvuB0y4tB4I/gVXV4CrLK/QJb/I1eQPcOSVEytVg3nY5a/qPKAbFwRW5AlkqtqRCOmWZYJpoD8mHjj8AziWStZ3bHrJqen4a0kPD85AC2I7FixMAjw8zan4JkLuWX+4mWPJ/syHptl2Yk48YDVb+FdEhdo6B2Li974m4wDt6uzyN48ZmlALM/N8HXa35eJY11dztZutdZcjkFiWtj+AMxzVhKMvscWaZ7/Q+54DTycmdbIax2kTfbhPVmbfgkONtZ2e6U+pXZgvagm5u0MWkWlcFiuRQe5bfc0Op8ogn7KrNAFMSNmPEcoZCy0hewBY4rAPc/XS3VG7J7t6YsMnkFHhwVNHD/8F8hkFoNa7cHD9/mnwQklmyd7CdqImydcouhsqL5dypQm565HAzmJ2k6aEV2FYT9CGAUZx4Jla0+KkTz4o3EOJot9ZbTR9ZNEogqBbrOD5mrbV1t2JADOEX+U5OC3WeQYYjPKb2XqgrK7sknq3gmmaraW8HALBoazmhyognHOUMbYm2MFxIsyLVrOlJXtDpX1qxB7cCJQZMnIWE5PvlNS1z6Kq/UE4Tny00UKheqMSc56T+vd2PZbNEAheMcNAN9N45A19FvWbdVRsQrz+3DXg7K7IN70bKaUx2HSlkzwvX7GiXOz71Vim6BNl48JEA27amAXT0pmjMJZ+/rbfGBZseaD19UB5BCdN2zAoBnmvp3fLTrj5tah6bguSu3RMg2m8iyF89DlyCTsN0qW/A=="
+  }
 }

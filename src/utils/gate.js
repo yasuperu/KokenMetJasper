@@ -1,15 +1,33 @@
 import { sourceType } from "./source";
+import { decryptJSON, encryptJSON } from "./crypto";
 
 /*
   Recepten van social media kunnen de bereiding afschermen tot de bezoeker
   de originele post heeft geopend, zodat de maker de klik krijgt.
-  Dit is een beleefdheid, geen beveiliging: de tekst staat gewoon in de site.
+
+  De bereiding staat versleuteld in de repo ("gatedSteps"), zodat hij op
+  GitHub niet leesbaar of doorzoekbaar is. De sleutel zit in de site zelf,
+  zodat elke bezoeker hem na de klik kan ontsleutelen: een slot op de deur,
+  geen kluis. Echt geheime recepten (kookboeken) gebruiken het wachtwoord.
 */
+
+const SITE_KEY = "koken-met-jasper/bereiding";
+const SITE_KEY_ITERATIONS = 1000; // snelheid boven sterkte; de sleutel is toch openbaar
+
+export function encryptSteps(instructions) {
+  return encryptJSON(instructions, SITE_KEY, SITE_KEY_ITERATIONS);
+}
+
+export function decryptSteps(payload) {
+  return decryptJSON(payload, SITE_KEY);
+}
 
 const KEY = "kmj-post-bezocht";
 
 export function isGated(recipe) {
-  return Boolean(recipe?.gate) && sourceType(recipe.source) === "social" && Boolean(recipe.source?.url);
+  return (
+    Boolean(recipe?.gate || recipe?.gatedSteps) && sourceType(recipe.source) === "social" && Boolean(recipe.source?.url)
+  );
 }
 
 function read() {

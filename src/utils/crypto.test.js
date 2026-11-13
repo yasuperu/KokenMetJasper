@@ -22,3 +22,12 @@ test("wachtwoordcontrole", async () => {
   expect(await checkPassword(lock, "anders")).toBe(false);
   expect(await checkPassword({}, "geheim")).toBe(false);
 });
+
+test("afgeschermde bereiding met de sitesleutel", async () => {
+  const { encryptSteps, decryptSteps } = require("./gate");
+  const steps = ["Verwarm de oven voor.", "Bak {kroket}."];
+  const payload = await encryptSteps(steps);
+  expect(payload.iterations).toBe(1000);
+  expect(JSON.stringify(payload)).not.toContain("oven");
+  expect(await decryptSteps(payload)).toEqual(steps);
+});
