@@ -1,3 +1,30 @@
+# Koken met Jasper
+
+## Een recept toevoegen
+
+Maak een bestand in `src/data/recipes/<Categorie>/`. Ingrediënten schrijf je in het **enkelvoud**; het meervoud wordt automatisch gemaakt als het aantal personen verandert.
+
+```js
+{ id: "ui", name: "ui", amount: 1 }                          // 1 ui → 2 uien
+{ id: "knoflook", name: "knoflook", amount: 2, unit: "teentje" } // 2 teentjes knoflook
+{ id: "gnocchi", name: "verse gnocchi", amount: 400, unit: "gr" } // gr/ml/el/tl: nooit meervoud
+{ id: "wraps", name: "wrap", amount: 4, step: 1 }            // altijd hele stuks
+{ id: "peper", name: "peper", amount: 1, note: "of sambal" } // toelichting
+{ id: "zout", name: "zout" }                                 // zonder amount: "naar smaak"
+{ id: "x", name: "kiwi", amount: 2, plural: "kiwi's" }       // eigen meervoud
+```
+
+In de bereiding:
+
+- `{ui}` → hoeveelheid + naam ("2 uien")
+- `{ui:naam}` → alleen de naam ("uien"), handig als je er later nog eens naar verwijst
+
+Klopt een meervoud niet? Voeg het woord toe aan `src/data/pluralWords.json`.
+
+Printen: knop "Recept printen" op de receptpagina. De print gebruikt het gekozen aantal personen.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
