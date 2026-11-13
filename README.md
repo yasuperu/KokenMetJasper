@@ -2,11 +2,17 @@
 
 ## Recepten beheren
 
-Ga naar **/admin** op de site (link "Beheer" onderaan elke pagina).
+Ga naar **https://kokenmetjasper.nl/keukenkastje** (zet er een bladwijzer van; er staat nergens een link naar). Het adres staat in `src/site.json` (`adminPath`) en kun je daar veranderen. De beheerpagina wordt nooit door Google geïndexeerd; de echte beveiliging is je GitHub-token.
 
 1. Eenmalig: maak een GitHub fine-grained token (alleen deze repo, *Contents: Read and write*, optioneel *Actions: Read-only*) en plak die op de beheerpagina. De token blijft alleen in je eigen browser.
 2. Nieuw recept → vul de velden in. Een ingrediëntenlijst of bereiding kun je in één keer plakken; de ingrediënten worden in de bereiding automatisch gekoppeld.
 3. Opslaan maakt een commit op `main`. De GitHub Action (`.github/workflows/deploy.yml`) bouwt en publiceert de site daarna automatisch (± 2 minuten).
+
+### Bron van een recept
+
+- **Eigen recept**: gewoon openbaar.
+- **Social media of website**: openbaar, met een link naar de post (Instagram, TikTok, YouTube, …) en optioneel de maker.
+- **Uit een kookboek**: versleuteld, zie hieronder.
 
 ### Recepten uit kookboeken
 
@@ -16,6 +22,10 @@ Vink *Dit recept komt uit een kookboek* aan en vul titel, auteur en pagina in.
 - Bezoekers zien titel, foto en bronvermelding, met een geblurde nep-weergave. Met het wachtwoord ontgrendel je het recept (en kun je het gewoon schalen en printen).
 - Alle boekrecepten gebruiken hetzelfde wachtwoord; `src/data/lock.json` controleert dat. **Ben je het wachtwoord kwijt, dan zijn die recepten niet meer te lezen.**
 - Gebruik bij boekrecepten alleen je eigen foto's.
+
+## Vindbaarheid (SEO)
+
+`npm run build` draait na de React-build ook `scripts/prerender.js`. Dat maakt per recept een echte pagina (`/recept/<id>/`) met titel, beschrijving, deelafbeelding (Open Graph) en receptgegevens voor Google (schema.org/Recipe), plus `sitemap.xml`. Kookboekrecepten krijgen geen ingrediënten in die gegevens. De algemene deelafbeelding is `public/og-image.png`.
 
 ## Receptformaat
 

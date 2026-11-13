@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { DOODLES } from "./Doodles";
 import { imageUrl } from "../config";
+import { recipePath } from "../utils/seo";
+import { platformName, sourceType } from "../utils/source";
 
 const ACCENTS = ["plum", "carrot", "leaf", "rose", "mustard", "cobalt"];
 const PLACEHOLDERS = [DOODLES.Beet, DOODLES.Tomato, DOODLES.PeaPod, DOODLES.Carrot];
@@ -11,7 +13,7 @@ function RecipeCard({ recipe, index = 0 }) {
   const image = imageUrl(recipe.image);
 
   return (
-    <Link to={`/recipe/${recipe.id}`} className={`recipe-card accent-${accent}`}>
+    <Link to={recipePath(recipe.id)} className={`recipe-card accent-${accent}`}>
       <div className="recipe-card-image">
         {image ? (
           <img src={image} alt="" loading="lazy" />
@@ -33,9 +35,14 @@ function RecipeCard({ recipe, index = 0 }) {
         {recipe.category && <p className="recipe-card-category">{recipe.category}</p>}
         <h3>{recipe.title}</h3>
         <p className="recipe-card-meta">
-          {recipe.source?.book
-            ? <>uit <cite>{recipe.source.book}</cite></>
-            : <>{(recipe.ingredients || []).length} ingrediënten · {recipe.servings} personen</>}
+          {sourceType(recipe.source) === "book" ? (
+            <>uit <cite>{recipe.source.book}</cite></>
+          ) : (
+            <>
+              {(recipe.ingredients || []).length} ingrediënten · {recipe.servings} personen
+              {sourceType(recipe.source) === "social" && <> · via {platformName(recipe.source.url)}</>}
+            </>
+          )}
         </p>
 
         {recipe.tags?.length > 0 && (

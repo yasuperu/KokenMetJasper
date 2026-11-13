@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import recipes from "../data/recipes";
 import RecipeCard from "../components/RecipeCard";
+import useSeo from "../hooks/useSeo";
 import SearchBar from "../components/SearchBar";
 import { Beet, Carrot, Chili, Garlic, Leaf, LemonSlice, PeaPod, Tomato, Whisk } from "../components/Doodles";
 
@@ -8,6 +9,8 @@ const normalize = (text) =>
   text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
 function Home() {
+  useSeo({ path: "/" });
+
   const [search, setSearch] = useState("");
   const [activeTag, setActiveTag] = useState(null);
 
@@ -26,6 +29,8 @@ function Home() {
         recipe.category,
         recipe.source?.book,
         recipe.source?.author,
+        recipe.source?.creator,
+        recipe.description,
         ...(recipe.tags || []),
         ...(recipe.ingredients || []).map((i) => i.name),
       ].join(" ");

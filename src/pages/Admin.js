@@ -6,6 +6,8 @@ import { checkPassword, decryptJSON, encryptJSON, LOCK_CHECK } from "../utils/cr
 import { getPassword, setPassword as storePassword } from "../utils/passwordStore";
 import { slugify } from "../utils/recipeTools";
 import RecipeEditor, { draftIngredients, recipeToDraft } from "../components/admin/RecipeEditor";
+import useSeo from "../hooks/useSeo";
+import { recipePath } from "../utils/seo";
 
 const TOKEN_KEY = "kmj-gh-token";
 
@@ -223,9 +225,7 @@ function Admin() {
   const [message, setMessage] = useState("");
   const [deployTrigger, setDeployTrigger] = useState(0);
 
-  useEffect(() => {
-    document.title = "Beheer · Koken met Jasper";
-  }, []);
+  useSeo({ title: "Beheer | Koken met Jasper", noindex: true });
 
   const load = useCallback(async () => {
     if (!client) return;
@@ -353,13 +353,18 @@ function Admin() {
         image,
       };
 
-      if (draft.isBook) {
-        const source = Object.fromEntries(
-          Object.entries(draft.source).map(([k, v]) => [k, String(v).trim()]).filter(([, v]) => v)
-        );
-        recipe.source = source;
+      if (draft.description.trim()) recipe.description = draft.description.trim();
+
+      const pick = (keys) =>
+        Object.fromEntries(keys.map((k) => [k, String(draft.source[k] || "").trim()]).filter(([, v]) => v));
+
+      if (draft.sourceType === "book") {
+        recipe.source = { type: "book", ...pick(["book", "author", "page", "url"]) };
         recipe.locked = await encryptJSON({ ingredients, instructions }, bookPassword);
       } else {
+        if (draft.sourceType === "social") {
+          recipe.source = { type: "social", ...pick(["url", "creator"]) };
+        }
         recipe.ingredients = ingredients;
         recipe.instructions = instructions;
       }
@@ -421,7 +426,7 @@ function Admin() {
 
       {draft ? (
         <>
-          {draft.isBook && (
+          {draft.sourceType === "book" && (
             <BookPasswordPanel lock={lock} password={bookPassword} onUnlocked={setBookPassword} onCreate={createLock} />
           )}
           <RecipeEditor
@@ -475,7 +480,7 @@ function Admin() {
                     </small>
                   </div>
                   <div className="admin-list-actions">
-                    <Link to={`/recipe/${entry.data.id}`} className="btn-link">Bekijk</Link>
+                    <Link to={recipePath(entry.data.id)} className="btn-link">Bekijk</Link>
                     <button type="button" className="btn-secondary" onClick={() => startEdit(entry)}>Bewerk</button>
                     <button type="button" className="btn-link danger" onClick={() => remove(entry)}>Verwijder</button>
                   </div>

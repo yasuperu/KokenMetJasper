@@ -8,6 +8,9 @@ import SourceNote from "../components/SourceNote";
 import { decryptJSON } from "../utils/crypto";
 import { forgetPassword, getPassword, setPassword } from "../utils/passwordStore";
 import { imageUrl } from "../config";
+import useSeo from "../hooks/useSeo";
+import { recipeDescription, recipePath, recipeTitle } from "../utils/seo";
+import NotFound from "./NotFound";
 
 function RecipePage() {
   const { id } = useParams();
@@ -23,8 +26,18 @@ function RecipePage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = recipe ? `${recipe.title} · Koken met Jasper` : "Koken met Jasper";
   }, [recipe]);
+
+  useSeo(
+    recipe
+      ? {
+          title: recipeTitle(recipe),
+          description: recipeDescription(recipe),
+          path: recipePath(recipe.id),
+          image: recipe.image,
+        }
+      : { noindex: true }
+  );
 
   // Automatisch ontgrendelen met een onthouden wachtwoord
   useEffect(() => {
@@ -61,14 +74,7 @@ function RecipePage() {
     setContent(null);
   }
 
-  if (!recipe) {
-    return (
-      <main className="container not-found">
-        <h1>Recept niet gevonden</h1>
-        <Link to="/" className="back-link">← Terug naar alle recepten</Link>
-      </main>
-    );
-  }
+  if (!recipe) return <NotFound />;
 
   const factor = servings / recipe.servings;
   const image = imageUrl(recipe.image);
@@ -88,6 +94,7 @@ function RecipePage() {
             </ul>
           )}
           <h1>{recipe.title}</h1>
+          {recipe.description && <p className="recipe-description">{recipe.description}</p>}
           <SourceNote source={recipe.source} />
           {unlocked && (
             <p className="recipe-meta">

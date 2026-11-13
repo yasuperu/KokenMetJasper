@@ -14,11 +14,15 @@ import {
 } from "../../utils/recipeTools";
 import { resizeImage } from "../../utils/image";
 import { imageUrl } from "../../config";
+import { platformName, sourceType } from "../../utils/source";
 
 export const CATEGORIES = [
-  "Ontbijt", "Lunch", "Soep", "Salade", "Voorgerecht", "Hoofdgerecht",
-  "Bijgerecht", "Dessert", "Gebak", "Snack", "Saus", "Drankje",
+  "Ontbijt", "Brunch", "Lunch", "Brood", "Soep", "Salade", "Voorgerecht", "Hoofdgerecht",
+  "Bijgerecht", "Pasta", "Ovenschotel", "Dessert", "Taart & gebak", "Koekjes",
+  "Snack", "Borrelhapje", "Saus & dressing", "Drankje",
 ];
+
+const OTHER = "__anders__";
 
 let keyCounter = 0;
 const newKey = () => `k${Date.now().toString(36)}${keyCounter++}`;
@@ -37,8 +41,9 @@ export function recipeToDraft(recipe, content) {
     servings: recipe?.servings || 4,
     image: recipe?.image || "",
     newImage: null,
-    isBook: Boolean(recipe?.locked || recipe?.source),
-    source: { book: "", author: "", page: "", url: "", ...(recipe?.source || {}) },
+    description: recipe?.description || "",
+    sourceType: recipe?.locked ? "book" : sourceType(recipe?.source),
+    source: { book: "", author: "", page: "", url: "", creator: "", ...(recipe?.source || {}) },
     ingredients: ingredients.map((i) => ({
       key: newKey(),
       id: i.id,
@@ -89,7 +94,15 @@ export function validateDraft(draft) {
   if (steps.length === 0) problems.push("Voeg minstens één stap toe.");
   const missing = unknownPlaceholders(steps, ings);
   if (missing.length) problems.push(`De bereiding verwijst naar onbekende ingrediënten: ${missing.map((m) => `{${m}}`).join(", ")}.`);
-  if (draft.isBook && !draft.source.book.trim()) problems.push("Vul de titel van het kookboek in.");
+  if (draft.sourceType === "book" && !draft.source.book.trim()) problems.push("Vul de titel van het kookboek in.");
+  if (draft.sourceType === "social") {
+    try {
+      const u = new URL(draft.source.url.trim());
+      if (!/^https?:$/.test(u.protocol)) throw new Error();
+    } catch {
+      problems.push("Vul een geldige link naar de post of website in (beginnend met https://).");
+    }
+  }
   return problems;
 }
 
@@ -104,6 +117,9 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
   const [nameOnly, setNameOnly] = useState(false);
   const [previewServings, setPreviewServings] = useState(null);
   const [problems, setProblems] = useState([]);
+  const [customCategory, setCustomCategory] = useState(
+    Boolean(draft.category) && !CATEGORIES.includes(draft.category)
+  );
   const stepRefs = useRef({});
 
   const update = (patch) => setDraft((d) => ({ ...d, ...patch }));
@@ -230,7 +246,7 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
   function submit(e) {
     e.preventDefault();
     const found = validateDraft(draft);
-    if (draft.isBook && !bookUnlocked) {
+    if (draft.sourceType === "book" && !bookUnlocked) {
       found.push("Ontgrendel eerst het kookboek-wachtwoord (bovenaan de beheerpagina).");
     }
     setProblems(found);
@@ -269,11 +285,34 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
             <span>Titel</span>
             <input value={draft.title} onChange={(e) => update({ title: e.target.value })} required />
           </label>
-          <label className="field">
-            <span>Categorie</span>
-            <input list="categories" value={draft.category} onChange={(e) => update({ category: e.target.value })} />
-            <datalist id="categories">{CATEGORIES.map((c) => <option key={c} value={c} />)}</datalist>
-          </label>
+          <div className="field">
+            <label htmlFor="category">Categorie</label>
+            <select
+              id="category"
+              value={customCategory ? OTHER : draft.category}
+              onChange={(e) => {
+                if (e.target.value === OTHER) {
+                  setCustomCategory(true);
+                  update({ category: "" });
+                } else {
+                  setCustomCategory(false);
+                  update({ category: e.target.value });
+                }
+              }}
+            >
+              {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+              <option value={OTHER}>Anders…</option>
+            </select>
+            {customCategory && (
+              <input
+                aria-label="Eigen categorie"
+                placeholder="Eigen categorie"
+                value={draft.category}
+                onChange={(e) => update({ category: e.target.value })}
+                autoFocus
+              />
+            )}
+          </div>
           <label className="field">
             <span>Aantal personen</span>
             <input
@@ -281,6 +320,16 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
               min="1"
               value={draft.servings}
               onChange={(e) => update({ servings: Math.max(1, Number(e.target.value) || 1) })}
+            />
+          </label>
+          <label className="field field-wide">
+            <span>Korte omschrijving <small>(optioneel; verschijnt onder de titel en in Google)</small></span>
+            <textarea
+              rows={2}
+              maxLength={300}
+              value={draft.description}
+              onChange={(e) => update({ description: e.target.value })}
+              placeholder="bv. Romige curry met kikkererwten, klaar in 30 minuten."
             />
           </label>
           <label className="field field-wide">
@@ -310,14 +359,53 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
         </div>
       </fieldset>
 
-      {/* ---------- Kookboek ---------- */}
+      {/* ---------- Bron ---------- */}
       <fieldset className="panel">
         <legend>Bron</legend>
-        <label className="checkbox checkbox-strong">
-          <input type="checkbox" checked={draft.isBook} onChange={(e) => update({ isBook: e.target.checked })} />
-          Dit recept komt uit een kookboek (wordt versleuteld en geblurd getoond)
-        </label>
-        {draft.isBook && (
+        <div className="source-choice" role="radiogroup" aria-label="Bron van het recept">
+          {[
+            ["own", "Eigen recept", "Gewoon openbaar op de site."],
+            ["social", "Social media of website", "Openbaar, met een link naar het origineel."],
+            ["book", "Uit een kookboek", "Versleuteld; bezoekers zien het geblurd."],
+          ].map(([value, label, help]) => (
+            <label key={value} className={draft.sourceType === value ? "source-option active" : "source-option"}>
+              <input
+                type="radio"
+                name="sourceType"
+                value={value}
+                checked={draft.sourceType === value}
+                onChange={() => update({ sourceType: value })}
+              />
+              <strong>{label}</strong>
+              <small>{help}</small>
+            </label>
+          ))}
+        </div>
+
+        {draft.sourceType === "social" && (
+          <>
+            <div className="field-grid">
+              <label className="field field-wide">
+                <span>Link naar de post of pagina</span>
+                <input
+                  type="url"
+                  placeholder="https://www.instagram.com/p/…"
+                  value={draft.source.url}
+                  onChange={(e) => updateSource({ url: e.target.value })}
+                />
+              </label>
+              <label className="field field-wide">
+                <span>Van wie <small>(optioneel, bv. @accountnaam of naam van de blog)</small></span>
+                <input value={draft.source.creator} onChange={(e) => updateSource({ creator: e.target.value })} />
+              </label>
+            </div>
+            {draft.source.url && platformName(draft.source.url) && (
+              <p className="hint">Wordt getoond als: bron op {platformName(draft.source.url)}.</p>
+            )}
+          </>
+        )}
+
+        {draft.sourceType === "book" && (
           <>
             {!bookUnlocked && (
               <p className="notice notice-warn">
@@ -344,8 +432,8 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
               </label>
             </div>
             <p className="hint">
-              Openbaar zichtbaar: titel, categorie, tags, foto en deze bronvermelding. De ingrediënten en
-              bereiding worden met je wachtwoord versleuteld voordat ze worden opgeslagen.
+              Openbaar zichtbaar: titel, categorie, tags, foto, omschrijving en de bronvermelding. De
+              ingrediënten en bereiding worden met je wachtwoord versleuteld voordat ze worden opgeslagen.
             </p>
           </>
         )}

@@ -1,9 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import RecipePage from "./pages/RecipePage";
 import Admin from "./pages/Admin";
+import NotFound from "./pages/NotFound";
+import site from "./site.json";
+
+// Oude Engelse adressen (/recipe/...) doorsturen naar /recept/...
+function OldRecipeRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/recept/${id}/`} replace />;
+}
 
 function App() {
   return (
@@ -11,9 +19,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/recipe/:id" element={<RecipePage />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/recept/:id" element={<RecipePage />} />
+        <Route path="/recipe/:id" element={<OldRecipeRedirect />} />
+        <Route path={site.adminPath} element={<Admin />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>
