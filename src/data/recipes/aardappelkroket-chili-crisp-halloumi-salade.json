@@ -1,0 +1,142 @@
+{
+  "id": "aardappelkroket-chili-crisp-halloumi-salade",
+  "title": "Aardappelkroket & Chili Crisp Halloumi Salade",
+  "category": "Salade",
+  "tags": [
+    "Vegetarisch",
+    "Oven"
+  ],
+  "servings": 4,
+  "image": "",
+  "description": "Salade met krokante aardappelkroketjes, halloumi met honing en chili crisp-olie en een frisse dilledressing.",
+  "source": {
+    "type": "social",
+    "url": "https://www.instagram.com/reel/DNK1z8LoKcw/",
+    "creator": "@veggilaine"
+  },
+  "ingredients": [
+    {
+      "id": "aardappelkroketjes",
+      "name": "aardappelkroketjes",
+      "amount": 1,
+      "unit": "zak",
+      "note": "ca. 600 gr"
+    },
+    {
+      "id": "halloumi",
+      "name": "halloumi",
+      "amount": 225,
+      "unit": "gr",
+      "note": "of grillkaas"
+    },
+    {
+      "id": "honing",
+      "name": "honing",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "crispyChiliOlie",
+      "name": "crispy chili olie",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "komkommer",
+      "name": "midi komkommer",
+      "amount": 6
+    },
+    {
+      "id": "bosui",
+      "name": "bosui",
+      "amount": 1,
+      "unit": "bosje",
+      "note": "fijngehakt"
+    },
+    {
+      "id": "avocado",
+      "name": "avocado",
+      "amount": 2,
+      "note": "rijp"
+    },
+    {
+      "id": "augurk",
+      "name": "augurk",
+      "amount": 4,
+      "note": "groot, in blokjes"
+    },
+    {
+      "id": "ingelegdeRodeUi",
+      "name": "ingelegde rode ui",
+      "amount": 4,
+      "unit": "el"
+    },
+    {
+      "id": "verseDille",
+      "name": "verse dille",
+      "amount": 30,
+      "unit": "gr",
+      "note": "met steel",
+      "group": "Dilledressing"
+    },
+    {
+      "id": "verseKoriander",
+      "name": "verse koriander",
+      "amount": 15,
+      "unit": "gr",
+      "note": "met steel",
+      "group": "Dilledressing"
+    },
+    {
+      "id": "knoflook",
+      "name": "knoflook",
+      "amount": 1,
+      "unit": "teentje",
+      "group": "Dilledressing"
+    },
+    {
+      "id": "griekseYoghurt",
+      "name": "Griekse yoghurt",
+      "amount": 4,
+      "unit": "el",
+      "group": "Dilledressing"
+    },
+    {
+      "id": "mayonaise",
+      "name": "mayonaise",
+      "amount": 1,
+      "unit": "el",
+      "group": "Dilledressing"
+    },
+    {
+      "id": "augurkenvocht",
+      "name": "augurkenvocht",
+      "amount": 4,
+      "unit": "el",
+      "group": "Dilledressing",
+      "note": "uit de pot"
+    },
+    {
+      "id": "zout",
+      "name": "zout",
+      "amount": 1,
+      "unit": "snufje",
+      "note": "flink",
+      "group": "Dilledressing"
+    },
+    {
+      "id": "peper",
+      "name": "zwarte peper",
+      "group": "Dilledressing",
+      "note": "fijngemalen"
+    }
+  ],
+  "instructions": [
+    "Verwarm de oven voor op 220 graden. Verdeel {aardappelkroketjes} over een met bakpapier beklede bakplaat.",
+    "Snijd {halloumi} in kleine blokjes en meng deze met {honing} en {crispyChiliOlie}. Verdeel de blokjes {halloumi:naam} ook over de bakplaat.",
+    "Bak alles 15-20 minuten in de oven en hussel halverwege voorzichtig door. Je kunt de {aardappelkroketjes:naam} ook los van de {halloumi:naam} in de airfryer bereiden, dan worden ze iets knapperiger.",
+    "Maak ondertussen de dressing: blend {verseDille}, {verseKoriander}, {knoflook}, {griekseYoghurt}, {mayonaise}, {augurkenvocht}, {zout} en {peper:naam} fijn met een staafmixer of foodprocessor.",
+    "Snijd {komkommer}, {bosui}, {avocado} en {augurk} en doe ze samen met {ingelegdeRodeUi} in een schaal.",
+    "Serveer de salade met de {aardappelkroketjes:naam}, de {halloumi:naam} en de dilledressing."
+  ]
+}

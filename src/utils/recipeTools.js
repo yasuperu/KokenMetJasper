@@ -66,7 +66,7 @@ const COUNT_UNITS = [
   "plak", "plakje", "snufje", "scheut", "scheutje", "handje", "handvol", "kop", "kopje",
   "mespunt", "mespuntje", "stengel", "krop", "pot", "potje", "knijp", "beker", "bekertje",
   "glas", "schijf", "schijfje", "blaadje", "druppel", "bol", "bakje", "fles", "flesje",
-  "blok", "sneetje", "snee", "stukje", "stuk", "teen",
+  "blok", "sneetje", "snee", "stukje", "stuk", "teen", "snuf",
 ];
 
 const SIZE_WORDS = ["klein", "kleine", "groot", "grote", "middelgroot", "middelgrote", "flink", "flinke", "ruim", "ruime"];
@@ -118,10 +118,17 @@ export function ingredientId(name, taken = []) {
 
 /** "2 teentjes knoflook, geperst" → { amount: 2, unit: "teentje", name: "knoflook", note: "geperst" } */
 export function parseIngredientLine(line) {
-  let s = line.trim().replace(/^[-•*·–]\s*/, "");
+  // opsommingstekens en emoji vooraan ("🌱 2 uien", "- 2 uien")
+  let s = line.trim().replace(/^[^\p{L}\p{N}½¼¾⅓⅔⅛]+/u, "").replace(/[’‘]/g, "'");
   if (!s) return null;
 
   const notes = [];
+  // "ca. 4 augurken", "circa 600 g"
+  const approx = s.match(/^(ca\.?|circa|ongeveer|±)\s*/i);
+  if (approx) {
+    notes.push("ongeveer");
+    s = s.slice(approx[0].length);
+  }
   const optional = s.match(/^optioneel:?\s*/i);
   if (optional) {
     notes.push("optioneel");

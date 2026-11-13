@@ -136,3 +136,13 @@ test("unusedIngredients", () => {
   const ings = [{ id: "ui", name: "ui", amount: 1 }, { id: "mayo", name: "mayonaise", amount: 2, unit: "el" }];
   expect(unusedIngredients(["Snijd de {ui:naam}."], ings).map((i) => i.id)).toEqual(["mayo"]);
 });
+
+test.each([
+  ["🌱 1 zak aardappelkroketjes (ca. 600 g)", { amount: 1, unit: "zak", name: "aardappelkroketjes", note: "ca. 600 g" }],
+  ["🌱 ca. 4 grote augurken, in blokjes", { amount: 4, unit: "", name: "grote augurk", note: "in blokjes, ongeveer" }],
+  ["🌱 2 rijpe avocado’s", { amount: 2, unit: "", name: "rijpe avocado", note: "" }],
+  ["🌱 flinke snuf zout", { amount: 1, unit: "snuf", name: "zout", note: "flinke" }],
+  ["🌱 fijngemalen zwarte peper", { amount: null, unit: "", name: "fijngemalen zwarte peper", note: "" }],
+])("parseIngredientLine(%s) – Instagram-schrijfwijzen", (line, expected) => {
+  expect(parseIngredientLine(line)).toEqual(expected);
+});
