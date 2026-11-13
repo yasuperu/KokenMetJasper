@@ -1,12 +1,11 @@
+/*
+  Alle recepten staan als JSON-bestand in deze map.
+  Ze worden beheerd via /admin (of met de hand bewerkt).
+*/
 function importAll(r) {
-  return r
-    .keys()
-    .filter((file) => file !== "./index.js")
-    .map((file) => r(file).default);
+  return r.keys().map((file) => r(file));
 }
 
-const recipes = importAll(
-  require.context("./", true, /\.js$/)
-);
+const recipes = importAll(require.context("./", false, /\.json$/));
 
 export default recipes;
