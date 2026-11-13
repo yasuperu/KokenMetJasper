@@ -85,12 +85,12 @@
     }
   ],
   "instructions": [
-    "Kook de {spaghetti:naam} volgens de bereidingswijze op de verpakking.",
-    "Snijd de {ui:naam}, {verseSelderij:naam}, {kipfilet:naam} en {knoflook:naam} in stukjes.",
-    "Verhit {olie} in een pan en fruit de {ui:naam} met {knoflook:naam} aan. Voeg na 2-3 minuten de kip, {gember:naam} en {zwartePeper} toe. Bak de kip rondom bruin.",
-    "Voeg 1 verkruimeld {maggiblokje:naam} en de {tomatenpuree:naam} toe. Na ongeveer 1 minuut voeg je de {sojasaus:naam} en {ketjapManis:naam} toe.",
+    "Kook {spaghetti} volgens de bereidingswijze op de verpakking.",
+    "Snijd {ui}, {verseSelderij:naam}, {kipfilet} en {knoflook} in stukjes.",
+    "Verhit {olie} in een pan en fruit de {ui:naam} met {knoflook:naam} aan. Voeg na 2-3 minuten de kip, {gember} en {zwartePeper} toe. Bak de kip rondom bruin.",
+    "Verkruimel {maggiblokje} en voeg het samen met {tomatenpuree} toe. Na ongeveer 1 minuut voeg je {sojasaus} en {ketjapManis} toe.",
     "Meng alles goed door elkaar en voeg vervolgens ook de gekookte {spaghetti:naam} toe.",
     "Meng alles goed door elkaar en strooi wat fijngesneden selderij over de Surinaamse bami.",
-    "Serveer de bami bijvoorbeeld met een omelet of extra groenten zoals een komkommersalade."
+    "Serveer de bami bijvoorbeeld met een omelet of extra groenten zoals een komkommersalade van {komkommer}."
   ]
 }

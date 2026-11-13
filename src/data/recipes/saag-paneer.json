@@ -94,9 +94,9 @@
     }
   ],
   "instructions": [
-    "Breng een pan met {water} en {zout} aan de kook. Voeg de {spinazie:naam} toe en kook gedurende 1 minuut. Schep de {spinazie:naam} uit het {water:naam} en leg het kort in een kom met koud {water:naam}. Haal de {spinazie:naam} uit het koude {water:naam} en maal het fijn in een blender.",
-    "Snijd de {ui:naam}, {knoflook} en {gember:naam} fijn. Verhit de helft van de {olie:naam} in een pan en voeg de {knoflook:naam}, {gember:naam}, {ui:naam}, {chilivlokken:naam} en {komijnzaad:naam} toe. Snijd de {tomaat:naam} in blokjes en voeg ze samen met de {kurkuma:naam} en {garamMasala:naam} toe aan de pan. Voeg na 3 minuten bakken de fijngemalen {spinazie:naam} en 150 ml {water:naam} toe.",
-    "Snijd de {paneer:naam} in blokjes van 1 bij 1 cm. Verhit een koekenpan met de rest van de {olie:naam} en bak de kaas kort aan alle zijdes. Roer de kaas door het spinaziemengsel, draai het vuur laag en laat 10 minuten pruttelen.",
-    "Verwarm de {naan:naam} volgens de verpakking."
+    "Breng een pan met {water} en {zout} aan de kook. Voeg {spinazie} toe en kook gedurende 1 minuut. Schep de {spinazie:naam} uit het {water:naam} en leg het kort in een kom met koud {water:naam}. Haal de {spinazie:naam} uit het koude {water:naam} en maal het fijn in een blender.",
+    "Snijd {ui}, {knoflook} en {gember} fijn. Verhit de helft van {olie} in een pan en voeg de {knoflook:naam}, {gember:naam}, {ui:naam}, {chilivlokken:naam} en {komijnzaad} toe. Snijd {tomaat} in blokjes en voeg ze samen met {kurkuma} en {garamMasala} toe aan de pan. Voeg na 3 minuten bakken de fijngemalen {spinazie:naam} en 150 ml {water:naam} toe.",
+    "Snijd {paneer} in blokjes van 1 bij 1 cm. Verhit een koekenpan met de rest van de {olie:naam} en bak de kaas kort aan alle zijdes. Roer de kaas door het spinaziemengsel, draai het vuur laag en laat 10 minuten pruttelen.",
+    "Verwarm {naan} volgens de verpakking."
   ]
 }

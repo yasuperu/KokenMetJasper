@@ -3,6 +3,7 @@ import ServingsSelector from "../ServingsSelector";
 import RecipeContent, { renderInstruction } from "../RecipeContent";
 import { formatIngredient } from "../../utils/formatIngredient";
 import {
+  amountsOnFirstMention,
   amountToText,
   autoLinkStep,
   ingredientId,
@@ -10,6 +11,7 @@ import {
   parseIngredientList,
   parseSteps,
   unknownPlaceholders,
+  unusedIngredients,
   UNIT_SUGGESTIONS,
 } from "../../utils/recipeTools";
 import { resizeImage } from "../../utils/image";
@@ -227,7 +229,11 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
   }
 
   function autoLinkAll() {
-    setDraft((d) => ({ ...d, instructions: d.instructions.map((s) => autoLinkStep(s, draftIngredients(d))) }));
+    setDraft((d) => {
+      const ings = draftIngredients(d);
+      const linked = d.instructions.map((s) => autoLinkStep(s, ings));
+      return { ...d, instructions: amountsOnFirstMention(linked, ings) };
+    });
   }
 
   /* ---- foto ---- */
@@ -258,6 +264,7 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
   }
 
   const ingredientsById = Object.fromEntries(ingredients.map((i) => [i.id, i]));
+  const unused = unusedIngredients(draft.instructions, ingredients);
   const previewImage = draft.newImage?.dataUrl || imageUrl(draft.image);
   const pServings = previewServings || draft.servings;
 
@@ -606,6 +613,13 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
           ))}
         </ol>
 
+        {unused.length > 0 && draft.instructions.some((st) => st.trim()) && (
+          <p className="notice notice-warn">
+            Nog niet in de bereiding: {unused.map((i) => i.name).join(", ")}. Klik in een stap en daarna op het
+            ingrediënt om het met hoeveelheid toe te voegen.
+          </p>
+        )}
+
         <div className="panel-actions">
           <button
             type="button"
@@ -636,7 +650,9 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
               className="btn-primary"
               onClick={() => {
                 const steps = parseSteps(pasteSteps).map((s) => autoLinkStep(s, ingredients));
-                update({ instructions: [...draft.instructions.filter((s) => s.trim()), ...steps] });
+                update({
+                  instructions: amountsOnFirstMention([...draft.instructions.filter((s) => s.trim()), ...steps], ingredients),
+                });
                 setPasteSteps(null);
               }}
             >

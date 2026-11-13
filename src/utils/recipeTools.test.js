@@ -1,4 +1,4 @@
-import { parseAmount, parseIngredientLine, parseIngredientList, parseSteps, autoLinkStep, ingredientId, unknownPlaceholders } from "./recipeTools";
+import { amountsOnFirstMention, unusedIngredients, parseAmount, parseIngredientLine, parseIngredientList, parseSteps, autoLinkStep, ingredientId, unknownPlaceholders } from "./recipeTools";
 import { singularize, singularizeWord } from "./pluralize";
 
 test.each([
@@ -116,4 +116,23 @@ test("autoLinkStep herkent andere schrijfwijzen", () => {
   expect(autoLinkStep("Breng 1 liter water en 1 theelepel zout aan de kook.", ings)).toBe("Breng {water} en {zout} aan de kook.");
   expect(autoLinkStep("Hak twee tenen knoflook fijn.", ings)).toBe("Hak {knoflook} fijn.");
   expect(autoLinkStep("Voeg 3 eetlepels ketjap manis toe.", ings)).toBe("Voeg {ketjap} toe.");
+});
+
+test("amountsOnFirstMention zet de hoeveelheid bij de eerste vermelding", () => {
+  const ings = [
+    { id: "ui", name: "ui", amount: 1 },
+    { id: "olie", name: "olie", amount: 2, unit: "el" },
+    { id: "zout", name: "zout" },
+  ];
+  expect(
+    amountsOnFirstMention(["Snijd de {ui:naam}.", "Bak de {ui:naam} in {olie:naam}.", "Voeg {olie} en {zout:naam} toe."], ings)
+  ).toEqual(["Snijd {ui}.", "Bak de {ui:naam} in {olie}.", "Voeg {olie:naam} en {zout:naam} toe."]);
+  expect(amountsOnFirstMention(["Blus met het {olie:naam}."], ings)).toEqual(["Blus met {olie}."]);
+  expect(amountsOnFirstMention(["Weeg {ui:naam} af."], ings)).toEqual(["Weeg {ui} af."]);
+  expect(amountsOnFirstMention(["Bak {ui} en {ui:naam}."], ings)).toEqual(["Bak {ui} en {ui:naam}."]);
+});
+
+test("unusedIngredients", () => {
+  const ings = [{ id: "ui", name: "ui", amount: 1 }, { id: "mayo", name: "mayonaise", amount: 2, unit: "el" }];
+  expect(unusedIngredients(["Snijd de {ui:naam}."], ings).map((i) => i.id)).toEqual(["mayo"]);
 });

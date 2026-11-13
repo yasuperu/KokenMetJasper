@@ -61,10 +61,10 @@
     }
   ],
   "instructions": [
-    "Snij de {komkommer:naam} en {watermeloen:naam} in blokjes en verdeel ze over de borden.",
-    "Snij de {rodeUi:naam} in dunne ringen en verdeel deze over de borden.",
-    "Meng in een schaaltje de ingrediënten voor de dressing ({olijfolie:naam}, {balsamicoAzijn:naam}, {verseMunt:naam}, snufje {zout:naam}).",
+    "Snij {komkommer} en {watermeloen} in blokjes en verdeel ze over de borden.",
+    "Snij {rodeUi} in dunne ringen en verdeel deze over de borden.",
+    "Meng in een schaaltje de ingrediënten voor de dressing ({olijfolie}, {balsamicoAzijn}, {verseMunt}, {zout}).",
     "Giet de dressing over de {watermeloen:naam} blokjes.",
-    "Verkruimel de {feta:naam} en strooi deze over de salade."
+    "Verkruimel {feta} en strooi deze over de salade."
   ]
 }

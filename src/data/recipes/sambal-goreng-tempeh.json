@@ -87,10 +87,10 @@
     }
   ],
   "instructions": [
-    "Snijd de {tempeh:naam} in dunne plakken en vervolgens in reepjes of blokjes, ongeveer zo groot als een dik luciferhoutje.",
-    "Verhit ruim {olie:naam} in een koekenpan, zorg ervoor dat de hele bodem bedekt is. Bak de {tempeh:naam} in twee rondes bruin en krokant. Schep de reepjes uit de pan en laat ze uitlekken op een bord met keukenpapier. Bestrooi de {tempeh:naam} met een snufje {zout:naam} en zet apart tot gebruik.",
+    "Snijd {tempeh} in dunne plakken en vervolgens in reepjes of blokjes, ongeveer zo groot als een dik luciferhoutje.",
+    "Verhit ruim {olie} in een koekenpan, zorg ervoor dat de hele bodem bedekt is. Bak de {tempeh:naam} in twee rondes bruin en krokant. Schep de reepjes uit de pan en laat ze uitlekken op een bord met keukenpapier. Bestrooi de {tempeh:naam} met een snufje {zout:naam} en zet apart tot gebruik.",
     "Maak de koekenpan schoon met keukenpapier en veeg de meeste {olie:naam} eruit. In dezelfde pan bereid je nu de ketjapsaus.",
-    "Snipper de {ui:naam} en hak {knoflook} fijn. Fruit de {ui:naam} en {knoflook:naam}, voeg {gemalenLaos:naam}, {sambalOelek:naam}, {djeroekPoeroet:naam} (in zijn geheel) en optioneel {verkruimeldeTrassi:naam} toe. Roer goed tot de trassi volledig is opgelost.",
+    "Snipper {ui} en hak {knoflook} fijn. Fruit de {ui:naam} en {knoflook:naam}, voeg {gemalenLaos}, {sambalOelek}, {djeroekPoeroet} (in zijn geheel) en optioneel {verkruimeldeTrassi} toe. Roer goed tot de trassi volledig is opgelost.",
     "Voeg {suiker} toe en roer tot het gesmolten is. Voeg vervolgens {ketjapManis} en {citroensap} toe. Verwarm goed tot het begint te bubbelen.",
     "Voeg de gebakken {tempeh:naam} toe en roer alles kort om op hoog vuur, zodat alle reepjes {tempeh:naam} bedekt zijn met de saus."
   ]

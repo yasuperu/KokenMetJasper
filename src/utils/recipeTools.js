@@ -303,6 +303,43 @@ function unitSpellings(unit) {
   return [...new Set(list)].sort((a, b) => b.length - a.length);
 }
 
+/**
+ * Zorg dat elk ingrediënt mét hoeveelheid in de bereiding staat: de eerste
+ * vermelding wordt {id} ("2 uien"), latere blijven {id:naam} ("de uien").
+ */
+export function amountsOnFirstMention(steps, ingredients) {
+  const out = [...steps];
+  for (const ing of ingredients) {
+    if (ing.amount == null) continue;
+    const full = `{${ing.id}}`;
+    const name = `{${ing.id}:naam}`;
+    const firstFull = out.findIndex((st) => st.includes(full));
+    const firstName = out.findIndex((st) => st.includes(name));
+    if (firstName === -1) continue;
+    if (firstFull !== -1 && firstFull < firstName) continue;
+    if (firstFull === firstName && out[firstName].indexOf(full) < out[firstName].indexOf(name)) continue;
+    // eerste naam-vermelding wordt de vermelding met hoeveelheid;
+    // "Snijd de {ui:naam}" → "Snijd {ui}" (geen lidwoord vóór "1 ui")
+    out[firstName] = out[firstName].replace(
+      new RegExp(`(^|[\\s(])(?:de|het|De|Het) ${escapeRegex(name)}|${escapeRegex(name)}`),
+      (m, pre) => (pre !== undefined ? pre : "") + full
+    );
+    // een latere {id} wordt dan een naam-vermelding
+    for (let n = firstName; n < out.length; n++) {
+      const from = n === firstName ? out[n].indexOf(full) + full.length : 0;
+      const idx = out[n].indexOf(full, from);
+      if (idx !== -1) out[n] = out[n].slice(0, idx) + name + out[n].slice(idx + full.length);
+    }
+  }
+  return out;
+}
+
+/** Ingrediënten met hoeveelheid die nergens in de bereiding voorkomen */
+export function unusedIngredients(steps, ingredients) {
+  const text = steps.join(" ");
+  return ingredients.filter((i) => i.amount != null && !text.includes(`{${i.id}}`) && !text.includes(`{${i.id}:naam}`));
+}
+
 /** Placeholders die naar een onbekend ingrediënt wijzen */
 export function unknownPlaceholders(steps, ingredients) {
   const ids = new Set(ingredients.map((i) => i.id));
