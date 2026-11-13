@@ -56,9 +56,9 @@ function Home() {
             <span className="h-carrot">Jasper</span>
           </h1>
           <p className="hero-lead">
-            Eerlijke, makkelijke gerechten voor elke dag. Pas het aantal personen
-            aan en alle hoeveelheden rekenen vanzelf mee — ook als je het recept
-            uitprint.
+            De favoriete recepten die thuis vaak worden gemaakt. Pas het aantal
+            personen aan en alle hoeveelheden rekenen vanzelf mee, ook als je het
+            recept uitprint.
           </p>
         </div>
       </section>
