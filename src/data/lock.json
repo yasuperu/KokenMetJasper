@@ -1,1 +1,7 @@
-{}
+{
+  "v": 1,
+  "iterations": 250000,
+  "salt": "F/yMn1KMq4PBwAnL7zKWTw==",
+  "iv": "le8KOMbFjyGcVpCv",
+  "data": "UwJogcgpT3Q4yGtERasYJwfGugMjtpswlx8IveR2Nj7jOQ=="
+}
