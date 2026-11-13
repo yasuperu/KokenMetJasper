@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/KokenMetJasper/static/css/main.19606d37.css",
-    "main.js": "/KokenMetJasper/static/js/main.066bcada.js",
+    "main.js": "/KokenMetJasper/static/js/main.9cc2dca3.js",
     "index.html": "/KokenMetJasper/index.html",
     "main.19606d37.css.map": "/KokenMetJasper/static/css/main.19606d37.css.map",
-    "main.066bcada.js.map": "/KokenMetJasper/static/js/main.066bcada.js.map"
+    "main.9cc2dca3.js.map": "/KokenMetJasper/static/js/main.9cc2dca3.js.map"
   },
   "entrypoints": [
     "static/css/main.19606d37.css",
-    "static/js/main.066bcada.js"
+    "static/js/main.9cc2dca3.js"
   ]
 }
