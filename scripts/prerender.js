@@ -37,6 +37,7 @@ Module._extensions[".js"] = function (module, filename) {
 const seo = require(path.join(SRC, "utils/seo.js"));
 const { formatIngredient } = require(path.join(SRC, "utils/formatIngredient.js"));
 const { sourceType, platformName } = require(path.join(SRC, "utils/source.js"));
+const { isGated } = require(path.join(SRC, "utils/gate.js"));
 const site = require(path.join(SRC, "site.json"));
 
 const recipesDir = path.join(SRC, "data/recipes");
@@ -123,9 +124,11 @@ for (const r of recipes) {
         const head = i.group && i.group !== (all[n - 1] || {}).group ? `<li><strong>${esc(i.group)}</strong></li>` : "";
         return `${head}<li>${esc(formatIngredient(i, 1))}${i.note ? ` (${esc(i.note)})` : ""}</li>`;
       })
-      .join("")}</ul><h2>Bereiding</h2><ol>${(r.instructions || [])
-      .map((s) => `<li>${esc(seo.plainInstruction(s, r.ingredients))}</li>`)
-      .join("")}</ol>`;
+      .join("")}</ul><h2>Bereiding</h2>${
+      isGated(r)
+        ? `<p>De bereiding staat bij de originele post: <a href="${esc(r.source.url)}" rel="nofollow noopener">bekijk het recept op ${esc(platformName(r.source.url))}</a>.</p>`
+        : `<ol>${(r.instructions || []).map((s) => `<li>${esc(seo.plainInstruction(s, r.ingredients))}</li>`).join("")}</ol>`
+    }`;
   }
 
   const body = `<main class="container prerender">

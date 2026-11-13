@@ -364,6 +364,7 @@ function Admin() {
       } else {
         if (draft.sourceType === "social") {
           recipe.source = { type: "social", ...pick(["url", "creator"]) };
+          if (draft.gate) recipe.gate = true;
         }
         recipe.ingredients = ingredients;
         recipe.instructions = instructions;

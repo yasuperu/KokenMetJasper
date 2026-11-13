@@ -1,6 +1,7 @@
 import site from "../site.json";
 import { formatIngredient, ingredientName } from "./formatIngredient";
 import { sourceType, platformName } from "./source";
+import { isGated } from "./gate";
 
 /*
   Gedeeld door de site (titel/meta per pagina) en scripts/prerender.js
@@ -90,6 +91,8 @@ export function recipeJsonLd(recipe) {
   if (sourceType(recipe.source) === "social" && recipe.source?.url) {
     data.isBasedOn = recipe.source.url;
   }
+  // Afgeschermde bereiding staat niet direct zichtbaar op de pagina, dus ook niet in de gegevens voor Google
+  if (isGated(recipe)) delete data.recipeInstructions;
   return { "@context": "https://schema.org", "@graph": [data, crumbs] };
 }
 

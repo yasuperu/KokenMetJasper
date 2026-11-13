@@ -7,6 +7,12 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import site from "./site.json";
 
+// Elk recept een eigen paginastatus (aantal personen, ontgrendeld, ...)
+function RecipeRoute() {
+  const { id } = useParams();
+  return <RecipePage key={id} />;
+}
+
 // Oude Engelse adressen (/recipe/...) doorsturen naar /recept/...
 function OldRecipeRedirect() {
   const { id } = useParams();
@@ -19,7 +25,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/recept/:id" element={<RecipePage />} />
+        <Route path="/recept/:id" element={<RecipeRoute />} />
         <Route path="/recipe/:id" element={<OldRecipeRedirect />} />
         <Route path={site.adminPath} element={<Admin />} />
         <Route path="*" element={<NotFound />} />

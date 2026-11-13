@@ -5,7 +5,10 @@ import ServingsSelector from "../components/ServingsSelector";
 import RecipeContent from "../components/RecipeContent";
 import LockedContent from "../components/LockedContent";
 import SourceNote from "../components/SourceNote";
-import { decryptJSON } from "../utils/crypto";
+import { checkPassword, decryptJSON } from "../utils/crypto";
+import StepsGate from "../components/StepsGate";
+import { hasVisitedPost, isGated, markPostVisited } from "../utils/gate";
+import passwordLock from "../data/lock.json";
 import { forgetPassword, getPassword, setPassword } from "../utils/passwordStore";
 import { imageUrl } from "../config";
 import useSeo from "../hooks/useSeo";
@@ -21,6 +24,9 @@ function RecipePage() {
   const [content, setContent] = useState(
     recipe && !recipe.locked ? { ingredients: recipe.ingredients, instructions: recipe.instructions } : null
   );
+  const gated = isGated(recipe);
+  const [stepsVisible, setStepsVisible] = useState(() => !gated || hasVisitedPost(recipe.id));
+  const [gateError, setGateError] = useState("");
   const [unlockError, setUnlockError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -54,6 +60,32 @@ function RecipePage() {
       cancelled = true;
     };
   }, [recipe]);
+
+  // Afgeschermde bereiding: met een onthouden wachtwoord meteen tonen
+  useEffect(() => {
+    if (!gated || stepsVisible) return;
+    const saved = getPassword();
+    if (saved) checkPassword(passwordLock, saved).then((ok) => ok && setStepsVisible(true));
+  }, [gated, stepsVisible]);
+
+  function visitPost() {
+    markPostVisited(recipe.id);
+    // even wachten zodat het nieuwe tabblad eerst opent
+    setTimeout(() => setStepsVisible(true), 400);
+  }
+
+  async function unlockSteps(password) {
+    setBusy(true);
+    setGateError("");
+    const ok = await checkPassword(passwordLock, password);
+    setBusy(false);
+    if (ok) {
+      setPassword(password, true);
+      setStepsVisible(true);
+    } else {
+      setGateError("Dat wachtwoord klopt niet.");
+    }
+  }
 
   async function unlock(password, remember) {
     setBusy(true);
@@ -142,6 +174,17 @@ function RecipePage() {
           instructions={content.instructions}
           servings={servings}
           factor={factor}
+          stepsReplacement={
+            stepsVisible ? null : (
+              <StepsGate
+                source={recipe.source}
+                onVisit={visitPost}
+                onPassword={unlockSteps}
+                error={gateError}
+                busy={busy}
+              />
+            )
+          }
         />
       ) : (
         <LockedContent source={recipe.source} onUnlock={unlock} error={unlockError} busy={busy} />

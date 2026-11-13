@@ -23,7 +23,7 @@ export function renderInstruction(text, ingredientsById, factor) {
   });
 }
 
-function RecipeContent({ ingredients, instructions, servings, factor }) {
+function RecipeContent({ ingredients, instructions, servings, factor, stepsReplacement }) {
   const ingredientsById = Object.fromEntries(ingredients.map((i) => [i.id, i]));
 
   return (
@@ -58,6 +58,7 @@ function RecipeContent({ ingredients, instructions, servings, factor }) {
         </ul>
       </section>
 
+      {stepsReplacement || (
       <section className="steps">
         <h2>
           <Whisk className="h2-icon" /> Bereiding
@@ -71,6 +72,7 @@ function RecipeContent({ ingredients, instructions, servings, factor }) {
           ))}
         </ol>
       </section>
+      )}
     </div>
   );
 }

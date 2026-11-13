@@ -45,6 +45,7 @@ export function recipeToDraft(recipe, content) {
     newImage: null,
     description: recipe?.description || "",
     sourceType: recipe?.locked ? "book" : sourceType(recipe?.source),
+    gate: recipe ? Boolean(recipe.gate) : true,
     source: { book: "", author: "", page: "", url: "", creator: "", ...(recipe?.source || {}) },
     ingredients: ingredients.map((i) => ({
       key: newKey(),
@@ -412,6 +413,14 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
             {draft.source.url && platformName(draft.source.url) && (
               <p className="hint">Wordt getoond als: bron op {platformName(draft.source.url)}.</p>
             )}
+            <label className="checkbox checkbox-strong gate-option">
+              <input type="checkbox" checked={draft.gate} onChange={(e) => update({ gate: e.target.checked })} />
+              Bereiding pas tonen nadat de bezoeker de post heeft bekeken
+            </label>
+            <p className="hint">
+              De ingrediënten blijven zichtbaar. Voor de bereiding klikt de bezoeker eerst door naar de post,
+              zodat de maker de klik krijgt. Met je kookboek-wachtwoord zie je hem altijd.
+            </p>
           </>
         )}
 

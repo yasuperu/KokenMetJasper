@@ -1661,6 +1661,88 @@ code {
   border-radius: 999px;
 }
 
+/* afgeschermde bereiding (recepten van social media) */
+
+.gate {
+  position: relative;
+  margin-top: 24px;
+  min-height: 360px;
+}
+
+.gate ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gate ol li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 18px;
+  padding-bottom: 26px;
+}
+
+.gate-card {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(440px, 100%);
+  padding: 24px 26px 20px;
+  background: var(--cream-light);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 0 var(--rose);
+  text-align: center;
+}
+
+.gate-card h3 {
+  margin-bottom: 8px;
+  font-size: 1.35rem;
+}
+
+.gate-card p {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.gate-password-link {
+  display: block;
+  margin: 12px auto 0;
+  font-size: 0.85rem;
+}
+
+.gate-password {
+  margin: 14px 0 0;
+}
+
+.gate-option {
+  margin: 16px 0 0;
+}
+
+@media (max-width: 560px) {
+  .gate {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .gate-card {
+    order: -1;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 20px;
+  }
+
+  .gate ol {
+    max-height: 220px;
+    overflow: hidden;
+  }
+}
+
 /* =============================================================
    PRINT
    Eén nette A4 met de hoeveelheden voor het gekozen aantal
@@ -1685,6 +1767,10 @@ code {
   .no-print,
   .hero-doodles,
   .locked,
+  .gate ol,
+  .gate-card .btn-primary,
+  .gate-password-link,
+  .gate-password,
   .admin {
     display: none !important;
   }
@@ -1878,6 +1964,33 @@ code {
   .ing-ref {
     background: none;
     font-weight: 700;
+  }
+
+  .gate {
+    min-height: 0;
+    margin-top: 2mm;
+  }
+
+  .gate-card {
+    position: static;
+    transform: none;
+    width: auto;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: left;
+  }
+
+  .gate-card {
+    background: none;
+  }
+
+  .gate-card h3 {
+    font-size: 12pt;
+  }
+
+  .gate-card p {
+    color: #000;
   }
 
   .print-footer {
