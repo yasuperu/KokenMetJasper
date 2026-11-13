@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { formatIngredient, ingredientName, ingredientParts } from "../utils/formatIngredient";
 import { Leaf, Whisk } from "./Doodles";
 
@@ -35,10 +36,14 @@ function RecipeContent({ ingredients, instructions, servings, factor }) {
           voor {servings} {servings === 1 ? "persoon" : "personen"}
         </p>
         <ul>
-          {ingredients.map((ingredient) => {
+          {ingredients.map((ingredient, index) => {
             const p = ingredientParts(ingredient, factor);
+            const group = ingredient.group || "";
+            const newGroup = group && group !== (ingredients[index - 1]?.group || "");
             return (
-              <li key={ingredient.id}>
+              <Fragment key={ingredient.id}>
+              {newGroup && <li className="ing-group">{group}</li>}
+              <li>
                 <span className="qty">
                   {p.amount} {p.unit}
                 </span>
@@ -47,6 +52,7 @@ function RecipeContent({ ingredients, instructions, servings, factor }) {
                   {p.note && <span className="ing-note"> ({p.note})</span>}
                 </span>
               </li>
+              </Fragment>
             );
           })}
         </ul>

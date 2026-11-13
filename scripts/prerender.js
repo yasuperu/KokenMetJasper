@@ -5,7 +5,7 @@
   - build/recept/<id>/index.html   per recept: titel, meta, Open Graph,
                                    structured data (schema.org/Recipe) en
                                    de inhoud als gewone HTML
-  - build/404.html                 noindex; vangt ook /keukenkastje op
+  - build/404.html                 noindex; vangt ook /jk (beheer) op
   - build/sitemap.xml
 
   Zo krijgt Google per recept een pagina met status 200 en de juiste
@@ -119,7 +119,10 @@ for (const r of recipes) {
   let content = "";
   if (!r.locked) {
     content = `<h2>Ingrediënten</h2><p>Voor ${r.servings} personen.</p><ul>${(r.ingredients || [])
-      .map((i) => `<li>${esc(formatIngredient(i, 1))}${i.note ? ` (${esc(i.note)})` : ""}</li>`)
+      .map((i, n, all) => {
+        const head = i.group && i.group !== (all[n - 1] || {}).group ? `<li><strong>${esc(i.group)}</strong></li>` : "";
+        return `${head}<li>${esc(formatIngredient(i, 1))}${i.note ? ` (${esc(i.note)})` : ""}</li>`;
+      })
       .join("")}</ul><h2>Bereiding</h2><ol>${(r.instructions || [])
       .map((s) => `<li>${esc(seo.plainInstruction(s, r.ingredients))}</li>`)
       .join("")}</ol>`;

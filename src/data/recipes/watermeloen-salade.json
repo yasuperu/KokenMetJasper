@@ -1,0 +1,70 @@
+{
+  "id": "watermeloen-salade",
+  "title": "Watermeloen Salade",
+  "category": "Salade",
+  "tags": [
+    "Vegetarisch",
+    "Zomer"
+  ],
+  "servings": 4,
+  "image": "",
+  "description": "Een verfrissende zomerse salade met watermeloen, feta en balsamico dressing!",
+  "ingredients": [
+    {
+      "id": "watermeloen",
+      "name": "watermeloen",
+      "amount": 0.5
+    },
+    {
+      "id": "feta",
+      "name": "feta",
+      "amount": 100,
+      "unit": "gr"
+    },
+    {
+      "id": "komkommer",
+      "name": "komkommer",
+      "amount": 1
+    },
+    {
+      "id": "rodeUi",
+      "name": "rode ui",
+      "amount": 1
+    },
+    {
+      "id": "olijfolie",
+      "name": "olijfolie",
+      "amount": 4,
+      "unit": "el",
+      "group": "Balsamicodressing"
+    },
+    {
+      "id": "balsamicoAzijn",
+      "name": "balsamico azijn",
+      "amount": 2,
+      "unit": "el",
+      "group": "Balsamicodressing"
+    },
+    {
+      "id": "verseMunt",
+      "name": "verse munt",
+      "amount": 2,
+      "unit": "el",
+      "group": "Balsamicodressing"
+    },
+    {
+      "id": "zout",
+      "name": "zout",
+      "amount": 1,
+      "unit": "snufje",
+      "group": "Balsamicodressing"
+    }
+  ],
+  "instructions": [
+    "Snij de {komkommer:naam} en {watermeloen:naam} in blokjes en verdeel ze over de borden.",
+    "Snij de {rodeUi:naam} in dunne ringen en verdeel deze over de borden.",
+    "Meng in een schaaltje de ingrediënten voor de dressing ({olijfolie:naam}, {balsamicoAzijn:naam}, {verseMunt:naam}, snufje {zout:naam}).",
+    "Giet de dressing over de {watermeloen:naam} blokjes.",
+    "Verkruimel de {feta:naam} en strooi deze over de salade."
+  ]
+}

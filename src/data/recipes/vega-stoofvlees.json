@@ -1,0 +1,104 @@
+{
+  "id": "vega-stoofvlees",
+  "title": "Vega Stoofvlees",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Vegetarisch",
+    "Stoofpot"
+  ],
+  "servings": 4,
+  "image": "",
+  "description": "Heerlijk vegetarisch stoofvlees met sojavlees en rijke smaken.",
+  "ingredients": [
+    {
+      "id": "sojavlees",
+      "name": "sojavlees",
+      "amount": 300,
+      "unit": "gr",
+      "note": "bijv. De Vegetarische Slager"
+    },
+    {
+      "id": "wortel",
+      "name": "wortel",
+      "amount": 100,
+      "unit": "gr"
+    },
+    {
+      "id": "ui",
+      "name": "ui",
+      "amount": 1
+    },
+    {
+      "id": "knoflook",
+      "name": "knoflook",
+      "amount": 2,
+      "unit": "teentje",
+      "note": "klein"
+    },
+    {
+      "id": "bruinBier",
+      "name": "bruin bier",
+      "amount": 660,
+      "unit": "ml",
+      "note": "bijv. Rochefort 10"
+    },
+    {
+      "id": "water",
+      "name": "water",
+      "amount": 250,
+      "unit": "ml"
+    },
+    {
+      "id": "olieOfMargarine",
+      "name": "olie of margarine",
+      "amount": 4,
+      "unit": "el"
+    },
+    {
+      "id": "verseTijm",
+      "name": "verse tijm",
+      "amount": 2,
+      "unit": "takje"
+    },
+    {
+      "id": "laurierblaadje",
+      "name": "laurierblaadje",
+      "amount": 2
+    },
+    {
+      "id": "kruidnagel",
+      "name": "kruidnagel",
+      "amount": 1
+    },
+    {
+      "id": "bruineBoterham",
+      "name": "bruine boterham",
+      "amount": 2,
+      "unit": "sneetje"
+    },
+    {
+      "id": "scherpeMosterd",
+      "name": "scherpe mosterd",
+      "amount": 2,
+      "unit": "el"
+    },
+    {
+      "id": "loonsePerenstroop",
+      "name": "Loonse perenstroop",
+      "amount": 1,
+      "unit": "el",
+      "note": "of Luikse, of vervangen door bruine suiker"
+    }
+  ],
+  "instructions": [
+    "Snipper de {ui:naam} grof en snijd de {wortel:naam} in niet al te fijne schijfjes.",
+    "Verhit een ruime stoofpot en smelt er een klontje margarine in. Stoof daarin de {ui:naam} en de {wortel:naam} op een matig vuur totdat de {ui:naam} begint te kleuren.",
+    "Voeg de fijn geperste {knoflook:naam}, het {sojavlees:naam}, en de fijngesneden champignons toe. Bak nog een aantal minuten mee met de {ui:naam}.",
+    "Voeg de {verseTijm:naam}, {laurierblaadje:naam}, jeneverbessen en {kruidnagel:naam} toe. Kneus de kruiden in een vijzel en stop ze in een theezakje of thee-ei.",
+    "Blus met het {bruinBier:naam} en het {water:naam}.",
+    "Voeg de {loonsePerenstroop:naam} toe.",
+    "Laat de stoverij 30 minuten sudderen op een zacht vuur met het deksel op de pot.",
+    "Besmeer de {bruineBoterham:naam} royaal met {scherpeMosterd:naam}. Leg de boterham in de pot, met de besmeerde zijde naar onder.",
+    "Roer na 30 minuten het geheel goed om en laat indien gewenst nog even verder sudderen zonder deksel totdat de saus de gewenste dikte heeft (minimaal nog een uur tot 1,5 uur)."
+  ]
+}

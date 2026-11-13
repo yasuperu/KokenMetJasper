@@ -1,0 +1,102 @@
+{
+  "id": "saag-paneer",
+  "title": "Saag Paneer",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Vegetarisch",
+    "Indiaas"
+  ],
+  "servings": 2,
+  "image": "",
+  "description": "Heerlijk Indisch gerecht met spinazie en paneer (Indiase kaas).",
+  "ingredients": [
+    {
+      "id": "water",
+      "name": "water",
+      "amount": 1,
+      "unit": "l"
+    },
+    {
+      "id": "zout",
+      "name": "zout",
+      "amount": 1,
+      "unit": "tl"
+    },
+    {
+      "id": "spinazie",
+      "name": "spinazie",
+      "amount": 500,
+      "unit": "gr"
+    },
+    {
+      "id": "ui",
+      "name": "ui",
+      "amount": 1
+    },
+    {
+      "id": "knoflook",
+      "name": "knoflook",
+      "amount": 2,
+      "unit": "teentje"
+    },
+    {
+      "id": "gember",
+      "name": "gember",
+      "note": "ter grootte van een duim, fijngesneden",
+      "amount": 1,
+      "unit": "stukje"
+    },
+    {
+      "id": "olie",
+      "name": "olie",
+      "amount": 3,
+      "unit": "el"
+    },
+    {
+      "id": "chilivlokken",
+      "name": "chilivlokken"
+    },
+    {
+      "id": "komijnzaad",
+      "name": "komijnzaad",
+      "amount": 1,
+      "unit": "tl"
+    },
+    {
+      "id": "tomaat",
+      "name": "tomaat",
+      "amount": 2
+    },
+    {
+      "id": "kurkuma",
+      "name": "kurkuma",
+      "amount": 0.5,
+      "unit": "tl"
+    },
+    {
+      "id": "garamMasala",
+      "name": "garam masala",
+      "amount": 1,
+      "unit": "tl"
+    },
+    {
+      "id": "paneer",
+      "name": "paneer",
+      "amount": 200,
+      "unit": "gr",
+      "note": "Indiase witte kaas, in blokjes van 1 bij 1 cm"
+    },
+    {
+      "id": "naan",
+      "name": "naan",
+      "amount": 2,
+      "plural": "naans"
+    }
+  ],
+  "instructions": [
+    "Breng een pan met {water} en {zout} aan de kook. Voeg de {spinazie:naam} toe en kook gedurende 1 minuut. Schep de {spinazie:naam} uit het {water:naam} en leg het kort in een kom met koud {water:naam}. Haal de {spinazie:naam} uit het koude {water:naam} en maal het fijn in een blender.",
+    "Snijd de {ui:naam}, {knoflook} en {gember:naam} fijn. Verhit de helft van de {olie:naam} in een pan en voeg de {knoflook:naam}, {gember:naam}, {ui:naam}, {chilivlokken:naam} en {komijnzaad:naam} toe. Snijd de {tomaat:naam} in blokjes en voeg ze samen met de {kurkuma:naam} en {garamMasala:naam} toe aan de pan. Voeg na 3 minuten bakken de fijngemalen {spinazie:naam} en 150 ml {water:naam} toe.",
+    "Snijd de {paneer:naam} in blokjes van 1 bij 1 cm. Verhit een koekenpan met de rest van de {olie:naam} en bak de kaas kort aan alle zijdes. Roer de kaas door het spinaziemengsel, draai het vuur laag en laat 10 minuten pruttelen.",
+    "Verwarm de {naan:naam} volgens de verpakking."
+  ]
+}

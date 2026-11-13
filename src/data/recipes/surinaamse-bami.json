@@ -1,0 +1,96 @@
+{
+  "id": "surinaamse-bami",
+  "title": "Surinaamse Bami",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Surinaams",
+    "Snel"
+  ],
+  "servings": 2,
+  "image": "",
+  "description": "Heerlijke Surinaamse bami in slechts 15-20 minuten op tafel!",
+  "ingredients": [
+    {
+      "id": "kipfilet",
+      "name": "kipfilet",
+      "amount": 150,
+      "unit": "gr"
+    },
+    {
+      "id": "spaghetti",
+      "name": "spaghetti",
+      "amount": 150,
+      "unit": "gr"
+    },
+    {
+      "id": "olie",
+      "name": "olie",
+      "amount": 1,
+      "unit": "scheutje"
+    },
+    {
+      "id": "ui",
+      "name": "ui",
+      "amount": 1
+    },
+    {
+      "id": "knoflook",
+      "name": "knoflook",
+      "amount": 1,
+      "unit": "teentje"
+    },
+    {
+      "id": "verseSelderij",
+      "name": "verse selderij"
+    },
+    {
+      "id": "maggiblokje",
+      "name": "maggiblokje",
+      "amount": 1
+    },
+    {
+      "id": "gember",
+      "name": "gember",
+      "amount": 2.5,
+      "unit": "cm"
+    },
+    {
+      "id": "sojasaus",
+      "name": "sojasaus",
+      "amount": 3,
+      "unit": "el"
+    },
+    {
+      "id": "tomatenpuree",
+      "name": "tomatenpuree",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "ketjapManis",
+      "name": "ketjap manis",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "komkommer",
+      "name": "komkommer",
+      "amount": 1
+    },
+    {
+      "id": "zwartePeper",
+      "name": "zwarte peper",
+      "amount": 1,
+      "unit": "snufje"
+    }
+  ],
+  "instructions": [
+    "Kook de {spaghetti:naam} volgens de bereidingswijze op de verpakking.",
+    "Snijd de {ui:naam}, {verseSelderij:naam}, {kipfilet:naam} en {knoflook:naam} in stukjes.",
+    "Verhit {olie} in een pan en fruit de {ui:naam} met {knoflook:naam} aan. Voeg na 2-3 minuten de kip, {gember:naam} en {zwartePeper} toe. Bak de kip rondom bruin.",
+    "Voeg 1 verkruimeld {maggiblokje:naam} en de {tomatenpuree:naam} toe. Na ongeveer 1 minuut voeg je de {sojasaus:naam} en {ketjapManis:naam} toe.",
+    "Meng alles goed door elkaar en voeg vervolgens ook de gekookte {spaghetti:naam} toe.",
+    "Meng alles goed door elkaar en strooi wat fijngesneden selderij over de Surinaamse bami.",
+    "Serveer de bami bijvoorbeeld met een omelet of extra groenten zoals een komkommersalade."
+  ]
+}

@@ -53,6 +53,7 @@ export function recipeToDraft(recipe, content) {
       note: i.note || "",
       whole: i.step === 1,
       plural: i.plural || "",
+      group: i.group || "",
     })),
     instructions: [...(content?.instructions || recipe?.instructions || [])],
   };
@@ -75,6 +76,7 @@ export function draftIngredients(draft) {
       if (row.whole) ing.step = 1;
       if (row.note.trim()) ing.note = row.note.trim();
       if (row.plural.trim()) ing.plural = row.plural.trim();
+      if (row.group?.trim()) ing.group = row.group.trim();
       return ing;
     });
 }
@@ -163,6 +165,7 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
           note: p.note || "",
           whole: false,
           plural: "",
+          group: p.group || "",
         };
       });
       return { ...d, ingredients: [...d.ingredients, ...newRows] };
@@ -483,6 +486,7 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
                   onChange={(e) => updateRow(row.key, { note: e.target.value })}
                 />
                 <span className="ing-preview">
+                  {row.group && <span className="ing-group-tag">{row.group}</span>}
                   {ing ? (
                     <>
                       {formatIngredient(ing, 1)}
@@ -495,6 +499,10 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
                     <label className="checkbox">
                       <input type="checkbox" checked={row.whole} onChange={(e) => updateRow(row.key, { whole: e.target.checked })} />
                       Alleen hele stuks
+                    </label>
+                    <label className="field">
+                      <span>Groep (bv. Dressing)</span>
+                      <input value={row.group} onChange={(e) => updateRow(row.key, { group: e.target.value })} placeholder="geen" />
                     </label>
                     <label className="field">
                       <span>Eigen meervoud</span>
@@ -528,7 +536,7 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
               <textarea
                 rows={6}
                 value={pasteIngredients}
-                placeholder={"200 gr bloem\n3 uien, gesnipperd\n2 teentjes knoflook\nzout en peper"}
+                placeholder={"200 gr bloem\n3 uien, gesnipperd\n2 teentjes knoflook\nzout en peper\nVoor de dressing:\n2 el olijfolie"}
                 onChange={(e) => setPasteIngredients(e.target.value)}
               />
             </label>

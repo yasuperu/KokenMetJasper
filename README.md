@@ -2,10 +2,10 @@
 
 ## Recepten beheren
 
-Ga naar **https://kokenmetjasper.nl/keukenkastje** (zet er een bladwijzer van; er staat nergens een link naar). Het adres staat in `src/site.json` (`adminPath`) en kun je daar veranderen. De beheerpagina wordt nooit door Google geïndexeerd; de echte beveiliging is je GitHub-token.
+Ga naar **https://kokenmetjasper.nl/jk** (zet er een bladwijzer van; er staat nergens een link naar). Het adres staat in `src/site.json` (`adminPath`) en kun je daar veranderen. De beheerpagina wordt nooit door Google geïndexeerd; de echte beveiliging is je GitHub-token.
 
 1. Eenmalig: maak een GitHub fine-grained token (alleen deze repo, *Contents: Read and write*, optioneel *Actions: Read-only*) en plak die op de beheerpagina. De token blijft alleen in je eigen browser.
-2. Nieuw recept → vul de velden in. Een ingrediëntenlijst of bereiding kun je in één keer plakken; de ingrediënten worden in de bereiding automatisch gekoppeld.
+2. Nieuw recept → vul de velden in. Een ingrediëntenlijst of bereiding kun je in één keer plakken; de ingrediënten worden in de bereiding automatisch gekoppeld. Een regel als `Voor de dressing:` in de geplakte lijst wordt een groep.
 3. Opslaan maakt een commit op `main`. De GitHub Action (`.github/workflows/deploy.yml`) bouwt en publiceert de site daarna automatisch (± 2 minuten).
 
 ### Bron van een recept
@@ -39,6 +39,7 @@ Recepten staan als JSON in `src/data/recipes/`. Ingrediënten schrijf je in het 
 { "id": "peper", "name": "peper", "amount": 1, "note": "of sambal" }   // toelichting
 { "id": "zout", "name": "zout" }                                       // zonder amount: "naar smaak"
 { "id": "x", "name": "kiwi", "amount": 2, "plural": "kiwi's" }         // eigen meervoud
+{ "id": "mayo", "name": "mayonaise", "amount": 2, "unit": "el", "group": "Dressing" } // groep met kopje
 ```
 
 In de bereiding:

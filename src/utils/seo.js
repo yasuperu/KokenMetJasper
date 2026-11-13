@@ -1,5 +1,5 @@
 import site from "../site.json";
-import { formatIngredient } from "./formatIngredient";
+import { formatIngredient, ingredientName } from "./formatIngredient";
 import { sourceType, platformName } from "./source";
 
 /*
@@ -22,7 +22,7 @@ export function plainInstruction(text, ingredients) {
   return text.replace(/{([^}:]+)(?::naam)?}/g, (m, id) => {
     const ing = byId[id];
     if (!ing) return "";
-    if (m.endsWith(":naam}")) return ing.name;
+    if (m.endsWith(":naam}")) return ingredientName(ing, 1);
     return formatIngredient(ing, 1);
   });
 }

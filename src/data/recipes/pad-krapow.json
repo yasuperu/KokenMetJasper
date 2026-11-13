@@ -1,0 +1,88 @@
+{
+  "id": "pad-krapow",
+  "title": "Thaise Pad Krapow",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Thais",
+    "Pittig"
+  ],
+  "servings": 4,
+  "image": "",
+  "description": "Een pittige Thaise favoriet met gehakt en Thaise basilicum.",
+  "ingredients": [
+    {
+      "id": "zonnebloemolie",
+      "name": "zonnebloemolie",
+      "amount": 3.5,
+      "unit": "el"
+    },
+    {
+      "id": "rodePeper",
+      "name": "rode peper",
+      "amount": 3,
+      "note": "fijngehakt"
+    },
+    {
+      "id": "sjalot",
+      "name": "sjalot",
+      "amount": 3,
+      "note": "in dunne ringen"
+    },
+    {
+      "id": "knoflook",
+      "name": "knoflook",
+      "amount": 5,
+      "unit": "teentje",
+      "note": "in dunne plakjes"
+    },
+    {
+      "id": "kipOfVarkensgehakt",
+      "name": "kip- of varkensgehakt",
+      "amount": 500,
+      "unit": "gr"
+    },
+    {
+      "id": "suiker",
+      "name": "suiker",
+      "amount": 2,
+      "unit": "el"
+    },
+    {
+      "id": "sojasaus",
+      "name": "sojasaus",
+      "amount": 2,
+      "unit": "el"
+    },
+    {
+      "id": "vissaus",
+      "name": "vissaus",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "bouillon",
+      "name": "water of kippenbouillon",
+      "amount": 90,
+      "unit": "ml"
+    },
+    {
+      "id": "thaiseBasilicum",
+      "name": "Thaise basilicum",
+      "amount": 1,
+      "unit": "bos"
+    },
+    {
+      "id": "gekookteRijst",
+      "name": "gekookte rijst",
+      "note": "om mee te serveren"
+    }
+  ],
+  "instructions": [
+    "Verhit de {zonnebloemolie:naam} in een wok op hoog vuur. Voeg de {rodePeper:naam}, {sjalot:naam} en {knoflook:naam} toe. Bak 1 tot 2 minuten tot alles zacht is en goudbruin, let op dat het niet verbrandt.",
+    "Voeg het {kipOfVarkensgehakt:naam} toe en bak het in enkele minuten rul.",
+    "Voeg {suiker:naam}, {sojasaus:naam} en {vissaus:naam} toe. Bak nog een minuut door.",
+    "Blus de pan af met {bouillon}. Wacht tot het vocht deels is verdampt.",
+    "Voeg de {thaiseBasilicum:naam} toe en roer door tot het geslonken is.",
+    "Serveer met {gekookteRijst:naam}."
+  ]
+}

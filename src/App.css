@@ -1638,6 +1638,29 @@ code {
   }
 }
 
+/* ingrediëntgroepen */
+
+.ingredients li.ing-group {
+  display: block;
+  padding: 18px 0 6px;
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-top: none;
+}
+
+.ing-group-tag {
+  display: inline-block;
+  margin-bottom: 2px;
+  padding: 0 7px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--plum);
+  background: #e7dcf1;
+  border-radius: 999px;
+}
+
 /* =============================================================
    PRINT
    Eén nette A4 met de hoeveelheden voor het gekozen aantal
@@ -1796,6 +1819,16 @@ code {
     padding: 1.2mm 0;
     border-top: none;
     break-inside: avoid;
+  }
+
+  .ingredients li.ing-group {
+    padding: 2mm 0 0.5mm;
+    font-size: 10.5pt;
+    break-after: avoid;
+  }
+
+  .ingredients li.ing-group::before {
+    display: none;
   }
 
   /* afvinkhokje voor in de keuken */

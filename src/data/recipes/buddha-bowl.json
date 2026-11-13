@@ -1,0 +1,126 @@
+{
+  "id": "buddha-bowl",
+  "title": "Buddha Bowl",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Vegetarisch",
+    "Bowl"
+  ],
+  "servings": 2,
+  "image": "",
+  "description": "Een voedzame en makkelijke Buddha Bowl met zoete aardappel, kikkererwten en een heerlijke sesamdressing.",
+  "ingredients": [
+    {
+      "id": "zoeteAardappel",
+      "name": "zoete aardappel",
+      "amount": 1,
+      "note": "middelgroot, in blokjes"
+    },
+    {
+      "id": "rodeUi",
+      "name": "rode ui",
+      "amount": 1,
+      "note": "in partjes"
+    },
+    {
+      "id": "balsamicoazijn",
+      "name": "balsamicoazijn",
+      "amount": 1.5,
+      "unit": "el"
+    },
+    {
+      "id": "kikkererwten",
+      "name": "kikkererwten",
+      "amount": 200,
+      "unit": "gr",
+      "note": "uit blik"
+    },
+    {
+      "id": "komijnpoeder",
+      "name": "komijnpoeder",
+      "amount": 0.5,
+      "unit": "tl"
+    },
+    {
+      "id": "chilipoeder",
+      "name": "chilipoeder",
+      "amount": 0.25,
+      "unit": "tl"
+    },
+    {
+      "id": "knoflookpoeder",
+      "name": "knoflookpoeder",
+      "amount": 0.5,
+      "unit": "tl"
+    },
+    {
+      "id": "olijfolie",
+      "name": "olijfolie",
+      "note": "om te roosteren en te bakken"
+    },
+    {
+      "id": "peperEnZout",
+      "name": "peper en zout"
+    },
+    {
+      "id": "linzenQuinoamix",
+      "name": "linzen-quinoamix",
+      "amount": 250,
+      "unit": "gr",
+      "note": "bijv. van Zonnatura"
+    },
+    {
+      "id": "bladspinazie",
+      "name": "bladspinazie",
+      "amount": 2,
+      "unit": "handvol"
+    },
+    {
+      "id": "avocado",
+      "name": "avocado",
+      "amount": 1,
+      "note": "in plakjes"
+    },
+    {
+      "id": "geroosterdeSesamzaadjes",
+      "name": "geroosterde sesamzaadjes"
+    },
+    {
+      "id": "mayonaise",
+      "name": "mayonaise",
+      "amount": 2,
+      "unit": "el",
+      "group": "Sesamdressing"
+    },
+    {
+      "id": "sesamolie",
+      "name": "sesamolie",
+      "amount": 1,
+      "unit": "tl",
+      "group": "Sesamdressing"
+    },
+    {
+      "id": "knoflook",
+      "name": "knoflook",
+      "amount": 1,
+      "unit": "teentje",
+      "note": "geraspt",
+      "group": "Sesamdressing"
+    },
+    {
+      "id": "citroen",
+      "name": "citroen",
+      "amount": 0.5,
+      "note": "alleen het sap",
+      "group": "Sesamdressing"
+    }
+  ],
+  "instructions": [
+    "Verwarm de oven voor op 180°C. Meng de {zoeteAardappel:naam}, {rodeUi:naam}, {balsamicoazijn:naam}, {olijfolie:naam}, {peperEnZout:naam} in een ovenschaal. Schep goed om.",
+    "Rooster de {zoeteAardappel:naam} 25 minuten in het midden van de oven tot deze zacht is.",
+    "Verhit {olijfolie:naam} in een koekenpan. Bak {kikkererwten:naam} met {komijnpoeder:naam}, {chilipoeder:naam} en {knoflookpoeder:naam} tot ze krokant zijn.",
+    "Meng alle ingrediënten voor de dressing.",
+    "Schep de {linzenQuinoamix:naam} in kommen. Verdeel geroosterde {zoeteAardappel:naam}, gebakken {kikkererwten:naam}, {bladspinazie:naam} en {avocado:naam} over de kommen.",
+    "Sprenkel sesamdressing over de bowls en garneer met {geroosterdeSesamzaadjes:naam}."
+  ]
+}

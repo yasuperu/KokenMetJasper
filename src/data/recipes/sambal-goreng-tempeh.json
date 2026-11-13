@@ -1,0 +1,97 @@
+{
+  "id": "sambal-goreng-tempeh",
+  "title": "Sambal Goreng Tempeh",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Vegetarisch",
+    "Indisch"
+  ],
+  "servings": 2,
+  "image": "",
+  "description": "Een bekend en geliefd gerecht uit de Indische keuken: Sambal Goreng Tempeh.",
+  "ingredients": [
+    {
+      "id": "tempeh",
+      "name": "tempeh",
+      "amount": 1,
+      "unit": "blok",
+      "note": "250 gram, in dunne reepjes of blokjes gesneden"
+    },
+    {
+      "id": "ui",
+      "name": "ui",
+      "amount": 1,
+      "note": "fijngesnipperd"
+    },
+    {
+      "id": "knoflook",
+      "name": "knoflook",
+      "amount": 2,
+      "unit": "teentje",
+      "note": "fijngehakt"
+    },
+    {
+      "id": "gemalenLaos",
+      "name": "gemalen laos",
+      "amount": 1,
+      "unit": "tl"
+    },
+    {
+      "id": "verkruimeldeTrassi",
+      "name": "verkruimelde trassi",
+      "amount": 0.5,
+      "unit": "tl",
+      "note": "optioneel"
+    },
+    {
+      "id": "sambalOelek",
+      "name": "sambal oelek",
+      "amount": 1,
+      "unit": "el",
+      "note": "naar smaak"
+    },
+    {
+      "id": "ketjapManis",
+      "name": "ketjap manis",
+      "amount": 3,
+      "unit": "el"
+    },
+    {
+      "id": "suiker",
+      "name": "palmsuiker of witte suiker",
+      "amount": 0.5,
+      "unit": "el",
+      "note": "of meer naar eigen smaak"
+    },
+    {
+      "id": "citroensap",
+      "name": "citroensap",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "olie",
+      "name": "olie",
+      "amount": 500,
+      "unit": "ml"
+    },
+    {
+      "id": "djeroekPoeroet",
+      "name": "djeroek poeroet",
+      "amount": 2,
+      "unit": "blaadje"
+    },
+    {
+      "id": "zout",
+      "name": "zout"
+    }
+  ],
+  "instructions": [
+    "Snijd de {tempeh:naam} in dunne plakken en vervolgens in reepjes of blokjes, ongeveer zo groot als een dik luciferhoutje.",
+    "Verhit ruim {olie:naam} in een koekenpan, zorg ervoor dat de hele bodem bedekt is. Bak de {tempeh:naam} in twee rondes bruin en krokant. Schep de reepjes uit de pan en laat ze uitlekken op een bord met keukenpapier. Bestrooi de {tempeh:naam} met een snufje {zout:naam} en zet apart tot gebruik.",
+    "Maak de koekenpan schoon met keukenpapier en veeg de meeste {olie:naam} eruit. In dezelfde pan bereid je nu de ketjapsaus.",
+    "Snipper de {ui:naam} en hak {knoflook} fijn. Fruit de {ui:naam} en {knoflook:naam}, voeg {gemalenLaos:naam}, {sambalOelek:naam}, {djeroekPoeroet:naam} (in zijn geheel) en optioneel {verkruimeldeTrassi:naam} toe. Roer goed tot de trassi volledig is opgelost.",
+    "Voeg {suiker} toe en roer tot het gesmolten is. Voeg vervolgens {ketjapManis} en {citroensap} toe. Verwarm goed tot het begint te bubbelen.",
+    "Voeg de gebakken {tempeh:naam} toe en roer alles kort om op hoog vuur, zodat alle reepjes {tempeh:naam} bedekt zijn met de saus."
+  ]
+}

@@ -1,4 +1,4 @@
-import { parseAmount, parseIngredientLine, parseSteps, autoLinkStep, ingredientId, unknownPlaceholders } from "./recipeTools";
+import { parseAmount, parseIngredientLine, parseIngredientList, parseSteps, autoLinkStep, ingredientId, unknownPlaceholders } from "./recipeTools";
 import { singularize, singularizeWord } from "./pluralize";
 
 test.each([
@@ -63,4 +63,57 @@ test("autoLinkStep koppelt hoeveelheden en namen", () => {
 
 test("unknownPlaceholders", () => {
   expect(unknownPlaceholders(["{ui} en {kaas:naam}"], [{ id: "ui" }])).toEqual(["kaas"]);
+});
+
+test.each([
+  ["2 tenen knoflook, fijngehakt", { amount: 2, unit: "teentje", name: "knoflook", note: "fijngehakt" }],
+  ["1 teen knoflook", { amount: 1, unit: "teentje", name: "knoflook", note: "" }],
+  ["Optioneel: halve theelepel verkruimelde trassi", { amount: 0.5, unit: "tl", name: "verkruimelde trassi", note: "optioneel" }],
+  ["Halve eetlepel palmsuiker", { amount: 0.5, unit: "el", name: "palmsuiker", note: "" }],
+  ["3 tot 4 eetlepels zonnebloemolie", { amount: 3, unit: "el", name: "zonnebloemolie", note: "" }],
+  ["2x 330 ml bruin bier", { amount: 660, unit: "ml", name: "bruin bier", note: "" }],
+  ["Een snufje zout", { amount: 1, unit: "snufje", name: "zout", note: "" }],
+  ["Peper en zout naar smaak", { amount: null, unit: "", name: "peper en zout", note: "" }],
+  ["1 eetlepel sambal oelek (naar smaak)", { amount: 1, unit: "el", name: "sambal oelek", note: "naar smaak" }],
+  ["2 handenvol bladspinazie", { amount: 2, unit: "handvol", name: "bladspinazie", note: "" }],
+  ["500 milliliter olie", { amount: 500, unit: "ml", name: "olie", note: "" }],
+  ["1 blok tempeh", { amount: 1, unit: "blok", name: "tempeh", note: "" }],
+  ["2 sneetjes bruin brood", { amount: 2, unit: "sneetje", name: "bruin brood", note: "" }],
+  ["Verse selderij", { amount: null, unit: "", name: "verse selderij", note: "" }],
+])("parseIngredientLine(%s) – kookboekschrijfwijzen", (line, expected) => {
+  expect(parseIngredientLine(line)).toEqual(expected);
+});
+
+test("groepen bij plakken", () => {
+  const list = parseIngredientList("2 el olie\nVoor de sesamdressing:\n2 el mayonaise");
+  expect(list[0].group).toBeUndefined();
+  expect(list[1]).toEqual({ amount: 2, unit: "el", name: "mayonaise", note: "", group: "Sesamdressing" });
+});
+
+test.each([
+  ["1/2 tl komijnpoeder", { amount: 0.5, unit: "tl", name: "komijnpoeder", note: "" }],
+  ["1 1/2 el olie", { amount: 1.5, unit: "el", name: "olie", note: "" }],
+  ["1,5 el balsamicoazijn", { amount: 1.5, unit: "el", name: "balsamicoazijn", note: "" }],
+  ["2,5 dl room, lauw", { amount: 2.5, unit: "dl", name: "room", note: "lauw" }],
+  ["1 halve watermeloen", { amount: 0.5, unit: "", name: "watermeloen", note: "" }],
+  ["2 kleine teentjes knoflook", { amount: 2, unit: "teentje", name: "knoflook", note: "kleine" }],
+  ["Snufje zwarte peper", { amount: 1, unit: "snufje", name: "zwarte peper", note: "" }],
+  ["Sap van 1/2 citroen", { amount: 0.5, unit: "", name: "citroen", note: "alleen het sap" }],
+  ["1 blok tempeh (250 gram), in reepjes", { amount: 1, unit: "blok", name: "tempeh", note: "250 gram, in reepjes" }],
+  ["1 el Loonse (of Luikse) perenstroop (of bruine suiker)", { amount: 1, unit: "el", name: "Loonse perenstroop", note: "of Luikse, of bruine suiker" }],
+  ["2 naan", { amount: 2, unit: "", name: "naan", note: "" }],
+])("parseIngredientLine(%s) – lastige gevallen", (line, expected) => {
+  expect(parseIngredientLine(line)).toEqual(expected);
+});
+
+test("autoLinkStep herkent andere schrijfwijzen", () => {
+  const ings = [
+    { id: "water", name: "water", amount: 1, unit: "l" },
+    { id: "knoflook", name: "knoflook", amount: 2, unit: "teentje" },
+    { id: "ketjap", name: "ketjap manis", amount: 3, unit: "el" },
+    { id: "zout", name: "zout", amount: 1, unit: "tl" },
+  ];
+  expect(autoLinkStep("Breng 1 liter water en 1 theelepel zout aan de kook.", ings)).toBe("Breng {water} en {zout} aan de kook.");
+  expect(autoLinkStep("Hak twee tenen knoflook fijn.", ings)).toBe("Hak {knoflook} fijn.");
+  expect(autoLinkStep("Voeg 3 eetlepels ketjap manis toe.", ings)).toBe("Voeg {ketjap} toe.");
 });
