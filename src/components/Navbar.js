@@ -4,7 +4,7 @@ import { Leaf } from "./Doodles";
 function Navbar() {
   return (
     <header className="navbar">
-      <Link to="/kokenmetjasper" className="logo">
+      <Link to="/" className="logo">
         <Leaf className="logo-mark" />
         <span>
           Koken <em>met</em> Jasper

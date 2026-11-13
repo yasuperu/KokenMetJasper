@@ -159,3 +159,65 @@ export function pluralize(phrase) {
   words[words.length - 1] = pluralize(words[words.length - 1]);
   return words.join(" ");
 }
+
+/*
+  Enkelvoud terugvinden: probeer kandidaten en kijk welke via pluralizeWord
+  precies dit meervoud oplevert. Handig bij het plakken van een
+  ingrediëntenlijst uit een kookboek ("3 uien" → naam "ui").
+*/
+export function singularizeWord(word) {
+  if (!word) return word;
+  const lower = word.toLowerCase();
+
+  const reverse = Object.entries(exceptions).find(([, plural]) => plural === lower);
+  if (reverse) return matchCase(word, reverse[0]);
+
+  const candidates = [];
+  if (lower.endsWith("'s")) candidates.push(lower.slice(0, -2));
+  if (lower.endsWith("ën")) candidates.push(lower.slice(0, -2));
+  if (lower.endsWith("eren")) candidates.push(lower.slice(0, -4));
+  if (lower.endsWith("en")) {
+    const stem = lower.slice(0, -2);
+    // Meest specifieke vormen eerst: druiven → druif vóór "druiv"
+    const variants = [];
+    if (stem.endsWith("z")) variants.push(stem.slice(0, -1) + "s");
+    if (stem.endsWith("v")) variants.push(stem.slice(0, -1) + "f");
+    variants.push(stem);
+    for (const v of variants) {
+      // kippen → kip
+      if (v.length > 2 && v[v.length - 1] === v[v.length - 2] && !isVowel(v[v.length - 1])) {
+        candidates.push(v.slice(0, -1));
+      }
+      // tomaten → tomaat
+      const m = v.match(/^(.*[^aeiou])([aeiou])([^aeiouy])$/);
+      if (m) candidates.push(m[1] + m[2] + m[2] + m[3]);
+      candidates.push(v);
+    }
+  }
+  if (lower.endsWith("s")) candidates.push(lower.slice(0, -1));
+
+  const hit = candidates.find((c) => c && pluralizeWord(c) === lower);
+  if (hit) return matchCase(word, hit);
+
+  // aardappels → aardappel (beide meervouden zijn goed Nederlands)
+  const sStem = lower.endsWith("s") && !lower.endsWith("'s") ? lower.slice(0, -1) : null;
+  if (sStem && /(el|er|em|en|e|je)$/.test(sStem)) return matchCase(word, sStem);
+
+  return word;
+}
+
+export function singularize(phrase) {
+  if (!phrase) return phrase;
+  const split = phrase.match(COUNTER_WORDS_SPLIT);
+  if (split) return singularize(phrase.slice(0, split.index)) + phrase.slice(split.index);
+
+  const words = phrase.split(" ");
+  if (words.length > 1 && words[0].toLowerCase().endsWith("jes")) {
+    words[0] = singularizeWord(words[0]);
+    return words.join(" ");
+  }
+  const lastParts = words[words.length - 1].split("-");
+  lastParts[lastParts.length - 1] = singularizeWord(lastParts[lastParts.length - 1]);
+  words[words.length - 1] = lastParts.join("-");
+  return words.join(" ");
+}

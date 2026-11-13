@@ -12,16 +12,23 @@ function Home() {
   const [activeTag, setActiveTag] = useState(null);
 
   const allTags = useMemo(
-    () => [...new Set(recipes.flatMap((r) => r.tags || []))].sort(),
+    () => [...new Set(recipes.flatMap((r) => [r.category, ...(r.tags || [])].filter(Boolean)))].sort(),
     []
   );
 
   const query = normalize(search.trim());
   const filteredRecipes = recipes
-    .filter((recipe) => !activeTag || (recipe.tags || []).includes(activeTag))
+    .filter((recipe) => !activeTag || recipe.category === activeTag || (recipe.tags || []).includes(activeTag))
     .filter((recipe) => {
       if (!query) return true;
-      const haystack = [recipe.title, ...(recipe.tags || []), ...recipe.ingredients.map((i) => i.name)].join(" ");
+      const haystack = [
+        recipe.title,
+        recipe.category,
+        recipe.source?.book,
+        recipe.source?.author,
+        ...(recipe.tags || []),
+        ...(recipe.ingredients || []).map((i) => i.name),
+      ].join(" ");
       return normalize(haystack).includes(query);
     })
     .sort((a, b) => a.title.localeCompare(b.title, "nl"));

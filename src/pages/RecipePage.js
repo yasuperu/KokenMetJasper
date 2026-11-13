@@ -2,29 +2,12 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import recipes from "../data/recipes";
 import ServingsSelector from "../components/ServingsSelector";
-import { formatIngredient, ingredientName, ingredientParts } from "../utils/formatIngredient";
-import { Leaf, Whisk } from "../components/Doodles";
-
-/*
-  In de bereiding:
-    {id}       → hoeveelheid + naam   ("2 teentjes knoflook")
-    {id:naam}  → alleen de naam        ("knoflook", "uien")
-*/
-function renderInstruction(text, ingredientsById, factor) {
-  const parts = text.split(/({[^}]+})/g);
-  return parts.map((part, i) => {
-    const match = part.match(/^{([^}:]+)(?::(naam))?}$/);
-    if (!match) return part;
-    const ingredient = ingredientsById[match[1]];
-    if (!ingredient) return part;
-    const label = match[2] ? ingredientName(ingredient, factor) : formatIngredient(ingredient, factor);
-    return (
-      <span key={i} className="ing-ref">
-        {label}
-      </span>
-    );
-  });
-}
+import RecipeContent from "../components/RecipeContent";
+import LockedContent from "../components/LockedContent";
+import SourceNote from "../components/SourceNote";
+import { decryptJSON } from "../utils/crypto";
+import { forgetPassword, getPassword, setPassword } from "../utils/passwordStore";
+import { imageUrl } from "../config";
 
 function RecipePage() {
   const { id } = useParams();
@@ -32,111 +15,135 @@ function RecipePage() {
 
   const [servings, setServings] = useState(recipe ? recipe.servings : 1);
   const [printPhoto, setPrintPhoto] = useState(false);
+  const [content, setContent] = useState(
+    recipe && !recipe.locked ? { ingredients: recipe.ingredients, instructions: recipe.instructions } : null
+  );
+  const [unlockError, setUnlockError] = useState("");
+  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = recipe ? `${recipe.title} · Koken met Jasper` : "Koken met Jasper";
   }, [recipe]);
 
+  // Automatisch ontgrendelen met een onthouden wachtwoord
+  useEffect(() => {
+    if (!recipe?.locked) return;
+    const saved = getPassword();
+    if (!saved) return;
+    let cancelled = false;
+    setBusy(true);
+    decryptJSON(recipe.locked, saved)
+      .then((data) => !cancelled && setContent(data))
+      .catch(() => {})
+      .finally(() => !cancelled && setBusy(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [recipe]);
+
+  async function unlock(password, remember) {
+    setBusy(true);
+    setUnlockError("");
+    try {
+      const data = await decryptJSON(recipe.locked, password);
+      setPassword(password, remember);
+      setContent(data);
+    } catch {
+      setUnlockError("Dat wachtwoord klopt niet.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function lock() {
+    forgetPassword();
+    setContent(null);
+  }
+
   if (!recipe) {
     return (
       <main className="container not-found">
         <h1>Recept niet gevonden</h1>
-        <Link to="/kokenmetjasper" className="back-link">← Terug naar alle recepten</Link>
+        <Link to="/" className="back-link">← Terug naar alle recepten</Link>
       </main>
     );
   }
 
   const factor = servings / recipe.servings;
-  const ingredientsById = Object.fromEntries(recipe.ingredients.map((i) => [i.id, i]));
+  const image = imageUrl(recipe.image);
+  const unlocked = Boolean(content);
 
   return (
     <main className={printPhoto ? "recipe-page print-photo" : "recipe-page"}>
-      <Link to="/kokenmetjasper" className="back-link no-print">← Alle recepten</Link>
+      <Link to="/" className="back-link no-print">← Alle recepten</Link>
 
       <header className="recipe-header">
         <div className="recipe-header-text">
-          {recipe.tags && (
+          {(recipe.category || recipe.tags?.length > 0) && (
             <ul className="tags">
-              {recipe.tags.map((tag) => (
+              {[recipe.category, ...(recipe.tags || [])].filter(Boolean).map((tag) => (
                 <li key={tag}>{tag}</li>
               ))}
             </ul>
           )}
           <h1>{recipe.title}</h1>
-          <p className="recipe-meta">
-            {recipe.ingredients.length} ingrediënten · {recipe.instructions.length} stappen
-            <span className="print-only"> · voor {servings} {servings === 1 ? "persoon" : "personen"}</span>
-          </p>
+          <SourceNote source={recipe.source} />
+          {unlocked && (
+            <p className="recipe-meta">
+              {content.ingredients.length} ingrediënten · {content.instructions.length} stappen
+              <span className="print-only"> · voor {servings} {servings === 1 ? "persoon" : "personen"}</span>
+            </p>
+          )}
 
-          <div className="recipe-tools no-print">
-            <ServingsSelector servings={servings} setServings={setServings} />
-            <div className="print-tools">
-              <button type="button" className="btn-print" onClick={() => window.print()}>
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M7 9V3h10v6M7 17H4v-7a1 1 0 011-1h14a1 1 0 011 1v7h-3M7 14h10v7H7z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-                </svg>
-                Recept printen
-              </button>
-              {recipe.image && (
-                <label className="checkbox">
-                  <input type="checkbox" checked={printPhoto} onChange={(e) => setPrintPhoto(e.target.checked)} />
-                  Foto mee printen
-                </label>
-              )}
+          {unlocked && (
+            <div className="recipe-tools no-print">
+              <ServingsSelector servings={servings} setServings={setServings} />
+              <div className="print-tools">
+                <button type="button" className="btn-print" onClick={() => window.print()}>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 9V3h10v6M7 17H4v-7a1 1 0 011-1h14a1 1 0 011 1v7h-3M7 14h10v7H7z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+                  </svg>
+                  Recept printen
+                </button>
+                {image && (
+                  <label className="checkbox">
+                    <input type="checkbox" checked={printPhoto} onChange={(e) => setPrintPhoto(e.target.checked)} />
+                    Foto mee printen
+                  </label>
+                )}
+                {recipe.locked && (
+                  <button type="button" className="btn-link" onClick={lock}>
+                    Vergrendel
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
-        {recipe.image && (
+        {image && (
           <div className="recipe-image-wrap">
-            <img src={recipe.image} alt={recipe.title} className="recipe-image" />
+            <img src={image} alt={recipe.title} className="recipe-image" />
           </div>
         )}
       </header>
 
-      <div className="recipe-body">
-        <section className="ingredients">
-          <h2>
-            <Leaf className="h2-icon" /> Ingrediënten
-          </h2>
-          <p className="ingredients-for">
-            voor {servings} {servings === 1 ? "persoon" : "personen"}
-          </p>
-          <ul>
-            {recipe.ingredients.map((ingredient) => {
-              const p = ingredientParts(ingredient, factor);
-              return (
-                <li key={ingredient.id}>
-                  <span className="qty">
-                    {p.amount} {p.unit}
-                  </span>
-                  <span className="ing-name">
-                    {p.name}
-                    {p.note && <span className="ing-note"> ({p.note})</span>}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
+      {unlocked ? (
+        <RecipeContent
+          ingredients={content.ingredients}
+          instructions={content.instructions}
+          servings={servings}
+          factor={factor}
+        />
+      ) : (
+        <LockedContent source={recipe.source} onUnlock={unlock} error={unlockError} busy={busy} />
+      )}
 
-        <section className="steps">
-          <h2>
-            <Whisk className="h2-icon" /> Bereiding
-          </h2>
-          <ol>
-            {recipe.instructions.map((step, index) => (
-              <li key={index}>
-                <span className="step-number" aria-hidden="true">{index + 1}</span>
-                <p>{renderInstruction(step, ingredientsById, factor)}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-      </div>
-
-      <p className="print-only print-footer">Koken met Jasper</p>
+      <p className="print-only print-footer">
+        Koken met Jasper
+        {recipe.source?.book && ` · uit ${recipe.source.book}${recipe.source.author ? `, ${recipe.source.author}` : ""}`}
+      </p>
     </main>
   );
 }

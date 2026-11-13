@@ -1,17 +1,34 @@
 # Koken met Jasper
 
-## Een recept toevoegen
+## Recepten beheren
 
-Maak een bestand in `src/data/recipes/<Categorie>/`. Ingrediënten schrijf je in het **enkelvoud**; het meervoud wordt automatisch gemaakt als het aantal personen verandert.
+Ga naar **/admin** op de site (link "Beheer" onderaan elke pagina).
+
+1. Eenmalig: maak een GitHub fine-grained token (alleen deze repo, *Contents: Read and write*, optioneel *Actions: Read-only*) en plak die op de beheerpagina. De token blijft alleen in je eigen browser.
+2. Nieuw recept → vul de velden in. Een ingrediëntenlijst of bereiding kun je in één keer plakken; de ingrediënten worden in de bereiding automatisch gekoppeld.
+3. Opslaan maakt een commit op `main`. De GitHub Action (`.github/workflows/deploy.yml`) bouwt en publiceert de site daarna automatisch (± 2 minuten).
+
+### Recepten uit kookboeken
+
+Vink *Dit recept komt uit een kookboek* aan en vul titel, auteur en pagina in.
+
+- De ingrediënten en bereiding worden **in je browser versleuteld** (AES-256-GCM, sleutel afgeleid van je wachtwoord) voordat ze worden opgeslagen. In de repo en op de site staat alleen versleutelde tekst.
+- Bezoekers zien titel, foto en bronvermelding, met een geblurde nep-weergave. Met het wachtwoord ontgrendel je het recept (en kun je het gewoon schalen en printen).
+- Alle boekrecepten gebruiken hetzelfde wachtwoord; `src/data/lock.json` controleert dat. **Ben je het wachtwoord kwijt, dan zijn die recepten niet meer te lezen.**
+- Gebruik bij boekrecepten alleen je eigen foto's.
+
+## Receptformaat
+
+Recepten staan als JSON in `src/data/recipes/`. Ingrediënten schrijf je in het **enkelvoud**; het meervoud wordt automatisch gemaakt als het aantal personen verandert.
 
 ```js
-{ id: "ui", name: "ui", amount: 1 }                          // 1 ui → 2 uien
-{ id: "knoflook", name: "knoflook", amount: 2, unit: "teentje" } // 2 teentjes knoflook
-{ id: "gnocchi", name: "verse gnocchi", amount: 400, unit: "gr" } // gr/ml/el/tl: nooit meervoud
-{ id: "wraps", name: "wrap", amount: 4, step: 1 }            // altijd hele stuks
-{ id: "peper", name: "peper", amount: 1, note: "of sambal" } // toelichting
-{ id: "zout", name: "zout" }                                 // zonder amount: "naar smaak"
-{ id: "x", name: "kiwi", amount: 2, plural: "kiwi's" }       // eigen meervoud
+{ "id": "ui", "name": "ui", "amount": 1 }                              // 1 ui → 2 uien
+{ "id": "knoflook", "name": "knoflook", "amount": 2, "unit": "teentje" } // 2 teentjes knoflook
+{ "id": "gnocchi", "name": "verse gnocchi", "amount": 400, "unit": "gr" } // gr/ml/el/tl: nooit meervoud
+{ "id": "wraps", "name": "wrap", "amount": 4, "step": 1 }              // altijd hele stuks
+{ "id": "peper", "name": "peper", "amount": 1, "note": "of sambal" }   // toelichting
+{ "id": "zout", "name": "zout" }                                       // zonder amount: "naar smaak"
+{ "id": "x", "name": "kiwi", "amount": 2, "plural": "kiwi's" }         // eigen meervoud
 ```
 
 In de bereiding:
