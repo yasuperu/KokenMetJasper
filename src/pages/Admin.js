@@ -9,6 +9,7 @@ import RecipeEditor, { draftIngredients, recipeToDraft } from "../components/adm
 import useSeo from "../hooks/useSeo";
 import { recipePath } from "../utils/seo";
 import { decryptSteps, encryptSteps } from "../utils/gate";
+import { cleanUrl } from "../utils/source";
 
 const TOKEN_KEY = "kmj-gh-token";
 
@@ -364,7 +365,11 @@ function Admin() {
       if (cook > 0) recipe.cookTime = cook;
 
       const pick = (keys) =>
-        Object.fromEntries(keys.map((k) => [k, String(draft.source[k] || "").trim()]).filter(([, v]) => v));
+        Object.fromEntries(
+          keys
+            .map((k) => [k, k === "url" ? cleanUrl(String(draft.source[k] || "")) : String(draft.source[k] || "").trim()])
+            .filter(([, v]) => v)
+        );
 
       const adaptation = () =>
         draft.adapted ? { adapted: true, ...pick(["adaptation"]) } : {};

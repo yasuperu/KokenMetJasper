@@ -1,0 +1,117 @@
+{
+  "id": "nasi-met-pindasaus",
+  "title": "Nasi met Pindasaus",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Vegetarisch",
+    "Indisch"
+  ],
+  "servings": 2,
+  "prepTime": 5,
+  "cookTime": 25,
+  "image": "",
+  "description": "Makkelijke nasi met een gebakken ei, zelfgemaakte pindasaus, gebakken uitjes en kroepoek!",
+  "ingredients": [
+    {
+      "id": "rijst",
+      "name": "rijst",
+      "amount": 160,
+      "unit": "gr"
+    },
+    {
+      "id": "groenten",
+      "name": "nasi- of bamigroente",
+      "amount": 450,
+      "unit": "gr"
+    },
+    {
+      "id": "wokolie",
+      "name": "wokolie",
+      "amount": 2,
+      "unit": "el"
+    },
+    {
+      "id": "korianderpoeder",
+      "name": "korianderpoeder",
+      "amount": 2,
+      "unit": "tl"
+    },
+    {
+      "id": "komijnpoeder",
+      "name": "komijnpoeder",
+      "amount": 2,
+      "unit": "tl"
+    },
+    {
+      "id": "laos",
+      "name": "laos",
+      "amount": 1,
+      "unit": "tl"
+    },
+    {
+      "id": "sojasaus",
+      "name": "sojasaus",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "ketjapManis",
+      "name": "ketjap manis",
+      "amount": 2,
+      "unit": "el"
+    },
+    {
+      "id": "ei",
+      "name": "ei",
+      "amount": 2,
+      "step": 1
+    },
+    {
+      "id": "pindakaas",
+      "name": "pindakaas",
+      "amount": 2,
+      "unit": "el",
+      "note": "100%",
+      "group": "Pindasaus"
+    },
+    {
+      "id": "water",
+      "name": "water",
+      "amount": 150,
+      "unit": "ml",
+      "group": "Pindasaus"
+    },
+    {
+      "id": "ketjapSaus",
+      "name": "ketjap manis",
+      "amount": 1,
+      "unit": "el",
+      "group": "Pindasaus"
+    },
+    {
+      "id": "sambal",
+      "name": "sambal",
+      "note": "naar smaak, optioneel",
+      "group": "Pindasaus"
+    },
+    {
+      "id": "gebakkenUitjes",
+      "name": "gebakken uitjes",
+      "group": "Om te serveren"
+    },
+    {
+      "id": "kroepoek",
+      "name": "kroepoek",
+      "group": "Om te serveren"
+    }
+  ],
+  "instructions": [
+    "Was en kook {rijst}.",
+    "Bak intussen {groenten} op hoog vuur in {wokolie}.",
+    "Voeg na een paar minuten {korianderpoeder}, {komijnpoeder}, {laos}, {sojasaus} en {ketjapManis} toe. Bak rustig door tot de rijst gekookt is.",
+    "Voeg de {rijst:naam} toe aan de groenten en bak op middelhoog tot hoog vuur, zodat de nasi goed droog wordt.",
+    "Doe intussen {pindakaas} in een pannetje op middelhoog vuur, samen met {water} en {ketjapSaus}. Voeg eventueel {sambal:naam} naar smaak toe. Roer regelmatig tot er een pindasaus ontstaat.",
+    "Bak {ei} als spiegelei in een andere pan.",
+    "Serveer de nasi met een spiegelei erop. Serveer de pindasaus, {gebakkenUitjes:naam} en {kroepoek:naam} ernaast."
+  ]
+}

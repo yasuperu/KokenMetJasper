@@ -156,3 +156,12 @@ test("tijden en keuken voor Google", () => {
   expect(formatMinutes(75)).toBe("1 uur 15 min");
   expect(recipeCuisine({ tags: ["Vegetarisch", "Surinaams"] })).toEqual(["Surinaams"]);
 });
+
+test("cleanUrl haalt volg- en affiliate-codes weg", () => {
+  const { cleanUrl } = require("./source");
+  expect(cleanUrl("https://www.bol.com/nl/nl/p/veggilaine/9300000176624029/?Referrer=ADV123&utm_source=1&utm_medium=Affiliates")).toBe(
+    "https://www.bol.com/nl/nl/p/veggilaine/9300000176624029/"
+  );
+  expect(cleanUrl("https://www.instagram.com/reel/DNK1z8LoKcw/?cplk=abc&igsh=xyz")).toBe("https://www.instagram.com/reel/DNK1z8LoKcw/");
+  expect(cleanUrl("https://www.youtube.com/watch?v=abc&si=xyz")).toBe("https://www.youtube.com/watch?v=abc");
+});

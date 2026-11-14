@@ -35,3 +35,19 @@ export function platformName(url) {
 export function isSocialPlatform(url) {
   return PLATFORMS.some(([pattern]) => pattern.test(url || ""));
 }
+
+// Volg- en affiliate-codes die niets met de pagina zelf te maken hebben
+const TRACKING = /^(utm_.*|referrer|ref|ref_src|aff.*|affiliate.*|igsh|igshid|cplk|fbclid|gclid|mc_.*|si|s)$/i;
+
+/** "https://…/p/boek/123/?Referrer=…&utm_source=…" → "https://…/p/boek/123/" */
+export function cleanUrl(url) {
+  if (!url) return url;
+  try {
+    const u = new URL(url.trim());
+    [...u.searchParams.keys()].forEach((k) => TRACKING.test(k) && u.searchParams.delete(k));
+    u.hash = "";
+    return u.toString();
+  } catch {
+    return url.trim();
+  }
+}
