@@ -7,10 +7,10 @@
     "Bowl"
   ],
   "servings": 4,
+  "image": "images/recipes/pokebowl-tofu-mwgahu5e.jpg",
+  "description": "Een kleurrijke pokébowl met gemarineerde, krokant gebakken tofu, rijst, verse groenten en een romige sesammayo!",
   "prepTime": 110,
   "cookTime": 20,
-  "image": "",
-  "description": "Een kleurrijke pokébowl met gemarineerde, krokant gebakken tofu, rijst, verse groenten en een romige sesammayo!",
   "ingredients": [
     {
       "id": "tofu",
