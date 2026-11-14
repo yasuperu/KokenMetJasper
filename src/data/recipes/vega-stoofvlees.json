@@ -51,9 +51,15 @@
       "unit": "ml"
     },
     {
-      "id": "olieOfMargarine",
-      "name": "olie of margarine",
-      "amount": 4,
+      "id": "olie",
+      "name": "olie",
+      "amount": 2,
+      "unit": "el"
+    },
+    {
+      "id": "boter",
+      "name": "boter",
+      "amount": 2,
       "unit": "el"
     },
     {
@@ -85,20 +91,19 @@
       "unit": "el"
     },
     {
-      "id": "perenstroop",
-      "name": "perenstroop",
+      "id": "basterdsuiker",
+      "name": "donkere basterdsuiker",
       "amount": 1,
-      "unit": "el",
-      "note": "of appelstroop of bruine suiker"
+      "unit": "el"
     }
   ],
   "instructions": [
-    "Snipper {ui} grof en snijd {wortel} in niet te dunne plakjes.",
-    "Verhit {olieOfMargarine} in een ruime braadpan. Fruit de {ui:naam} en {wortel:naam} op middelhoog vuur tot de ui begint te kleuren.",
+    "Snipper {ui} grof. Halveer {wortel} en snijd in plakken.",
+    "Verhit {olie} en {boter} in een ruime braadpan. Fruit de {ui:naam} en {wortel:naam} op middelhoog vuur tot de ui begint te kleuren.",
     "Pers {knoflook} en bak dit een paar minuten mee met {sojavlees}.",
-    "Kneus {verseTijm}, {laurierblaadje} en {kruidnagel} in een vijzel en doe ze in een theezakje of thee-ei. Leg dit in de pan.",
+    "Voeg {verseTijm}, {laurierblaadje} en {kruidnagel} toe. Tip: prik de kruidnagel in een laurierblaadje, dan raak je hem niet kwijt in de pan.",
     "Blus af met {donkerBier} en {water}.",
-    "Roer {perenstroop} erdoor.",
+    "Roer {basterdsuiker} erdoor.",
     "Laat het stoofvlees 30 minuten zachtjes stoven met het deksel op de pan.",
     "Besmeer {bruinBrood} royaal met {scherpeMosterd}. Leg de sneetjes met de mosterdkant naar beneden in de pan.",
     "Roer na 30 minuten alles goed door. Laat het daarna zonder deksel nog 1 tot 1,5 uur zachtjes stoven, tot de saus mooi gebonden is."
