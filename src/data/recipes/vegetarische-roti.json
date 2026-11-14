@@ -7,7 +7,10 @@
     "Surinaams"
   ],
   "servings": 4,
+  "prepTime": 15,
+  "cookTime": 50,
   "image": "images/recipes/vegetarische-roti.jpg",
+  "description": "Een vegetarische Surinaamse roti met vega kip, aardappel en sperziebonen in masalasaus!",
   "ingredients": [
     {
       "id": "vegaKip",

@@ -4,9 +4,12 @@
   "category": "Hoofdgerecht",
   "tags": [
     "Vegetarisch",
-    "Stoofpot"
+    "Stoofpot",
+    "Belgisch"
   ],
   "servings": 4,
+  "prepTime": 15,
+  "cookTime": 120,
   "image": "",
   "description": "Heerlijk vegetarisch stoofvlees met sojavlees en rijke smaken.",
   "ingredients": [

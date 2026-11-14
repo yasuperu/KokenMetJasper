@@ -7,6 +7,8 @@
     "Oven"
   ],
   "servings": 4,
+  "prepTime": 15,
+  "cookTime": 20,
   "image": "",
   "description": "Een frisse salade met krokante aardappelkroketjes, chili crisp halloumi en een romige dilledressing!",
   "source": {

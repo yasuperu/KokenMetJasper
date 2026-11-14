@@ -4,10 +4,14 @@
   "category": "Hoofdgerecht",
   "tags": [
     "Vegetarisch",
-    "Oven"
+    "Oven",
+    "Italiaans"
   ],
   "servings": 4,
+  "prepTime": 10,
+  "cookTime": 17,
   "image": "",
+  "description": "Een makkelijke traybake uit de oven met gnocchi, paprika, plantaardige spekjes en pesto rosso!",
   "ingredients": [
     {
       "id": "gnocchi",

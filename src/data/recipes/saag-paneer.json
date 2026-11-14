@@ -7,8 +7,10 @@
     "Indiaas"
   ],
   "servings": 2,
+  "prepTime": 15,
+  "cookTime": 20,
   "image": "",
-  "description": "Heerlijk Indisch gerecht met spinazie en paneer (Indiase kaas).",
+  "description": "Heerlijk Indiaas gerecht met spinazie en paneer (Indiase kaas).",
   "ingredients": [
     {
       "id": "water",
