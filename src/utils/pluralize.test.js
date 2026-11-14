@@ -39,6 +39,7 @@ describe("pluralizeWord", () => {
     ["abrikoos", "abrikozen"],
     ["radijs", "radijzen"],
     ["perzik", "perziken"],
+    ["flatbread", "flatbreads"],
   ])("%s → %s", (single, plural) => {
     expect(pluralizeWord(single)).toBe(plural);
   });
