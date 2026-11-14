@@ -1,13 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.3da35fa3.css",
-    "main.js": "/static/js/main.a1048233.js",
+    "main.css": "/static/css/main.2bbf489a.css",
+    "main.js": "/static/js/main.fad16992.js",
+    "static/js/846.3c51556b.chunk.js": "/static/js/846.3c51556b.chunk.js",
+    "static/media/fraunces-latin-full-normal.woff2": "/static/media/fraunces-latin-full-normal.4e5db5e80eb27f260ed3.woff2",
+    "static/media/fraunces-latin-ext-full-normal.woff2": "/static/media/fraunces-latin-ext-full-normal.587cc2e45c55dd475854.woff2",
+    "static/media/inter-latin-ext-wght-normal.woff2": "/static/media/inter-latin-ext-wght-normal.8bff79fbfaa8b8167a0b.woff2",
+    "static/media/inter-latin-wght-normal.woff2": "/static/media/inter-latin-wght-normal.4f2981d82860061bca3e.woff2",
+    "static/media/fraunces-vietnamese-full-normal.woff2": "/static/media/fraunces-vietnamese-full-normal.902ed62e0c1ac09fad15.woff2",
+    "static/media/inter-cyrillic-ext-wght-normal.woff2": "/static/media/inter-cyrillic-ext-wght-normal.b5cdd4765614e027c252.woff2",
+    "static/media/inter-greek-wght-normal.woff2": "/static/media/inter-greek-wght-normal.4f908aee8194b11d9c35.woff2",
+    "static/media/inter-cyrillic-wght-normal.woff2": "/static/media/inter-cyrillic-wght-normal.49594fb515ba00213fc3.woff2",
+    "static/media/inter-greek-ext-wght-normal.woff2": "/static/media/inter-greek-ext-wght-normal.f4df85d151e5ee39bc2b.woff2",
+    "static/media/inter-vietnamese-wght-normal.woff2": "/static/media/inter-vietnamese-wght-normal.ab4bb8dcda024fe6eff2.woff2",
     "index.html": "/index.html",
-    "main.3da35fa3.css.map": "/static/css/main.3da35fa3.css.map",
-    "main.a1048233.js.map": "/static/js/main.a1048233.js.map"
+    "main.2bbf489a.css.map": "/static/css/main.2bbf489a.css.map",
+    "main.fad16992.js.map": "/static/js/main.fad16992.js.map",
+    "846.3c51556b.chunk.js.map": "/static/js/846.3c51556b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3da35fa3.css",
-    "static/js/main.a1048233.js"
+    "static/css/main.2bbf489a.css",
+    "static/js/main.fad16992.js"
   ]
 }
