@@ -146,3 +146,13 @@ test.each([
 ])("parseIngredientLine(%s) – Instagram-schrijfwijzen", (line, expected) => {
   expect(parseIngredientLine(line)).toEqual(expected);
 });
+
+test("tijden en keuken voor Google", () => {
+  const { isoDuration, formatMinutes, recipeCuisine } = require("./seo");
+  expect(isoDuration(25)).toBe("PT25M");
+  expect(isoDuration(75)).toBe("PT1H15M");
+  expect(isoDuration(60)).toBe("PT1H");
+  expect(isoDuration(0)).toBeUndefined();
+  expect(formatMinutes(75)).toBe("1 uur 15 min");
+  expect(recipeCuisine({ tags: ["Vegetarisch", "Surinaams"] })).toEqual(["Surinaams"]);
+});

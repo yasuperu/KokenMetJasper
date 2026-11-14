@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { DOODLES } from "./Doodles";
 import { imageUrl } from "../config";
-import { recipePath } from "../utils/seo";
+import { formatMinutes, recipePath, recipeTimes } from "../utils/seo";
 import { platformName, sourceType } from "../utils/source";
 
 const ACCENTS = ["plum", "carrot", "leaf", "rose", "mustard", "cobalt"];
@@ -39,7 +39,10 @@ function RecipeCard({ recipe, index = 0 }) {
             <>uit <cite>{recipe.source.book}</cite></>
           ) : (
             <>
-              {(recipe.ingredients || []).length} ingrediënten · {recipe.servings} personen
+              {recipeTimes(recipe).total > 0
+                ? `${formatMinutes(recipeTimes(recipe).total)} · `
+                : `${(recipe.ingredients || []).length} ingrediënten · `}
+              {recipe.servings} personen
               {sourceType(recipe.source) === "social" && <> · via {platformName(recipe.source.url)}</>}
             </>
           )}

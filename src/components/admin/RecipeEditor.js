@@ -44,6 +44,8 @@ export function recipeToDraft(recipe, content) {
     image: recipe?.image || "",
     newImage: null,
     description: recipe?.description || "",
+    prepTime: recipe?.prepTime ? String(recipe.prepTime) : "",
+    cookTime: recipe?.cookTime ? String(recipe.cookTime) : "",
     sourceType: recipe?.locked ? "book" : sourceType(recipe?.source),
     gate: recipe ? Boolean(recipe.gate) : true,
     source: { book: "", author: "", page: "", url: "", creator: "", ...(recipe?.source || {}) },
@@ -331,6 +333,28 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
               min="1"
               value={draft.servings}
               onChange={(e) => update({ servings: Math.max(1, Number(e.target.value) || 1) })}
+            />
+          </label>
+          <label className="field">
+            <span>Voorbereiden <small>(minuten: snijden, mengen)</small></span>
+            <input
+              type="number"
+              min="0"
+              inputMode="numeric"
+              value={draft.prepTime}
+              onChange={(e) => update({ prepTime: e.target.value })}
+              placeholder="bv. 15"
+            />
+          </label>
+          <label className="field">
+            <span>Koken <small>(minuten: oven, pan, pruttelen)</small></span>
+            <input
+              type="number"
+              min="0"
+              inputMode="numeric"
+              value={draft.cookTime}
+              onChange={(e) => update({ cookTime: e.target.value })}
+              placeholder="bv. 25"
             />
           </label>
           <label className="field field-wide">

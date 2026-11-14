@@ -48,6 +48,40 @@ export function recipeDescription(recipe) {
   return names.length ? `${base}, met ${joinNames(names)}. Hoeveelheden rekenen mee met het aantal personen.` : `${base}.`;
 }
 
+// Tags die een keuken aanduiden → schema.org recipeCuisine
+const CUISINES = [
+  "Surinaams", "Indiaas", "Indisch", "Indonesisch", "Thais", "Chinees", "Japans", "Koreaans",
+  "Vietnamees", "Aziatisch", "Italiaans", "Frans", "Spaans", "Grieks", "Turks", "Marokkaans",
+  "Libanees", "Mexicaans", "Amerikaans", "Hollands", "Belgisch", "Mediterraans", "Midden-Oosters",
+];
+
+export function recipeCuisine(recipe) {
+  return (recipe.tags || []).filter((t) => CUISINES.includes(t));
+}
+
+/** Minuten → ISO 8601 ("PT1H15M") */
+export function isoDuration(minutes) {
+  const m = Math.round(Number(minutes));
+  if (!m || m <= 0) return undefined;
+  const h = Math.floor(m / 60);
+  return `PT${h ? `${h}H` : ""}${m % 60 ? `${m % 60}M` : ""}`;
+}
+
+/** Minuten → "1 uur 15 min" */
+export function formatMinutes(minutes) {
+  const m = Math.round(Number(minutes));
+  if (!m || m <= 0) return "";
+  const h = Math.floor(m / 60);
+  const rest = m % 60;
+  return [h ? `${h} uur` : "", rest ? `${rest} min` : ""].filter(Boolean).join(" ");
+}
+
+export function recipeTimes(recipe) {
+  const prep = Number(recipe.prepTime) || 0;
+  const cook = Number(recipe.cookTime) || 0;
+  return { prep, cook, total: prep + cook };
+}
+
 export function recipeTitle(recipe) {
   return `${recipe.title} – recept | ${site.name}`;
 }
@@ -76,6 +110,10 @@ export function recipeJsonLd(recipe) {
     description: recipeDescription(recipe),
     author: { "@type": "Person", name: site.author },
     recipeYield: `${recipe.servings} personen`,
+    prepTime: isoDuration(recipe.prepTime),
+    cookTime: isoDuration(recipe.cookTime),
+    totalTime: isoDuration(recipeTimes(recipe).total),
+    recipeCuisine: recipeCuisine(recipe).join(", ") || undefined,
     recipeCategory: recipe.category || undefined,
     keywords: (recipe.tags || []).join(", ") || undefined,
     inLanguage: "nl",
@@ -85,6 +123,7 @@ export function recipeJsonLd(recipe) {
     recipeInstructions: (recipe.instructions || []).map((step, n) => ({
       "@type": "HowToStep",
       position: n + 1,
+      url: `${url}#stap-${n + 1}`,
       text: plainInstruction(step, ingredients),
     })),
   };

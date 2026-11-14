@@ -65,7 +65,7 @@ function RecipeContent({ ingredients, instructions, servings, factor, stepsRepla
         </h2>
         <ol>
           {instructions.map((step, index) => (
-            <li key={index}>
+            <li key={index} id={`stap-${index + 1}`}>
               <span className="step-number" aria-hidden="true">{index + 1}</span>
               <p>{renderInstruction(step, ingredientsById, factor)}</p>
             </li>

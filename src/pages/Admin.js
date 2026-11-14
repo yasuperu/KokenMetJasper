@@ -358,6 +358,10 @@ function Admin() {
       };
 
       if (draft.description.trim()) recipe.description = draft.description.trim();
+      const prep = Math.round(Number(draft.prepTime));
+      const cook = Math.round(Number(draft.cookTime));
+      if (prep > 0) recipe.prepTime = prep;
+      if (cook > 0) recipe.cookTime = cook;
 
       const pick = (keys) =>
         Object.fromEntries(keys.map((k) => [k, String(draft.source[k] || "").trim()]).filter(([, v]) => v));

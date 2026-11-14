@@ -1743,6 +1743,21 @@ code {
   }
 }
 
+/* bereidingstijd */
+
+.recipe-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 14px 0 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.recipe-times strong {
+  color: var(--ink);
+}
+
 /* =============================================================
    PRINT
    Eén nette A4 met de hoeveelheden voor het gekozen aantal

@@ -108,6 +108,15 @@ write(
 
 /* ---------------- recepten ---------------- */
 
+function timeLine(r) {
+  const t = seo.recipeTimes(r);
+  const parts = [
+    t.prep && `Voorbereiden: ${seo.formatMinutes(t.prep)}`,
+    t.cook && `Koken: ${seo.formatMinutes(t.cook)}`,
+  ].filter(Boolean);
+  return parts.length ? `<p>${esc(parts.join(" · "))}</p>` : "";
+}
+
 for (const r of recipes) {
   const type = sourceType(r.source);
   let source = "";
@@ -127,7 +136,7 @@ for (const r of recipes) {
       .join("")}</ul><h2>Bereiding</h2>${
       isGated(r)
         ? `<p>De bereiding staat bij de originele post: <a href="${esc(r.source.url)}" rel="nofollow noopener">bekijk het recept op ${esc(platformName(r.source.url))}</a>.</p>`
-        : `<ol>${(r.instructions || []).map((s) => `<li>${esc(seo.plainInstruction(s, r.ingredients))}</li>`).join("")}</ol>`
+        : `<ol>${(r.instructions || []).map((s, n) => `<li id="stap-${n + 1}">${esc(seo.plainInstruction(s, r.ingredients))}</li>`).join("")}</ol>`
     }`;
   }
 
@@ -135,6 +144,7 @@ for (const r of recipes) {
 <p><a href="/">← Alle recepten</a></p>
 <h1>${esc(r.title)}</h1>
 <p>${esc(seo.recipeDescription(r))}</p>
+${timeLine(r)}
 ${source}
 ${content}
 </main>`;

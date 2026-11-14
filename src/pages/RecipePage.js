@@ -12,7 +12,7 @@ import passwordLock from "../data/lock.json";
 import { forgetPassword, getPassword, setPassword } from "../utils/passwordStore";
 import { imageUrl } from "../config";
 import useSeo from "../hooks/useSeo";
-import { recipeDescription, recipePath, recipeTitle } from "../utils/seo";
+import { formatMinutes, recipeDescription, recipePath, recipeTimes, recipeTitle } from "../utils/seo";
 import NotFound from "./NotFound";
 
 function RecipePage() {
@@ -126,6 +126,7 @@ function RecipePage() {
   if (!recipe) return <NotFound />;
 
   const factor = servings / recipe.servings;
+  const times = recipeTimes(recipe);
   const image = imageUrl(recipe.image);
   const unlocked = Boolean(content);
 
@@ -145,6 +146,12 @@ function RecipePage() {
           <h1>{recipe.title}</h1>
           {recipe.description && <p className="recipe-description">{recipe.description}</p>}
           <SourceNote source={recipe.source} />
+          {times.total > 0 && (
+            <p className="recipe-times">
+              {times.prep > 0 && <span>Voorbereiden <strong>{formatMinutes(times.prep)}</strong></span>}
+              {times.cook > 0 && <span>Koken <strong>{formatMinutes(times.cook)}</strong></span>}
+            </p>
+          )}
           {unlocked && (
             <p className="recipe-meta">
               {content.ingredients.length} ingrediënten
