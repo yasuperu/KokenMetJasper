@@ -316,6 +316,7 @@ button {
 .recipe-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-auto-rows: 1fr; /* alle kaarten even hoog */
   gap: 28px;
 }
 
@@ -345,28 +346,45 @@ button {
 .accent-mustard { --accent: var(--mustard); }
 .accent-cobalt { --accent: var(--cobalt); }
 
+/* Vast fotovak: staande en liggende foto's vullen het vak zonder de kaart op te rekken */
 .recipe-card-image {
+  position: relative;
+  flex-shrink: 0;
   aspect-ratio: 4 / 3;
-  display: grid;
-  place-items: center;
+  overflow: hidden;
   background: var(--cream-dark);
   border-bottom: 2px solid var(--ink);
 }
 
 .recipe-card-image img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
 .recipe-card-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 40%;
   height: auto;
+  transform: translate(-50%, -50%);
 }
 
 .recipe-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 18px 20px 20px;
+}
+
+.recipe-card-content .tags {
+  margin-top: auto;
+  padding-top: 14px;
 }
 
 .recipe-card h3 {
