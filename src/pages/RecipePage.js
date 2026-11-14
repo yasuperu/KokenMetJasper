@@ -10,7 +10,7 @@ import StepsGate from "../components/StepsGate";
 import { decryptSteps, hasVisitedPost, isGated, markPostVisited } from "../utils/gate";
 import passwordLock from "../data/lock.json";
 import { forgetPassword, getPassword, setPassword } from "../utils/passwordStore";
-import { imageUrl } from "../config";
+import { imageSrcSet, imageUrl } from "../config";
 import useSeo from "../hooks/useSeo";
 import { formatMinutes, recipeDescription, recipePath, recipeTimes, recipeTitle } from "../utils/seo";
 import NotFound from "./NotFound";
@@ -25,7 +25,10 @@ function RecipePage() {
     recipe && !recipe.locked ? { ingredients: recipe.ingredients, instructions: recipe.instructions || [] } : null
   );
   const gated = isGated(recipe);
-  const [stepsVisible, setStepsVisible] = useState(() => !gated || hasVisitedPost(recipe.id));
+  const [stepsVisible, setStepsVisible] = useState(!gated);
+  useEffect(() => {
+    if (gated && hasVisitedPost(recipe.id)) setStepsVisible(true);
+  }, [gated, recipe]);
   const [gateError, setGateError] = useState("");
   const [unlockError, setUnlockError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -188,7 +191,18 @@ function RecipePage() {
 
         {image && (
           <div className="recipe-image-wrap">
-            <img src={image} alt={recipe.title} className="recipe-image" />
+            <picture>
+              {/* Telefoons: hooguit 720 px, scherp genoeg en veel lichter */}
+              <source media="(max-width: 860px)" srcSet={imageSrcSet(recipe.image, [480, 720])} sizes="88vw" />
+              <img
+                src={image}
+                srcSet={imageSrcSet(recipe.image)}
+                sizes="520px"
+                alt={recipe.title}
+                className="recipe-image"
+                fetchPriority="high"
+              />
+            </picture>
           </div>
         )}
       </header>

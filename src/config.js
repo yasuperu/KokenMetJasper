@@ -14,3 +14,13 @@ export function imageUrl(path) {
   if (/^(https?:|data:|blob:)/.test(path)) return path;
   return `${process.env.PUBLIC_URL}/${path.replace(/^\//, "")}`;
 }
+
+/**
+ * srcSet met de kleine WebP-versies uit scripts/optimize-images.js,
+ * alleen voor foto's die in de site zelf staan.
+ */
+export function imageSrcSet(path, widths = [480, 720, 960]) {
+  if (!path || !/^images\/recipes\/[^/]+\.(jpe?g|png|webp)$/i.test(path)) return undefined;
+  const base = path.replace(/^images\/recipes\//, "").replace(/\.[^.]+$/, "");
+  return widths.map((w) => `${imageUrl(`images/recipes/opt/${base}-${w}.webp`)} ${w}w`).join(", ");
+}

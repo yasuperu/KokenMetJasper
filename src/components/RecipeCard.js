@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { DOODLES } from "./Doodles";
-import { imageUrl } from "../config";
+import { imageSrcSet, imageUrl } from "../config";
 import { formatMinutes, recipePath, recipeTimes } from "../utils/seo";
 import { platformName, sourceType } from "../utils/source";
 
@@ -16,7 +16,14 @@ function RecipeCard({ recipe, index = 0 }) {
     <Link to={recipePath(recipe.id)} className={`recipe-card accent-${accent}`}>
       <div className="recipe-card-image">
         {image ? (
-          <img src={image} alt="" loading="lazy" />
+          <img
+            src={image}
+            srcSet={imageSrcSet(recipe.image, [480, 720])}
+            sizes="(max-width: 640px) 100vw, 360px"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
           <Placeholder className="recipe-card-placeholder" />
         )}

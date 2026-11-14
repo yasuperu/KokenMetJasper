@@ -1,11 +1,14 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import RecipePage from "./pages/RecipePage";
-import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import site from "./site.json";
+
+// Beheer apart laden: bezoekers downloaden die code niet
+const Admin = lazy(() => import("./pages/Admin"));
 
 // Elk recept een eigen paginastatus (aantal personen, ontgrendeld, ...)
 function RecipeRoute() {
@@ -19,19 +22,35 @@ function OldRecipeRedirect() {
   return <Navigate to={`/recept/${id}/`} replace />;
 }
 
-function App() {
+/** De hele site zonder router; scripts/prerender.js rendert dit vooraf. */
+export function AppShell() {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recept/:id" element={<RecipeRoute />} />
         <Route path="/recipe/:id" element={<OldRecipeRedirect />} />
-        <Route path={site.adminPath} element={<Admin />} />
+        <Route
+          path={site.adminPath}
+          element={
+            <Suspense fallback={<main className="admin"><p className="hint">Beheer laden…</p></main>}>
+              <Admin />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-    </Router>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <AppShell />
+    </BrowserRouter>
   );
 }
 

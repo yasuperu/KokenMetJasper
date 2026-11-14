@@ -30,6 +30,13 @@ Vink *Dit recept komt uit een kookboek* aan en vul titel, auteur en pagina in.
 
 `npm run build` draait na de React-build ook `scripts/prerender.js`. Dat maakt per recept een echte pagina (`/recept/<id>/`) met titel, beschrijving, deelafbeelding (Open Graph) en receptgegevens voor Google (schema.org/Recipe), plus `sitemap.xml`. Kookboekrecepten krijgen geen ingrediënten in die gegevens. De algemene deelafbeelding is `public/og-image.png`.
 
+## Snelheid
+
+- `scripts/prerender.js` rendert de homepage en elk recept vooraf met de echte React-componenten; de browser neemt die HTML over (`hydrateRoot`), zodat de pagina meteen in beeld staat.
+- `scripts/optimize-images.js` maakt van elke foto WebP-versies van 480, 720 en 960 px (`public/images/recipes/opt/`, niet in git). Draait vanzelf bij `npm start` en `npm run build`.
+- Lettertypen worden zelf gehost (`@fontsource-variable/fraunces` en `inter`) en vooraf geladen.
+- De beheerpagina wordt apart geladen, alleen op `/jk`.
+
 ## Receptformaat
 
 Recepten staan als JSON in `src/data/recipes/`. Ingrediënten schrijf je in het **enkelvoud**; het meervoud wordt automatisch gemaakt als het aantal personen verandert.

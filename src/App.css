@@ -24,12 +24,23 @@
   --tomato: #c8473a;
   --cobalt: #3e5f9e;
 
-  --font-display: "Fraunces", Georgia, serif;
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body: "Inter Variable", "Inter Fallback", system-ui, -apple-system, sans-serif;
 
   --radius: 18px;
   --radius-sm: 10px;
   --shadow: 0 1px 0 rgba(43, 37, 35, 0.06), 0 10px 30px -12px rgba(43, 37, 35, 0.18);
+}
+
+/* Reserve-lettertype met dezelfde maten als Inter, zodat tekst niet
+   verspringt als Inter binnenkomt */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("Helvetica"), local("Roboto"), local("Liberation Sans");
+  ascent-override: 90.2%;
+  descent-override: 22.48%;
+  line-gap-override: 0%;
+  size-adjust: 107.4%;
 }
 
 * {
@@ -207,6 +218,9 @@ button {
 }
 
 @media (max-width: 560px) {
+  /* "Jasper" altijd op een eigen regel: zelfde hoogte met en zonder Fraunces */
+  .hero h1 .h-carrot { display: block; }
+  .hero h1 { white-space: nowrap; }
   .hero { padding: 64px 16px 72px; }
   .hero-doodles .d { width: 44px; height: 44px; }
   .d2 { width: 48px !important; height: 48px !important; top: 14px; }
@@ -498,6 +512,11 @@ button {
   border-radius: 46% 54% 52% 48% / 48% 46% 54% 52%;
   background: var(--mustard);
   transform: rotate(-4deg) translate(14px, 10px);
+}
+
+.recipe-image-wrap picture {
+  display: block;
+  position: relative;
 }
 
 .recipe-image {

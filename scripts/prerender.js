@@ -1,5 +1,8 @@
 /*
-  Na "react-scripts build": maak voor elke pagina een echte HTML-file.
+  Na "react-scripts build": maak voor elke pagina een echte HTML-file,
+  gerenderd met dezelfde React-componenten als de site (server-side
+  rendering). De browser neemt die HTML daarna over (hydrateRoot), zodat
+  de pagina meteen compleet in beeld staat.
 
   - build/index.html               homepage met titel, beschrijving en links
   - build/recept/<id>/index.html   per recept: titel, meta, Open Graph,
@@ -21,23 +24,45 @@ const ROOT = path.join(__dirname, "..");
 const SRC = path.join(ROOT, "src") + path.sep;
 const BUILD = path.join(ROOT, "build");
 
-// src/ gebruikt ES-modules; vertaal ze voor Node naar CommonJS
+// De site draait op de hoofdmap van het domein
+process.env.PUBLIC_URL = "";
+
+// require.context bestaat alleen in webpack; bied een eenvoudige versie aan
+global.__requireContext = (dir, rel, deep, pattern) => {
+  const base = path.resolve(dir, rel);
+  const files = fs.readdirSync(base).filter((f) => pattern.test(`./${f}`));
+  const ctx = (key) => require(path.join(base, key));
+  ctx.keys = () => files.map((f) => `./${f}`);
+  return ctx;
+};
+
+// src/ gebruikt ES-modules en JSX; vertaal ze voor Node naar CommonJS
 const loadJs = Module._extensions[".js"];
 Module._extensions[".js"] = function (module, filename) {
   if (!filename.startsWith(SRC)) return loadJs(module, filename);
-  const { code } = babel.transformSync(fs.readFileSync(filename, "utf8"), {
+  const source = fs
+    .readFileSync(filename, "utf8")
+    .replace(/require\.context\(/g, "__requireContext(__dirname, ");
+  const { code } = babel.transformSync(source, {
     filename,
     babelrc: false,
     configFile: false,
+    presets: [[require.resolve("@babel/preset-react"), { runtime: "automatic" }]],
     plugins: [require.resolve("@babel/plugin-transform-modules-commonjs")],
   });
   module._compile(code, filename);
 };
 
+const React = require("react");
+const { renderToString } = require("react-dom/server");
+const { StaticRouter } = require("react-router");
+const { AppShell } = require(path.join(SRC, "App.js"));
+
+function renderPage(location) {
+  return renderToString(React.createElement(StaticRouter, { location }, React.createElement(AppShell)));
+}
+
 const seo = require(path.join(SRC, "utils/seo.js"));
-const { formatIngredient } = require(path.join(SRC, "utils/formatIngredient.js"));
-const { sourceType, platformName } = require(path.join(SRC, "utils/source.js"));
-const { isGated } = require(path.join(SRC, "utils/gate.js"));
 const site = require(path.join(SRC, "site.json"));
 
 const recipesDir = path.join(SRC, "data/recipes");
@@ -47,7 +72,18 @@ const recipes = fs
   .map((f) => JSON.parse(fs.readFileSync(path.join(recipesDir, f), "utf8")))
   .sort((a, b) => a.title.localeCompare(b.title, "nl"));
 
-const template = fs.readFileSync(path.join(BUILD, "index.html"), "utf8");
+let template = fs.readFileSync(path.join(BUILD, "index.html"), "utf8");
+
+// De twee lettertypen die op elke pagina boven de vouw staan meteen ophalen
+const mediaDir = path.join(BUILD, "static", "media");
+const fontPreloads = fs.existsSync(mediaDir)
+  ? fs
+      .readdirSync(mediaDir)
+      .filter((f) => /^(fraunces-latin-full-normal|inter-latin-wght-normal)\..*\.woff2$/.test(f))
+      .map((f) => `<link rel="preload" href="/static/media/${f}" as="font" type="font/woff2" crossorigin>`)
+      .join("")
+  : "";
+template = template.replace("</head>", `${fontPreloads}</head>`);
 
 const esc = (s) =>
   String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -86,15 +122,6 @@ function write(rel, content) {
 
 /* ---------------- homepage ---------------- */
 
-const homeBody = `<main class="container prerender">
-<h1>${esc(site.name)}</h1>
-<p>${esc(site.description)}</p>
-<h2>Recepten</h2>
-<ul>${recipes
-  .map((r) => `<li><a href="${seo.recipePath(r.id)}">${esc(r.title)}</a>${r.category ? ` – ${esc(r.category)}` : ""}</li>`)
-  .join("")}</ul>
-</main>`;
-
 write(
   "index.html",
   page({
@@ -102,56 +129,13 @@ write(
     description: site.description,
     path: "/",
     jsonLd: seo.homeJsonLd(),
-    body: homeBody,
+    body: renderPage("/"),
   })
 );
 
 /* ---------------- recepten ---------------- */
 
-function timeLine(r) {
-  const t = seo.recipeTimes(r);
-  const parts = [
-    t.prep && `Voorbereiden: ${seo.formatMinutes(t.prep)}`,
-    t.cook && `Koken: ${seo.formatMinutes(t.cook)}`,
-  ].filter(Boolean);
-  return parts.length ? `<p>${esc(parts.join(" · "))}</p>` : "";
-}
-
 for (const r of recipes) {
-  const type = sourceType(r.source);
-  let source = "";
-  const adapted = r.source?.adapted
-    ? ` ${r.source.adaptation ? `Eigen aanpassingen: ${esc(r.source.adaptation)}.` : "Met eigen aanpassingen."}`
-    : "";
-  if (type === "book") {
-    source = `<p>${r.source.adapted ? "Gebaseerd op het kookboek" : "Uit het kookboek"} <cite>${esc(r.source.book)}</cite>${r.source.author ? ` van ${esc(r.source.author)}` : ""}${r.source.page ? `, pagina ${esc(r.source.page)}` : ""}.${adapted}</p>`;
-  } else if (type === "social" && r.source.url) {
-    source = `<p>${r.source.adapted ? "Gebaseerd op" : "Bron:"} <a href="${esc(r.source.url)}" rel="nofollow noopener">${esc(r.source.creator || "origineel")}</a> op ${esc(platformName(r.source.url))}.${adapted}</p>`;
-  }
-
-  let content = "";
-  if (!r.locked) {
-    content = `<h2>Ingrediënten</h2><p>Voor ${r.servings} personen.</p><ul>${(r.ingredients || [])
-      .map((i, n, all) => {
-        const head = i.group && i.group !== (all[n - 1] || {}).group ? `<li><strong>${esc(i.group)}</strong></li>` : "";
-        return `${head}<li>${esc(formatIngredient(i, 1))}${i.note ? ` (${esc(i.note)})` : ""}</li>`;
-      })
-      .join("")}</ul><h2>Bereiding</h2>${
-      isGated(r)
-        ? `<p>De bereiding staat bij de originele post: <a href="${esc(r.source.url)}" rel="nofollow noopener">bekijk het recept op ${esc(platformName(r.source.url))}</a>.</p>`
-        : `<ol>${(r.instructions || []).map((s, n) => `<li id="stap-${n + 1}">${esc(seo.plainInstruction(s, r.ingredients))}</li>`).join("")}</ol>`
-    }`;
-  }
-
-  const body = `<main class="container prerender">
-<p><a href="/">← Alle recepten</a></p>
-<h1>${esc(r.title)}</h1>
-<p>${esc(seo.recipeDescription(r))}</p>
-${timeLine(r)}
-${source}
-${content}
-</main>`;
-
   write(
     `recept/${r.id}/index.html`,
     page({
@@ -161,7 +145,7 @@ ${content}
       image: r.image,
       type: "article",
       jsonLd: seo.recipeJsonLd(r),
-      body,
+      body: renderPage(seo.recipePath(r.id)),
     })
   );
 }

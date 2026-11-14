@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# gemaakt door scripts/optimize-images.js
+/public/images/recipes/opt
