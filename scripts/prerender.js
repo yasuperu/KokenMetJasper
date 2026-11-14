@@ -120,10 +120,13 @@ function timeLine(r) {
 for (const r of recipes) {
   const type = sourceType(r.source);
   let source = "";
+  const adapted = r.source?.adapted
+    ? ` ${r.source.adaptation ? `Eigen aanpassingen: ${esc(r.source.adaptation)}.` : "Met eigen aanpassingen."}`
+    : "";
   if (type === "book") {
-    source = `<p>Uit het kookboek <cite>${esc(r.source.book)}</cite>${r.source.author ? ` van ${esc(r.source.author)}` : ""}${r.source.page ? `, pagina ${esc(r.source.page)}` : ""}.</p>`;
+    source = `<p>${r.source.adapted ? "Gebaseerd op het kookboek" : "Uit het kookboek"} <cite>${esc(r.source.book)}</cite>${r.source.author ? ` van ${esc(r.source.author)}` : ""}${r.source.page ? `, pagina ${esc(r.source.page)}` : ""}.${adapted}</p>`;
   } else if (type === "social" && r.source.url) {
-    source = `<p>Bron: <a href="${esc(r.source.url)}" rel="nofollow noopener">${esc(r.source.creator || "origineel")}</a> op ${esc(platformName(r.source.url))}</p>`;
+    source = `<p>${r.source.adapted ? "Gebaseerd op" : "Bron:"} <a href="${esc(r.source.url)}" rel="nofollow noopener">${esc(r.source.creator || "origineel")}</a> op ${esc(platformName(r.source.url))}.${adapted}</p>`;
   }
 
   let content = "";

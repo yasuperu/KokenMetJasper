@@ -217,7 +217,8 @@ function RecipePage() {
 
       <p className="print-only print-footer">
         Koken met Jasper
-        {recipe.source?.book && ` · uit ${recipe.source.book}${recipe.source.author ? `, ${recipe.source.author}` : ""}`}
+        {recipe.source?.book &&
+          ` · ${recipe.source.adapted ? "gebaseerd op" : "uit"} ${recipe.source.book}${recipe.source.author ? `, ${recipe.source.author}` : ""}`}
       </p>
     </main>
   );

@@ -1,5 +1,15 @@
 import { platformName, sourceType } from "../utils/source";
 
+/** "met eigen aanpassingen: …" onder de bron */
+function Adaptation({ source }) {
+  if (!source.adapted) return null;
+  return (
+    <span className="source-adapted">
+      {source.adaptation ? <>Eigen aanpassingen: {source.adaptation}</> : "Met eigen aanpassingen."}
+    </span>
+  );
+}
+
 function SourceNote({ source }) {
   const type = sourceType(source);
 
@@ -7,7 +17,7 @@ function SourceNote({ source }) {
     const details = [source.author, source.page && `p. ${source.page}`].filter(Boolean).join(", ");
     return (
       <p className="source-note">
-        <span className="source-label">Uit het kookboek</span>{" "}
+        <span className="source-label">{source.adapted ? "Gebaseerd op het kookboek" : "Uit het kookboek"}</span>{" "}
         {source.url ? (
           <a href={source.url} target="_blank" rel="noopener noreferrer">
             <cite>{source.book}</cite>
@@ -16,6 +26,7 @@ function SourceNote({ source }) {
           <cite>{source.book}</cite>
         )}
         {details && <> — {details}</>}
+        <Adaptation source={source} />
       </p>
     );
   }
@@ -24,11 +35,12 @@ function SourceNote({ source }) {
     const platform = platformName(source.url);
     return (
       <p className="source-note">
-        <span className="source-label">Bron</span>{" "}
+        <span className="source-label">{source.adapted ? "Gebaseerd op" : "Bron"}</span>{" "}
         <a href={source.url} target="_blank" rel="noopener noreferrer nofollow">
           {source.creator ? <cite>{source.creator}</cite> : "Bekijk het origineel"}
         </a>
         {platform && <> op {platform}</>}
+        <Adaptation source={source} />
       </p>
     );
   }

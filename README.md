@@ -15,6 +15,8 @@ Ga naar **https://kokenmetjasper.nl/jk** (zet er een bladwijzer van; er staat ne
   Met *Bereiding pas tonen nadat de bezoeker de post heeft bekeken* (`"gate": true`) blijven de ingrediënten zichtbaar, maar verschijnt de bereiding pas na een klik naar de post (of met het kookboek-wachtwoord). Zo krijgt de maker de klik. De bereiding staat dan versleuteld in de repo (`gatedSteps`), met een sleutel die in de site zelf zit: op GitHub onleesbaar, na de klik voor iedere bezoeker zichtbaar. Dit is een beleefdheid, geen beveiliging; Google krijgt de bereiding van zulke recepten niet te zien.
 - **Uit een kookboek**: versleuteld, zie hieronder.
 
+Heb je een recept van iemand anders zelf aangepast? Vink dan *Ik heb het recept zelf aangepast* aan (en vul eventueel in wat er anders is). Er staat dan "Gebaseerd op …" met "Met eigen aanpassingen" in plaats van "Uit het kookboek" of "Bron".
+
 ### Recepten uit kookboeken
 
 Vink *Dit recept komt uit een kookboek* aan en vul titel, auteur en pagina in.

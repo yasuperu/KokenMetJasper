@@ -48,7 +48,8 @@ export function recipeToDraft(recipe, content) {
     cookTime: recipe?.cookTime ? String(recipe.cookTime) : "",
     sourceType: recipe?.locked ? "book" : sourceType(recipe?.source),
     gate: recipe ? Boolean(recipe.gate) : true,
-    source: { book: "", author: "", page: "", url: "", creator: "", ...(recipe?.source || {}) },
+    source: { book: "", author: "", page: "", url: "", creator: "", adaptation: "", ...(recipe?.source || {}) },
+    adapted: Boolean(recipe?.source?.adapted),
     ingredients: ingredients.map((i) => ({
       key: newKey(),
       id: i.id,
@@ -481,6 +482,31 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
           </>
         )}
       </fieldset>
+
+      {/* ---------- Aangepast ---------- */}
+      {(draft.sourceType === "book" || draft.sourceType === "social") && (
+        <fieldset className="panel">
+          <legend>Eigen aanpassingen</legend>
+          <label className="checkbox checkbox-strong">
+            <input type="checkbox" checked={draft.adapted} onChange={(e) => update({ adapted: e.target.checked })} />
+            Ik heb het recept zelf aangepast
+          </label>
+          {draft.adapted && (
+            <label className="field">
+              <span>Wat is er anders? <small>(optioneel, staat zichtbaar onder de bron)</small></span>
+              <input
+                value={draft.source.adaptation}
+                onChange={(e) => updateSource({ adaptation: e.target.value })}
+                placeholder="bv. met agavesiroop in plaats van ahornsiroop"
+              />
+            </label>
+          )}
+          <p className="hint">
+            Dan staat er &ldquo;Gebaseerd op&rdquo; in plaats van &ldquo;Uit het kookboek&rdquo; of &ldquo;Bron&rdquo;, met
+            &ldquo;Met eigen aanpassingen&rdquo; erbij.
+          </p>
+        </fieldset>
+      )}
 
       {/* ---------- Ingrediënten ---------- */}
       <fieldset className="panel">

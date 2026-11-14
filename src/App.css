@@ -1758,6 +1758,14 @@ code {
   color: var(--ink);
 }
 
+.source-adapted {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
 /* =============================================================
    PRINT
    Eén nette A4 met de hoeveelheden voor het gekozen aantal

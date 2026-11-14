@@ -366,13 +366,16 @@ function Admin() {
       const pick = (keys) =>
         Object.fromEntries(keys.map((k) => [k, String(draft.source[k] || "").trim()]).filter(([, v]) => v));
 
+      const adaptation = () =>
+        draft.adapted ? { adapted: true, ...pick(["adaptation"]) } : {};
+
       if (draft.sourceType === "book") {
-        recipe.source = { type: "book", ...pick(["book", "author", "page", "url"]) };
+        recipe.source = { type: "book", ...pick(["book", "author", "page", "url"]), ...adaptation() };
         recipe.locked = await encryptJSON({ ingredients, instructions }, bookPassword);
       } else {
         const gate = draft.sourceType === "social" && draft.gate;
         if (draft.sourceType === "social") {
-          recipe.source = { type: "social", ...pick(["url", "creator"]) };
+          recipe.source = { type: "social", ...pick(["url", "creator"]), ...adaptation() };
           if (gate) recipe.gate = true;
         }
         recipe.ingredients = ingredients;

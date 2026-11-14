@@ -29,7 +29,9 @@ function StepsGate({ source, onVisit, onPassword, error, busy }) {
         </ol>
 
         <div className="gate-card">
-          <h3>Dit recept komt van {source.creator || platform}</h3>
+          <h3>
+            {source.adapted ? "Gebaseerd op een recept van" : "Dit recept komt van"} {source.creator || platform}
+          </h3>
           <p className="no-print">
             Bekijk eerst de originele post, zodat de maker er ook iets aan heeft. Daarna verschijnt de
             bereiding hier vanzelf.

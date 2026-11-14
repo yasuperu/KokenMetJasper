@@ -54,7 +54,8 @@ function LockedContent({ source, onUnlock, error, busy }) {
         </svg>
         <h2>Recept uit een kookboek</h2>
         <p>
-          Dit recept komt uit {source?.book ? <cite>{source.book}</cite> : "een kookboek"}
+          Dit recept {source?.adapted ? "is gebaseerd op" : "komt uit"}{" "}
+          {source?.book ? <cite>{source.book}</cite> : "een kookboek"}
           {source?.author ? ` van ${source.author}` : ""}. Uit respect voor de maker staat het hier
           niet openbaar. Wil je het maken? Koop of leen het boek
           {source?.page ? ` (pagina ${source.page})` : ""}.
