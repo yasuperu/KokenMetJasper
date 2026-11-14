@@ -4,8 +4,7 @@
   "category": "Hoofdgerecht",
   "tags": [
     "Vegetarisch",
-    "Stoofpot",
-    "Belgisch"
+    "Stoofpot"
   ],
   "servings": 4,
   "prepTime": 15,
@@ -39,8 +38,8 @@
       "note": "klein"
     },
     {
-      "id": "bruinBier",
-      "name": "bruin bier",
+      "id": "donkerBier",
+      "name": "donker bier",
       "amount": 660,
       "unit": "ml",
       "note": "bijv. Rochefort 10"
@@ -74,8 +73,8 @@
       "amount": 1
     },
     {
-      "id": "bruineBoterham",
-      "name": "bruine boterham",
+      "id": "bruinBrood",
+      "name": "bruin brood",
       "amount": 2,
       "unit": "sneetje"
     },
@@ -86,22 +85,22 @@
       "unit": "el"
     },
     {
-      "id": "loonsePerenstroop",
-      "name": "Loonse perenstroop",
+      "id": "perenstroop",
+      "name": "perenstroop",
       "amount": 1,
       "unit": "el",
-      "note": "of Luikse, of vervangen door bruine suiker"
+      "note": "of appelstroop of bruine suiker"
     }
   ],
   "instructions": [
-    "Snipper {ui} grof en snijd {wortel} in niet al te fijne schijfjes.",
-    "Verhit een ruime stoofpot en smelt er {olieOfMargarine} in. Stoof daarin de {ui:naam} en de {wortel:naam} op een matig vuur totdat de {ui:naam} begint te kleuren.",
-    "Pers {knoflook} fijn en voeg het samen met {sojavlees} toe. Bak nog een aantal minuten mee met de {ui:naam}.",
-    "Voeg {verseTijm}, {laurierblaadje} en {kruidnagel} toe. Kneus de kruiden in een vijzel en stop ze in een theezakje of thee-ei.",
-    "Blus met {bruinBier} en {water}.",
-    "Voeg {loonsePerenstroop} toe.",
-    "Laat de stoverij 30 minuten sudderen op een zacht vuur met het deksel op de pot.",
-    "Besmeer {bruineBoterham} royaal met {scherpeMosterd}. Leg de boterham in de pot, met de besmeerde zijde naar onder.",
-    "Roer na 30 minuten het geheel goed om en laat indien gewenst nog even verder sudderen zonder deksel totdat de saus de gewenste dikte heeft (minimaal nog een uur tot 1,5 uur)."
+    "Snipper {ui} grof en snijd {wortel} in niet te dunne plakjes.",
+    "Verhit {olieOfMargarine} in een ruime braadpan. Fruit de {ui:naam} en {wortel:naam} op middelhoog vuur tot de ui begint te kleuren.",
+    "Pers {knoflook} en bak dit een paar minuten mee met {sojavlees}.",
+    "Kneus {verseTijm}, {laurierblaadje} en {kruidnagel} in een vijzel en doe ze in een theezakje of thee-ei. Leg dit in de pan.",
+    "Blus af met {donkerBier} en {water}.",
+    "Roer {perenstroop} erdoor.",
+    "Laat het stoofvlees 30 minuten zachtjes stoven met het deksel op de pan.",
+    "Besmeer {bruinBrood} royaal met {scherpeMosterd}. Leg de sneetjes met de mosterdkant naar beneden in de pan.",
+    "Roer na 30 minuten alles goed door. Laat het daarna zonder deksel nog 1 tot 1,5 uur zachtjes stoven, tot de saus mooi gebonden is."
   ]
 }
