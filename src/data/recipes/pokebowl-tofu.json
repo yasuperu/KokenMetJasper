@@ -37,31 +37,31 @@
     {
       "id": "rijst",
       "name": "rijst",
-      "amount": 400,
+      "amount": 320,
       "unit": "gr"
     },
     {
       "id": "mirinRijst",
       "name": "mirin",
-      "amount": 1,
+      "amount": 2,
       "unit": "el"
     },
     {
       "id": "rijstazijn",
       "name": "rijstazijn",
-      "amount": 1,
+      "amount": 2,
       "unit": "el"
     },
     {
       "id": "suiker",
       "name": "suiker",
-      "amount": 1,
+      "amount": 2,
       "unit": "el"
     },
     {
       "id": "zout",
       "name": "zout",
-      "amount": 1,
+      "amount": 2,
       "unit": "tl"
     },
     {
