@@ -7,10 +7,10 @@
     "Indisch"
   ],
   "servings": 2,
+  "image": "images/recipes/nasi-met-pindasaus-mwgah8at.jpg",
+  "description": "Makkelijke nasi met een gebakken ei, zelfgemaakte pindasaus, gebakken uitjes en kroepoek!",
   "prepTime": 5,
   "cookTime": 25,
-  "image": "",
-  "description": "Makkelijke nasi met een gebakken ei, zelfgemaakte pindasaus, gebakken uitjes en kroepoek!",
   "ingredients": [
     {
       "id": "rijst",
