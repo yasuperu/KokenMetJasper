@@ -1,0 +1,182 @@
+{
+  "id": "pokebowl-tofu",
+  "title": "Pokébowl met Tofu",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Vegetarisch",
+    "Bowl"
+  ],
+  "servings": 4,
+  "prepTime": 110,
+  "cookTime": 20,
+  "image": "",
+  "description": "Een kleurrijke pokébowl met gemarineerde, krokant gebakken tofu, rijst, verse groenten en een romige sesammayo!",
+  "ingredients": [
+    {
+      "id": "tofu",
+      "name": "tofu",
+      "amount": 500,
+      "unit": "gr",
+      "note": "stevig"
+    },
+    {
+      "id": "komkommer",
+      "name": "komkommer",
+      "amount": 1
+    },
+    {
+      "id": "wortel",
+      "name": "wortel",
+      "amount": 1
+    },
+    {
+      "id": "avocado",
+      "name": "avocado",
+      "amount": 2
+    },
+    {
+      "id": "rijst",
+      "name": "rijst",
+      "amount": 400,
+      "unit": "gr"
+    },
+    {
+      "id": "mirinRijst",
+      "name": "mirin",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "rijstazijn",
+      "name": "rijstazijn",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "suiker",
+      "name": "suiker",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "zout",
+      "name": "zout",
+      "amount": 1,
+      "unit": "tl"
+    },
+    {
+      "id": "gochujang",
+      "name": "gochujang",
+      "amount": 1,
+      "unit": "tl",
+      "group": "Marinade"
+    },
+    {
+      "id": "sojasaus",
+      "name": "sojasaus",
+      "amount": 2,
+      "unit": "el",
+      "group": "Marinade"
+    },
+    {
+      "id": "ketjap",
+      "name": "ketjap",
+      "amount": 1,
+      "unit": "el",
+      "group": "Marinade"
+    },
+    {
+      "id": "vijfkruiden",
+      "name": "Chinees vijfkruidenpoeder",
+      "amount": 1,
+      "unit": "tl",
+      "group": "Marinade"
+    },
+    {
+      "id": "kurkuma",
+      "name": "kurkuma",
+      "amount": 1,
+      "unit": "tl",
+      "group": "Marinade"
+    },
+    {
+      "id": "msg",
+      "name": "MSG",
+      "amount": 0.5,
+      "unit": "tl",
+      "group": "Marinade"
+    },
+    {
+      "id": "olie",
+      "name": "olie",
+      "amount": 1,
+      "unit": "el",
+      "group": "Marinade"
+    },
+    {
+      "id": "korianderzaad",
+      "name": "korianderzaad",
+      "amount": 1,
+      "unit": "tl",
+      "group": "Marinade"
+    },
+    {
+      "id": "mirinMarinade",
+      "name": "mirin",
+      "amount": 1,
+      "unit": "el",
+      "group": "Marinade"
+    },
+    {
+      "id": "mayonaise",
+      "name": "mayonaise",
+      "amount": 4,
+      "unit": "el",
+      "group": "Sesammayo"
+    },
+    {
+      "id": "sesamolie",
+      "name": "sesamolie",
+      "amount": 2,
+      "unit": "tl",
+      "group": "Sesammayo"
+    },
+    {
+      "id": "knoflook",
+      "name": "knoflook",
+      "amount": 1,
+      "unit": "teentje",
+      "group": "Sesammayo"
+    },
+    {
+      "id": "citroensap",
+      "name": "citroensap",
+      "amount": 2,
+      "unit": "tl",
+      "group": "Sesammayo"
+    },
+    {
+      "id": "sesamzaad",
+      "name": "sesamzaad",
+      "group": "Garnering"
+    },
+    {
+      "id": "sriracha",
+      "name": "sriracha",
+      "group": "Garnering"
+    }
+  ],
+  "instructions": [
+    "Haal {tofu} uit de verpakking. Wikkel de tofu in een theedoek en leg er een gewicht op, bijvoorbeeld een paar boeken. Laat zo minimaal een halfuur het vocht eruit persen.",
+    "Snijd de {tofu:naam} in blokjes van ongeveer 1 bij 1 cm.",
+    "Meng voor de marinade {gochujang}, {sojasaus}, {ketjap}, {vijfkruiden}, {kurkuma}, {msg}, {olie}, {korianderzaad} en {mirinMarinade} in een kom.",
+    "Doe de {tofu:naam} in de marinade en meng goed, zodat alles bedekt is. Laat minimaal een uur marineren: hoe langer, hoe beter.",
+    "Halveer {komkommer} en snijd in dunne plakjes. Snijd {wortel} julienne, in dunne reepjes.",
+    "Kook {rijst} volgens de verpakking.",
+    "Verhit ondertussen een pan op hoog vuur en bak de {tofu:naam} in ongeveer 15 minuten mooi bruin.",
+    "Giet de {rijst:naam} af als die klaar is. Meng er {mirinRijst}, {rijstazijn}, {suiker} en {zout} door en laat even rusten.",
+    "Rasp {knoflook} en meng met {mayonaise}, {sesamolie} en {citroensap} tot sesammayo.",
+    "Snijd als laatste {avocado} in dunne plakjes, zo blijft de avocado het mooist.",
+    "Schep de {rijst:naam} in diepe borden en verdeel de {tofu:naam}, {komkommer:naam}, {wortel:naam} en {avocado:naam} erover. Maak af met de sesammayo, {sriracha:naam} en {sesamzaad:naam}."
+  ]
+}

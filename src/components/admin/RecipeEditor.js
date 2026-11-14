@@ -487,7 +487,7 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
         <legend>Ingrediënten <small>voor {draft.servings} personen</small></legend>
         <p className="hint">
           Schrijf de naam in het <strong>enkelvoud</strong> (ui, tomaat). Het meervoud gaat vanzelf; controleer
-          het in de kolom rechts.
+          het in de kolom rechts. Hoe je iets snijdt (in blokjes, fijngehakt) zet je in de bereiding, niet bij de toelichting.
         </p>
 
         <div className="ing-table">
@@ -521,7 +521,7 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
                 />
                 <input
                   aria-label="Toelichting"
-                  placeholder="bv. fijngesneden"
+                  placeholder="bv. uit blik, rijp"
                   value={row.note}
                   onChange={(e) => updateRow(row.key, { note: e.target.value })}
                 />

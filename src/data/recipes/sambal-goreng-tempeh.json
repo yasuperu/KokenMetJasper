@@ -17,20 +17,18 @@
       "name": "tempeh",
       "amount": 1,
       "unit": "blok",
-      "note": "250 gram, in dunne reepjes of blokjes gesneden"
+      "note": "250 gram"
     },
     {
       "id": "ui",
       "name": "ui",
-      "amount": 1,
-      "note": "fijngesnipperd"
+      "amount": 1
     },
     {
       "id": "knoflook",
       "name": "knoflook",
       "amount": 2,
-      "unit": "teentje",
-      "note": "fijngehakt"
+      "unit": "teentje"
     },
     {
       "id": "gemalenLaos",

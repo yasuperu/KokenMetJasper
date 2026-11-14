@@ -21,21 +21,18 @@
     {
       "id": "rodePeper",
       "name": "rode peper",
-      "amount": 3,
-      "note": "fijngehakt"
+      "amount": 3
     },
     {
       "id": "sjalot",
       "name": "sjalot",
-      "amount": 3,
-      "note": "in dunne ringen"
+      "amount": 3
     },
     {
       "id": "knoflook",
       "name": "knoflook",
       "amount": 5,
-      "unit": "teentje",
-      "note": "in dunne plakjes"
+      "unit": "teentje"
     },
     {
       "id": "kipOfVarkensgehakt",
@@ -76,11 +73,12 @@
     {
       "id": "gekookteRijst",
       "name": "gekookte rijst",
-      "note": "om mee te serveren"
+      "group": "Om te serveren"
     }
   ],
   "instructions": [
-    "Verhit {zonnebloemolie} in een wok op hoog vuur. Voeg {rodePeper}, {sjalot} en {knoflook} toe. Bak 1 tot 2 minuten tot alles zacht is en goudbruin, let op dat het niet verbrandt.",
+    "Hak {rodePeper} fijn, snijd {sjalot} in dunne ringen en {knoflook} in dunne plakjes.",
+    "Verhit {zonnebloemolie} in een wok op hoog vuur. Voeg de {rodePeper:naam}, {sjalot:naam} en {knoflook:naam} toe. Bak 1 tot 2 minuten tot alles zacht is en goudbruin, let op dat het niet verbrandt.",
     "Voeg {kipOfVarkensgehakt} toe en bak het in enkele minuten rul.",
     "Voeg {suiker}, {sojasaus} en {vissaus} toe. Bak nog een minuut door.",
     "Blus de pan af met {bouillon}. Wacht tot het vocht deels is verdampt.",

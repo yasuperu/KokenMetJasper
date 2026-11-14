@@ -16,13 +16,12 @@
       "id": "zoeteAardappel",
       "name": "zoete aardappel",
       "amount": 1,
-      "note": "middelgroot, in blokjes"
+      "note": "middelgroot"
     },
     {
       "id": "rodeUi",
       "name": "rode ui",
-      "amount": 1,
-      "note": "in partjes"
+      "amount": 1
     },
     {
       "id": "balsamicoazijn",
@@ -65,11 +64,10 @@
       "name": "peper en zout"
     },
     {
-      "id": "linzenQuinoamix",
-      "name": "linzen-quinoamix",
+      "id": "linzen",
+      "name": "linzen",
       "amount": 250,
-      "unit": "gr",
-      "note": "bijv. van Zonnatura"
+      "unit": "gr"
     },
     {
       "id": "bladspinazie",
@@ -80,8 +78,7 @@
     {
       "id": "avocado",
       "name": "avocado",
-      "amount": 1,
-      "note": "in plakjes"
+      "amount": 1
     },
     {
       "id": "geroosterdeSesamzaadjes",
@@ -106,23 +103,23 @@
       "name": "knoflook",
       "amount": 1,
       "unit": "teentje",
-      "note": "geraspt",
       "group": "Sesamdressing"
     },
     {
-      "id": "citroen",
-      "name": "citroen",
-      "amount": 0.5,
-      "note": "alleen het sap",
-      "group": "Sesamdressing"
+      "id": "citroensap",
+      "name": "citroensap",
+      "amount": 1,
+      "group": "Sesamdressing",
+      "unit": "el"
     }
   ],
   "instructions": [
-    "Verwarm de oven voor op 180°C. Meng {zoeteAardappel}, {rodeUi}, {balsamicoazijn}, {olijfolie:naam}, {peperEnZout:naam} in een ovenschaal. Schep goed om.",
+    "Verwarm de oven voor op 180°C. Snijd {zoeteAardappel} in blokjes en {rodeUi} in partjes.",
+    "Meng de {zoeteAardappel:naam} en {rodeUi:naam} met {balsamicoazijn}, {olijfolie:naam} en {peperEnZout:naam} in een ovenschaal. Schep goed om.",
     "Rooster de {zoeteAardappel:naam} 25 minuten in het midden van de oven tot deze zacht is.",
     "Verhit {olijfolie:naam} in een koekenpan. Bak {kikkererwten} met {komijnpoeder}, {chilipoeder} en {knoflookpoeder} tot ze krokant zijn.",
-    "Meng voor de dressing {mayonaise}, {sesamolie}, {knoflook} en het sap van {citroen}.",
-    "Schep {linzenQuinoamix} in kommen. Verdeel geroosterde {zoeteAardappel:naam}, gebakken {kikkererwten:naam}, {bladspinazie} en {avocado} over de kommen.",
+    "Rasp {knoflook} en meng voor de dressing met {mayonaise}, {sesamolie} en {citroensap}.",
+    "Snijd {avocado} in plakjes. Schep {linzen} in kommen en verdeel de geroosterde {zoeteAardappel:naam}, gebakken {kikkererwten:naam}, {bladspinazie} en de {avocado:naam} over de kommen.",
     "Sprenkel sesamdressing over de bowls en garneer met {geroosterdeSesamzaadjes:naam}."
   ]
 }

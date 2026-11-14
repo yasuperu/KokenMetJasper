@@ -44,7 +44,7 @@
     {
       "id": "gember",
       "name": "gember",
-      "note": "ter grootte van een duim, fijngesneden",
+      "note": "ter grootte van een duim",
       "amount": 1,
       "unit": "stukje"
     },
@@ -86,13 +86,14 @@
       "name": "paneer",
       "amount": 200,
       "unit": "gr",
-      "note": "Indiase witte kaas, in blokjes van 1 bij 1 cm"
+      "note": "Indiase witte kaas"
     },
     {
       "id": "naan",
       "name": "naan",
       "amount": 2,
-      "plural": "naans"
+      "plural": "naans",
+      "group": "Om te serveren"
     }
   ],
   "instructions": [

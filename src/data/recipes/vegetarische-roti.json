@@ -49,13 +49,6 @@
       "unit": ""
     },
     {
-      "id": "rotivellen",
-      "name": "rotivel",
-      "amount": 4,
-      "unit": "",
-      "step": 1
-    },
-    {
       "id": "peper",
       "name": "madame jeanette peper",
       "amount": 1,
@@ -80,6 +73,14 @@
       "name": "ketchup",
       "amount": 1,
       "unit": "knijp"
+    },
+    {
+      "id": "rotivellen",
+      "name": "rotivel",
+      "amount": 4,
+      "unit": "",
+      "step": 1,
+      "group": "Om te serveren"
     }
   ],
   "instructions": [
