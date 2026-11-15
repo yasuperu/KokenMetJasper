@@ -1,0 +1,73 @@
+{
+  "id": "baked-oats-met-banaan",
+  "title": "Baked oats met banaan",
+  "category": "Ontbijt",
+  "tags": [
+    "Oven",
+    "Snel"
+  ],
+  "servings": 2,
+  "image": "",
+  "description": "Een heel makkelijk baked oats recept met banaan en chocolate chips. Met slechts 5 minuten voorbereiding zet je een gezond en lekker ontbijtje op tafel.",
+  "prepTime": 5,
+  "cookTime": 20,
+  "source": {
+    "type": "social",
+    "url": "https://www.leukerecepten.nl/recepten/baked-oats-met-banaan/",
+    "creator": "Sanne van Lierop",
+    "adapted": true,
+    "adaptation": "agave siroop in plaats van maple syrup, en met havervlokken"
+  },
+  "gate": true,
+  "ingredients": [
+    {
+      "id": "banaan",
+      "name": "banaan",
+      "amount": 2
+    },
+    {
+      "id": "havervlokken",
+      "name": "havervlokken",
+      "amount": 80,
+      "unit": "gr"
+    },
+    {
+      "id": "ei",
+      "name": "ei",
+      "amount": 2
+    },
+    {
+      "id": "melk",
+      "name": "melk",
+      "amount": 40,
+      "unit": "ml",
+      "note": "of melkalternatief"
+    },
+    {
+      "id": "pureChocolade",
+      "name": "pure chocolade",
+      "amount": 24,
+      "unit": "gr",
+      "note": "in stukjes"
+    },
+    {
+      "id": "agaveSiroop",
+      "name": "agave siroop",
+      "amount": 1,
+      "unit": "el"
+    },
+    {
+      "id": "bakpoeder",
+      "name": "bakpoeder",
+      "amount": 2,
+      "unit": "tl"
+    }
+  ],
+  "gatedSteps": {
+    "v": 1,
+    "iterations": 1000,
+    "salt": "5pEdJupgFR6Q9jR3jy+bwg==",
+    "iv": "tWWxZQZ7yGRzL9JD",
+    "data": "MA/lyZZN63FUquMDK/aY9u/sZ7hZT7sSUMrIoWmRQB/YSooF2wMXCrLEtzN6QMsxmN5N2rI0NaAdyxs+W89EDqBszWo4oDLG4Ht0ch+qWY5hR0zxKpKgLSWuC1GqmOmPu9XPA674Zwz+a7jHss+HReQKKLDydUXrM8dTfQs78wGxvNiGyx6fdP87vT0oJyM3f7hPeM3pjmc15A75chPWcA8q3zvRiZwcxeFxzEaVcyfI5Idtv4MD9d5rLFNK4InBuUZmlYi7DE0LmdtoEUchTfF7VZhv6pHQ581xjZQys+U/wBYflGDfU0D2CmPfMbHvD7lINScovE5t41MjM/caS3ejo2QxAgzL12987rXcXiqFfv/eDsBvxrVRJ4xP9RsVsyB+5kOLEBbVFigEQtux5GqpT6X67iUng7Mc7szpDeMISfUo6sZ9XgsRk1QrSNfj/twXrcA8lHRLEXFteftel1f8C+vnqO9V0Cb7aVGaw9VGieQinKttyfxtplz8z+zaJXF4uBfpO39YH2Vv7ctmO4qyeA=="
+  }
+}
