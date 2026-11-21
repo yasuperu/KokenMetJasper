@@ -7,10 +7,16 @@
     "Bowl"
   ],
   "servings": 2,
-  "prepTime": 15,
-  "cookTime": 25,
   "image": "",
   "description": "Een voedzame en makkelijke Buddha Bowl met zoete aardappel, kikkererwten en een heerlijke sesamdressing.",
+  "prepTime": 15,
+  "cookTime": 25,
+  "source": {
+    "type": "social",
+    "url": "https://ohmyfoodness.nl/buddhabowl-met-zoete-aardappel-en-kikkererwten/",
+    "creator": "Sabine"
+  },
+  "gate": true,
   "ingredients": [
     {
       "id": "zoeteAardappel",
@@ -109,17 +115,15 @@
       "id": "citroensap",
       "name": "citroensap",
       "amount": 1,
-      "group": "Sesamdressing",
-      "unit": "el"
+      "unit": "el",
+      "group": "Sesamdressing"
     }
   ],
-  "instructions": [
-    "Verwarm de oven voor op 180°C. Snijd {zoeteAardappel} in blokjes en {rodeUi} in partjes.",
-    "Meng de {zoeteAardappel:naam} en {rodeUi:naam} met {balsamicoazijn}, {olijfolie:naam} en {peperEnZout:naam} in een ovenschaal. Schep goed om.",
-    "Rooster de {zoeteAardappel:naam} 25 minuten in het midden van de oven tot deze zacht is.",
-    "Verhit {olijfolie:naam} in een koekenpan. Bak {kikkererwten} met {komijnpoeder}, {chilipoeder} en {knoflookpoeder} tot ze krokant zijn.",
-    "Rasp {knoflook} en meng voor de dressing met {mayonaise}, {sesamolie} en {citroensap}.",
-    "Snijd {avocado} in plakjes. Schep {linzen} in kommen en verdeel de geroosterde {zoeteAardappel:naam}, gebakken {kikkererwten:naam}, {bladspinazie} en de {avocado:naam} over de kommen.",
-    "Sprenkel sesamdressing over de bowls en garneer met {geroosterdeSesamzaadjes:naam}."
-  ]
+  "gatedSteps": {
+    "v": 1,
+    "iterations": 1000,
+    "salt": "2f0ywLjjdebGLYlcZuCXqA==",
+    "iv": "X00Mhn7ToFzlXpSF",
+    "data": "km7wo3UMDtOWg5ABb6BYFdfDJbWlqqqIOvykAZYhFLZo7SoPxxC+5D9qhSIKbKPHKgxZenRA6Y2WO7QB7II/CCfQtznBE5YsrlMgtDyplcHDcksnkKOWujl/v1P0jrSqjObeCT47ePk+sfVdZu8Jmcw+Bf4hBQB5YMEXLwKVDJFPrX3Uoj6ZW2VGc58LvN/+fhxvGEugSIVnQRt3glfu5gNJTxNb5wKjhKp7EqYg/EHU9Q0mCNzNLmwiS3ha7iNIa4PdcumVYfQ7/F8rrpS+tVOHapUW1HD4Oz/QsklUvVilePWL5R+gOoF4V5ZLriQrkfNTIMjzldwACVjFZJdWJKHL9NnwTNnG6ALQY43OwqvgkMez/SrRY2cHdSblmVrDhPypSf+l54ObA2NHtC2qe0BBkCEADV17kDtVOFVxJ7AgKeM3kd6O6NRlo98436CfHOoN4pmUL7wxn6lj4eZgYW5/9szKQmsDHAvp9qcCofWiA8tFTpshzNtgMT+uzx3Tz6vCrzLYMhab5rVr31bqgXvGF4ypDu6qMGhg1kjCKFSSaFIpqDr/ARNJyY+n7TfUgndbJ0xzAJVCLZiSjC/balBI5nr3UvXrAs8swf1YMmmIuIwHc8SZOYqjLPKT7f5zjmwR/Weog+j9Wgg507Xvn9/I9F0yT0jYGsYVKb8VATwsjbbfPzOXotkNUtx7g7QeBva5h3UKs/j2jW6+XMWD9mYnzEl+H4dwiDAs2S95cQJdLB5CaCcshq8Ib9nNlJurcbphQgjN/Kz7/iAq4PiP1eAAqeacM04jxmjhK5VAg+H/YVNuVdeHZqT1LUZpPwU3P/rjFNPDMeG8autMX1ztKce3A4sIZj58AQY3qmzqTOhsjRZ8XjALUlmIAuZHGQKMmfbxsFmMFq8UP/9NVVWWyXnTyqSnhwtUaLvKUZkeUlGQNjkq5LEszgS85T50K/Blyqah+HzXNvUpeFID7CO1DRQgxk4X74u+iSxYCV8kZNB76IJ6uiLOx+PyWsHgt/qP46N1Z5Puk6NbQAgHYVO2iNvEbGQO4ZcgS0v4/9v8lRN+27slIsBkwSuYhj38UHv+hdnXfVDkzCtPhb4657KCIHnI41T/OyrX1UjF"
+  }
 }
