@@ -1,0 +1,29 @@
+{
+  "id": "tofutaco-s",
+  "title": "Tofutaco's",
+  "category": "Hoofdgerecht",
+  "tags": [
+    "Vegetarisch",
+    "Mexicaans"
+  ],
+  "servings": 3,
+  "image": "",
+  "description": "Krokante taco's met geraspte, geroosterde tofu, maïs, avocado en salsa!",
+  "prepTime": 25,
+  "source": {
+    "type": "book",
+    "book": "Veggilaine",
+    "author": "Ghislaine Voogd",
+    "page": "138",
+    "url": "https://www.bol.com/nl/nl/p/veggilaine/9300000176624029/",
+    "adapted": true,
+    "adaptation": "met salsa uit een potje in plaats van zelfgemaakte pico de gallo, en met maïs"
+  },
+  "locked": {
+    "v": 1,
+    "iterations": 250000,
+    "salt": "eFhvjCpCJ7nTK8J38ZAN1g==",
+    "iv": "fjadj4Ltlj7SVKNz",
+    "data": "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"
+  }
+}
