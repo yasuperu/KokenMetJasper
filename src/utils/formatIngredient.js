@@ -50,9 +50,11 @@ export function scaleAmount(ingredient, factor) {
     return { value, text: formatFraction(value), unit };
   }
 
-  // Gewicht en volume: afronden op hele, vijf- of tientallen
+  // Gewicht en volume: afronden op hele, vijf- of tientallen.
+  // Bij het originele aantal personen blijft de hoeveelheid precies zoals in het recept.
   if (["gr", "g", "ml"].includes(unit)) {
-    if (value >= 250) value = roundTo(value, 10);
+    if (Math.abs(factor - 1) < 1e-9) value = ingredient.amount;
+    else if (value >= 250) value = roundTo(value, 10);
     else if (value >= 20) value = roundTo(value, 5);
     else value = Math.max(1, Math.round(value));
 

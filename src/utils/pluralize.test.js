@@ -78,6 +78,12 @@ describe("formatIngredient", () => {
     expect(formatIngredient(knoflook, 0.5)).toBe("1 teentje knoflook");
   });
 
+  test("origineel aantal personen: exacte hoeveelheid", () => {
+    expect(formatIngredient({ name: "tofu", amount: 375, unit: "gr" }, 1)).toBe("375 gr tofu");
+    expect(formatIngredient({ name: "tofu", amount: 375, unit: "gr" }, 2)).toBe("750 gr tofu");
+    expect(formatIngredient({ name: "tofu", amount: 375, unit: "gr" }, 2 / 3)).toBe("250 gr tofu");
+  });
+
   test("maateenheden blijven gelijk", () => {
     expect(formatIngredient(gnocchi, 1)).toBe("400 gr verse gnocchi");
     expect(formatIngredient(gnocchi, 3)).toBe("1,2 kg verse gnocchi");
