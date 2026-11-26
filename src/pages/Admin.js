@@ -11,15 +11,7 @@ import { recipePath } from "../utils/seo";
 import { decryptSteps, encryptSteps } from "../utils/gate";
 import { cleanUrl } from "../utils/source";
 
-const TOKEN_KEY = "kmj-gh-token";
-
-function readToken() {
-  try {
-    return localStorage.getItem(TOKEN_KEY) || "";
-  } catch {
-    return "";
-  }
-}
+import { readToken, TOKEN_KEY } from "../utils/githubToken";
 
 /* ============================================================
    Inloggen met een GitHub-token

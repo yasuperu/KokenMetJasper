@@ -165,3 +165,15 @@ test("cleanUrl haalt volg- en affiliate-codes weg", () => {
   expect(cleanUrl("https://www.instagram.com/reel/DNK1z8LoKcw/?cplk=abc&igsh=xyz")).toBe("https://www.instagram.com/reel/DNK1z8LoKcw/");
   expect(cleanUrl("https://www.youtube.com/watch?v=abc&si=xyz")).toBe("https://www.youtube.com/watch?v=abc");
 });
+
+test("bringLine: boodschappenlijst zoals in de winkel", () => {
+  const { bringLine } = require("./bring");
+  expect(bringLine({ name: "ui", amount: 1 }, 1.5)).toBe("2 uien");
+  expect(bringLine({ name: "knoflook", amount: 1, unit: "teentje" }, 1.5)).toBe("2 teentjes knoflook");
+  expect(bringLine({ name: "spaghetti", amount: 150, unit: "gr" }, 1.5)).toBe("225 g spaghetti");
+  expect(bringLine({ name: "sojasaus", amount: 3, unit: "el" }, 1.5)).toBe("sojasaus");
+  expect(bringLine({ name: "gember", amount: 2.5, unit: "cm" }, 1)).toBe("gember");
+  expect(bringLine({ name: "zout" }, 2)).toBe("zout");
+  expect(bringLine({ name: "watermeloen", amount: 0.5 }, 1)).toBe("1 watermeloen");
+  expect(bringLine({ name: "maïs", amount: 1, unit: "blik" }, 2)).toBe("2 blikken maïs");
+});

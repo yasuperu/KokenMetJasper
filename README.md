@@ -26,6 +26,14 @@ Vink *Dit recept komt uit een kookboek* aan en vul titel, auteur en pagina in.
 - Alle boekrecepten gebruiken hetzelfde wachtwoord; `src/data/lock.json` controleert dat. **Ben je het wachtwoord kwijt, dan zijn die recepten niet meer te lezen.**
 - Gebruik bij boekrecepten alleen je eigen foto's.
 
+## Boodschappen naar Bring!
+
+Alleen zichtbaar als je in deze browser via `/jk` met GitHub bent ingelogd. Op een receptpagina: **Boodschappen** → vink uit wat je al hebt → **Naar Bring!**.
+
+- De gekozen ingrediënten (voor het gekozen aantal personen, als boodschappenlijst: stuks naar boven afgerond, lepels en snufjes zonder hoeveelheid) worden als klein `.json`-recept op de branch `boodschappen` gezet (`lijsten/`). Bring! importeert dat bestand via `api.getbring.com/rest/bringrecipes/deeplink`. Lijsten ouder dan een dag worden opgeruimd.
+- De branch is openbaar, net als de repo; er staan alleen ingrediëntnamen in.
+- Reserve: **Kopieer lijst**, **Delen** (telefoon) of **het hele recept naar Bring!** (leest de receptgegevens van de openbare pagina; niet voor kookboekrecepten).
+
 ## Vindbaarheid (SEO)
 
 `npm run build` draait na de React-build ook `scripts/prerender.js`. Dat maakt per recept een echte pagina (`/recept/<id>/`) met titel, beschrijving, deelafbeelding (Open Graph) en receptgegevens voor Google (schema.org/Recipe), plus `sitemap.xml`. Kookboekrecepten krijgen geen ingrediënten in die gegevens. De algemene deelafbeelding is `public/og-image.png`.

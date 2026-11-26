@@ -7,6 +7,8 @@ import LockedContent from "../components/LockedContent";
 import SourceNote from "../components/SourceNote";
 import { checkPassword, decryptJSON } from "../utils/crypto";
 import StepsGate from "../components/StepsGate";
+import ShoppingPanel from "../components/ShoppingPanel";
+import { readToken } from "../utils/githubToken";
 import { decryptSteps, hasVisitedPost, isGated, markPostVisited } from "../utils/gate";
 import passwordLock from "../data/lock.json";
 import { forgetPassword, getPassword, setPassword } from "../utils/passwordStore";
@@ -30,6 +32,26 @@ function RecipePage() {
     if (gated && hasVisitedPost(recipe.id)) setStepsVisible(true);
   }, [gated, recipe]);
   const [gateError, setGateError] = useState("");
+
+  // Boodschappen: alleen voor wie via het beheer met GitHub is ingelogd
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [shopping, setShopping] = useState(false);
+  const [selected, setSelected] = useState(() => new Set());
+  useEffect(() => setLoggedIn(Boolean(readToken())), []);
+
+  function openShopping() {
+    setSelected(new Set((content?.ingredients || []).map((i) => i.id)));
+    setShopping(true);
+  }
+
+  function toggleIngredient(id) {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
   const [unlockError, setUnlockError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -179,6 +201,14 @@ function RecipePage() {
                     Foto mee printen
                   </label>
                 )}
+                {loggedIn && !shopping && (
+                  <button type="button" className="btn-print" onClick={openShopping}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4 5h2l2 10h10l2-7H7.5M10 19.5a1 1 0 100-.01M17 19.5a1 1 0 100-.01" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    Boodschappen
+                  </button>
+                )}
                 {recipe.locked && (
                   <button type="button" className="btn-link" onClick={lock}>
                     Vergrendel
@@ -207,8 +237,22 @@ function RecipePage() {
         )}
       </header>
 
+      {unlocked && shopping && (
+        <ShoppingPanel
+          recipe={recipe}
+          ingredients={content.ingredients}
+          selected={selected}
+          setSelected={setSelected}
+          servings={servings}
+          factor={factor}
+          onClose={() => setShopping(false)}
+        />
+      )}
+
       {unlocked ? (
         <RecipeContent
+          selected={shopping ? selected : null}
+          onToggle={toggleIngredient}
           ingredients={content.ingredients}
           instructions={content.instructions}
           servings={servings}
