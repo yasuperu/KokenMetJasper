@@ -19,6 +19,75 @@
     "adapted": true,
     "adaptation": "met salsa uit een potje in plaats van zelfgemaakte pico de gallo, en met maïs"
   },
+  "ingredients": [
+    {
+      "id": "i1",
+      "name": "ahornsiroop"
+    },
+    {
+      "id": "i2",
+      "name": "avocado"
+    },
+    {
+      "id": "i3",
+      "name": "chilivlokken"
+    },
+    {
+      "id": "i4",
+      "name": "gerookte paprikapoeder"
+    },
+    {
+      "id": "i5",
+      "name": "ketjap manis"
+    },
+    {
+      "id": "i6",
+      "name": "knoflook"
+    },
+    {
+      "id": "i7",
+      "name": "lichte sojasaus"
+    },
+    {
+      "id": "i8",
+      "name": "maïs"
+    },
+    {
+      "id": "i9",
+      "name": "olijfolie"
+    },
+    {
+      "id": "i10",
+      "name": "salsa"
+    },
+    {
+      "id": "i11",
+      "name": "tacoschelp"
+    },
+    {
+      "id": "i12",
+      "name": "tofu"
+    },
+    {
+      "id": "i13",
+      "name": "tomatenpuree"
+    },
+    {
+      "id": "i14",
+      "name": "water"
+    },
+    {
+      "id": "i15",
+      "name": "zure room"
+    }
+  ],
+  "bringIngredients": {
+    "v": 1,
+    "iterations": 1000,
+    "salt": "Du29mswWtkgrAFkw64OJAQ==",
+    "iv": "X+uWX2yROQ2/YQlD",
+    "data": "D0Q3V5mCvFpU7UDjCM21+LF8WBB4ya8Fq/ojfg2a3X6VXd01i7kdMIDqC8r+OW9WzgfsYQvoeQx43DPlAN5bBwdrWp2r0377phHOexg03xjanbpRtoDEVhr3ubd/SNDopVQSF/7Q6ZnBGlhIDc+vmORyUZN/6lGHHQTJs08b665QthImsEhZEvGY6BrIJtLK7ODSzvKS6z4TI7AbhB0hcD/MnzoCIjpijkJmlBn4mkihQ4jERBYtOh8OhEIjC4O5AQH0R1RPaDNAPUTt8kuBOOb8WPK4dsUJNGaQLn38p2koBqzytWbwb4ymERMho//Z61M9FXF09Q+/NEXprM9FOw9fS8YYqkge7uiI3fgCKq1vCCAm7uxO5TpVmroq4XM70eP3ZE2aUu7X+i9Z90byOl+eYSS3AnclmzCUbAFavQekC4o55DvLBO4Uzw+UoSzjgbL8dgV4ZagK2VkETxv1v3k+XvhzmmgSUD5o3kZ+eu8lTbdhUoBqVHXenjL8CL1yfANWnMYA9lWXb+9A9b/6Ef+ZTX4CQIeYmhig4xw6924lZnZm4ruI3YK1G8BVskCMxB+bT7TfX/yi16c8OBqP558k/hfq2IsPUkPzprFqLtpdxpG9a54FWCUOeLkH697Zdf76zueWW0saeyr93UUsMWyl3jxaa2iIFEk/s0DBZG9OkprSKs8LMi3J0pTEZkJsttj10+LjYOaFykz/smJFvGyJYdQqlGlYPVrmWnT+YLgitDSCVz1QcioVKQRKUCa0YcFRts5VmegOFSGZzY2zgs9JdLozCX/9PucTp0TdNQjUo5XQVALgSSYOrshgRmJlkhGSp+7qO1wh47GaCmMEvpNLy5DPkCiYsoIDzG9QGeJt4qDlkW4P/2Zsg8Awv3Msb3al2xJ5GmH+3beqgNEM0ZFvQ6XMhgEfbTT+0ypiulgrViJqLN3aaYCeHV2eXXs8Q7e9DX4mx6Mktdy8eZZcidVKPQDFngE2+Dx7ToYKmuUxHYwdsCAiL2Q7sNVGbejh4lJa0UKbzMb6iUu8TzzGzxwAJpnQEaMNebKRIQTlrJrYjJCA/7MQ5ww="
+  },
   "locked": {
     "v": 1,
     "iterations": 250000,
