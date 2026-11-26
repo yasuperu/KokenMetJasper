@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.2bbf489a.css",
-    "main.js": "/static/js/main.26c024e7.js",
-    "static/js/846.3c51556b.chunk.js": "/static/js/846.3c51556b.chunk.js",
+    "main.css": "/static/css/main.a7360c3e.css",
+    "main.js": "/static/js/main.206de9de.js",
+    "static/js/846.5060bb1e.chunk.js": "/static/js/846.5060bb1e.chunk.js",
     "static/media/fraunces-latin-full-normal.woff2": "/static/media/fraunces-latin-full-normal.4e5db5e80eb27f260ed3.woff2",
     "static/media/fraunces-latin-ext-full-normal.woff2": "/static/media/fraunces-latin-ext-full-normal.587cc2e45c55dd475854.woff2",
     "static/media/inter-latin-ext-wght-normal.woff2": "/static/media/inter-latin-ext-wght-normal.8bff79fbfaa8b8167a0b.woff2",
@@ -14,12 +14,12 @@
     "static/media/inter-greek-ext-wght-normal.woff2": "/static/media/inter-greek-ext-wght-normal.f4df85d151e5ee39bc2b.woff2",
     "static/media/inter-vietnamese-wght-normal.woff2": "/static/media/inter-vietnamese-wght-normal.ab4bb8dcda024fe6eff2.woff2",
     "index.html": "/index.html",
-    "main.2bbf489a.css.map": "/static/css/main.2bbf489a.css.map",
-    "main.26c024e7.js.map": "/static/js/main.26c024e7.js.map",
-    "846.3c51556b.chunk.js.map": "/static/js/846.3c51556b.chunk.js.map"
+    "main.a7360c3e.css.map": "/static/css/main.a7360c3e.css.map",
+    "main.206de9de.js.map": "/static/js/main.206de9de.js.map",
+    "846.5060bb1e.chunk.js.map": "/static/js/846.5060bb1e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2bbf489a.css",
-    "static/js/main.26c024e7.js"
+    "static/css/main.a7360c3e.css",
+    "static/js/main.206de9de.js"
   ]
 }
