@@ -1,9 +1,11 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import recipes from "../data/recipes";
 import ServingsSelector from "../components/ServingsSelector";
 import RecipeContent from "../components/RecipeContent";
 import LockedContent from "../components/LockedContent";
+import LockedSteps from "../components/LockedSteps";
+import { shuffled } from "../utils/publicIngredients";
 import SourceNote from "../components/SourceNote";
 import { checkPassword, decryptJSON } from "../utils/crypto";
 import StepsGate from "../components/StepsGate";
@@ -23,9 +25,24 @@ function RecipePage() {
 
   const [servings, setServings] = useState(recipe ? recipe.servings : 1);
   const [printPhoto, setPrintPhoto] = useState(false);
-  const [content, setContent] = useState(
-    recipe && !recipe.locked ? { ingredients: recipe.ingredients, instructions: recipe.instructions || [] } : null
-  );
+  // Kookboekrecepten: ingrediënten openbaar (als ze erin staan), bereiding versleuteld
+  const publicContent = (r) =>
+    !r ? null
+    : !r.locked ? { ingredients: r.ingredients, instructions: r.instructions || [] }
+    : r.ingredients ? { ingredients: r.ingredients, instructions: [] }
+    : null;
+  const [content, setContent] = useState(() => publicContent(recipe));
+  const [bookOpen, setBookOpen] = useState(false);
+  // Niet ontgrendeld: openbare ingrediënten elke keer in een andere volgorde
+  // (pas na het laden, zodat de vooraf gebouwde HTML gelijk blijft)
+  const showShuffled = useCallback(() => {
+    if (recipe?.locked && recipe.ingredients) {
+      setContent({ ingredients: shuffled(recipe.ingredients), instructions: [] });
+    }
+  }, [recipe]);
+  useEffect(() => {
+    if (!getPassword()) showShuffled();
+  }, [showShuffled]);
   const gated = isGated(recipe);
   const [stepsVisible, setStepsVisible] = useState(!gated);
   useEffect(() => {
@@ -96,13 +113,17 @@ function RecipePage() {
     let cancelled = false;
     setBusy(true);
     decryptJSON(recipe.locked, saved)
-      .then((data) => !cancelled && setContent(data))
-      .catch(() => {})
+      .then((data) => {
+        if (cancelled) return;
+        setContent(data);
+        setBookOpen(true);
+      })
+      .catch(() => !cancelled && showShuffled())
       .finally(() => !cancelled && setBusy(false));
     return () => {
       cancelled = true;
     };
-  }, [recipe]);
+  }, [recipe, showShuffled]);
 
   // Afgeschermde bereiding: met een onthouden wachtwoord meteen tonen
   useEffect(() => {
@@ -138,6 +159,7 @@ function RecipePage() {
       const data = await decryptJSON(recipe.locked, password);
       setPassword(password, remember);
       setContent(data);
+      setBookOpen(true);
       setLoggedIn(true);
     } catch {
       setUnlockError("Dat wachtwoord klopt niet.");
@@ -148,7 +170,9 @@ function RecipePage() {
 
   function lock() {
     forgetPassword();
-    setContent(null);
+    setContent(publicContent(recipe));
+    showShuffled();
+    setBookOpen(false);
   }
 
   if (!recipe) return <NotFound />;
@@ -157,6 +181,9 @@ function RecipePage() {
   const times = recipeTimes(recipe);
   const image = imageUrl(recipe.image);
   const unlocked = Boolean(content);
+  const stepsKnown = recipe.locked ? bookOpen : stepsReady;
+  // Bring! leest de openbare pagina; kan dus als de ingrediënten openbaar zijn
+  const bringable = !recipe.locked || Boolean(recipe.ingredients);
 
   return (
     <main className={printPhoto ? "recipe-page print-photo" : "recipe-page"}>
@@ -183,7 +210,7 @@ function RecipePage() {
           {unlocked && (
             <p className="recipe-meta">
               {content.ingredients.length} ingrediënten
-              {stepsReady && <> · {content.instructions.length} stappen</>}
+              {stepsKnown && <> · {content.instructions.length} stappen</>}
               <span className="print-only"> · voor {servings} {servings === 1 ? "persoon" : "personen"}</span>
             </p>
           )}
@@ -204,7 +231,7 @@ function RecipePage() {
                     Foto mee printen
                   </label>
                 )}
-                {loggedIn && !recipe.locked && (
+                {loggedIn && bringable && (
                   <a
                     className="btn-print"
                     href={bringDeeplinkForPage(recipe, servings)}
@@ -217,7 +244,7 @@ function RecipePage() {
                     Naar Bring!
                   </a>
                 )}
-                {loggedIn && recipe.locked && (
+                {loggedIn && !bringable && (
                   <button type="button" className="btn-print" onClick={copyShopping}>
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M4 5h2l2 10h10l2-7H7.5M10 19.5a1 1 0 100-.01M17 19.5a1 1 0 100-.01" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -225,7 +252,7 @@ function RecipePage() {
                     {copied ? "Gekopieerd!" : "Kopieer boodschappen"}
                   </button>
                 )}
-                {recipe.locked && (
+                {recipe.locked && bookOpen && (
                   <button type="button" className="btn-link" onClick={lock}>
                     Vergrendel
                   </button>
@@ -260,7 +287,9 @@ function RecipePage() {
           servings={servings}
           factor={factor}
           stepsReplacement={
-            stepsVisible && stepsReady ? null : (
+            recipe.locked && !bookOpen ? (
+              <LockedSteps source={recipe.source} onUnlock={unlock} error={unlockError} busy={busy} />
+            ) : stepsVisible && stepsReady ? null : (
               <StepsGate
                 source={recipe.source}
                 onVisit={visitPost}

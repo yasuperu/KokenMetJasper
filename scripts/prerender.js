@@ -22,7 +22,7 @@ const babel = require("@babel/core");
 
 const ROOT = path.join(__dirname, "..");
 const SRC = path.join(ROOT, "src") + path.sep;
-const BUILD = path.join(ROOT, "build");
+const BUILD = process.env.BUILD_PATH ? path.resolve(process.env.BUILD_PATH) : path.join(ROOT, "build");
 
 // De site draait op de hoofdmap van het domein
 process.env.PUBLIC_URL = "";

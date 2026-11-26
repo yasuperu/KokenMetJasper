@@ -177,3 +177,18 @@ test("bringLine: boodschappenlijst zoals in de winkel", () => {
   expect(bringLine({ name: "watermeloen", amount: 0.5 }, 1)).toBe("1 watermeloen");
   expect(bringLine({ name: "maïs", amount: 1, unit: "blik" }, 2)).toBe("2 blikken maïs");
 });
+
+test("publicIngredients: geen groepen of toelichtingen, neutrale volgorde", () => {
+  const { publicIngredients, shuffled } = require("./publicIngredients");
+  const pub = publicIngredients([
+    { id: "olie", name: "olijfolie", amount: 4, unit: "el", note: "om te roosteren" },
+    { id: "mayoDressing", name: "mayonaise", amount: 2, unit: "el", group: "Sesamdressing" },
+    { id: "aubergine", name: "aubergine", amount: 2, note: "groot" },
+  ]);
+  expect(pub).toEqual([
+    { id: "i1", name: "aubergine", amount: 2 },
+    { id: "i2", name: "mayonaise", amount: 2, unit: "el" },
+    { id: "i3", name: "olijfolie", amount: 4, unit: "el" },
+  ]);
+  expect(shuffled(pub).map((i) => i.id).sort()).toEqual(["i1", "i2", "i3"]);
+});

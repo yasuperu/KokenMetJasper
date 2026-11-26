@@ -96,8 +96,8 @@ export function recipeJsonLd(recipe) {
     ],
   };
 
-  // Kookboekrecepten: geen ingrediënten openbaar, dus geen Recipe-schema
-  if (recipe.locked) {
+  // Kookboekrecepten zonder openbare ingrediënten: geen Recipe-schema
+  if (recipe.locked && !recipe.ingredients) {
     return { "@context": "https://schema.org", "@graph": [{ "@type": "WebPage", name: recipe.title, url, description: recipeDescription(recipe) }, crumbs] };
   }
 
@@ -131,7 +131,7 @@ export function recipeJsonLd(recipe) {
     data.isBasedOn = recipe.source.url;
   }
   // Afgeschermde bereiding staat niet direct zichtbaar op de pagina, dus ook niet in de gegevens voor Google
-  if (isGated(recipe)) delete data.recipeInstructions;
+  if (isGated(recipe) || recipe.locked) delete data.recipeInstructions;
   return { "@context": "https://schema.org", "@graph": [data, crumbs] };
 }
 

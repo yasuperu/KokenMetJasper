@@ -10,6 +10,7 @@ import useSeo from "../hooks/useSeo";
 import { recipePath } from "../utils/seo";
 import { decryptSteps, encryptSteps } from "../utils/gate";
 import { cleanUrl } from "../utils/source";
+import { publicIngredients } from "../utils/publicIngredients";
 
 import { readToken, TOKEN_KEY } from "../utils/githubToken";
 
@@ -368,6 +369,8 @@ function Admin() {
 
       if (draft.sourceType === "book") {
         recipe.source = { type: "book", ...pick(["book", "author", "page", "url"]), ...adaptation() };
+        // Ingrediënten openbaar (ook voor Bring! en Google), bereiding versleuteld
+        recipe.ingredients = publicIngredients(ingredients);
         recipe.locked = await encryptJSON({ ingredients, instructions }, bookPassword);
       } else {
         const gate = draft.sourceType === "social" && draft.gate;
@@ -417,6 +420,35 @@ function Admin() {
     } catch (err) {
       setMessage(`Verwijderen mislukt: ${err.message}`);
     }
+  }
+
+  /* ---- kookboekrecepten: ingrediënten openbaar maken ---- */
+
+  const oldBookRecipes = (recipes || []).filter((e) => e.data.locked && !e.data.ingredients);
+  const [converting, setConverting] = useState(false);
+
+  async function publishBookIngredients() {
+    setConverting(true);
+    setMessage("");
+    let done = 0;
+    try {
+      for (const entry of oldBookRecipes) {
+        const content = await decryptJSON(entry.data.locked, bookPassword);
+        const updated = {};
+        for (const [k, v] of Object.entries(entry.data)) {
+          if (k === "locked") updated.ingredients = publicIngredients(content.ingredients);
+          updated[k] = v;
+        }
+        await client.writeJSON(entry.path, updated, `Ingrediënten openbaar: ${entry.data.title}`, entry.sha);
+        done++;
+      }
+      setMessage(`Ingrediënten van ${done} kookboekrecept(en) staan nu openbaar. De bereiding blijft versleuteld.`);
+      setDeployTrigger((n) => n + 1);
+      await load();
+    } catch (err) {
+      setMessage(`Omzetten mislukt na ${done} recept(en): ${err.message}`);
+    }
+    setConverting(false);
   }
 
   /* ---- weergave ---- */
@@ -472,6 +504,19 @@ function Admin() {
 
           {lock && (
             <BookPasswordPanel lock={lock} password={bookPassword} onUnlocked={setBookPassword} onCreate={createLock} />
+          )}
+
+          {bookPassword && oldBookRecipes.length > 0 && (
+            <div className="panel panel-compact">
+              <h2>Ingrediënten van kookboekrecepten openbaar maken</h2>
+              <p className="hint">
+                {oldBookRecipes.length} kookboekrecept(en) hebben nog geheel versleutelde ingrediënten. Maak ze
+                openbaar, zodat bezoekers ze zien en &ldquo;Naar Bring!&rdquo; werkt. De bereiding blijft versleuteld.
+              </p>
+              <button type="button" className="btn-primary" onClick={publishBookIngredients} disabled={converting}>
+                {converting ? "Bezig…" : `Omzetten (${oldBookRecipes.length})`}
+              </button>
+            </div>
           )}
 
           {loadError && <div className="notice notice-error">{loadError}</div>}
