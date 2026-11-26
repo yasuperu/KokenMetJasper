@@ -179,7 +179,7 @@ test("bringLine: boodschappenlijst zoals in de winkel", () => {
 });
 
 test("publicIngredients: geen groepen of toelichtingen, neutrale volgorde", () => {
-  const { publicIngredients, shuffled } = require("./publicIngredients");
+  const { publicIngredients } = require("./publicIngredients");
   const pub = publicIngredients([
     { id: "olie", name: "olijfolie", amount: 4, unit: "el", note: "om te roosteren" },
     { id: "mayoDressing", name: "mayonaise", amount: 2, unit: "el", group: "Sesamdressing" },
@@ -190,5 +190,4 @@ test("publicIngredients: geen groepen of toelichtingen, neutrale volgorde", () =
     { id: "i2", name: "mayonaise", amount: 2, unit: "el" },
     { id: "i3", name: "olijfolie", amount: 4, unit: "el" },
   ]);
-  expect(shuffled(pub).map((i) => i.id).sort()).toEqual(["i1", "i2", "i3"]);
 });

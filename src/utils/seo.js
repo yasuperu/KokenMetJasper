@@ -96,8 +96,8 @@ export function recipeJsonLd(recipe) {
     ],
   };
 
-  // Kookboekrecepten zonder openbare ingrediënten: geen Recipe-schema
-  if (recipe.locked && !recipe.ingredients) {
+  // Kookboekrecepten: bezoekers zien geen ingrediënten, dus ook geen Recipe-schema
+  if (recipe.locked) {
     return { "@context": "https://schema.org", "@graph": [{ "@type": "WebPage", name: recipe.title, url, description: recipeDescription(recipe) }, crumbs] };
   }
 

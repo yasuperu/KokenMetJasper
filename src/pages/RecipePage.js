@@ -1,11 +1,9 @@
 import { Link, useParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import recipes from "../data/recipes";
 import ServingsSelector from "../components/ServingsSelector";
 import RecipeContent from "../components/RecipeContent";
 import LockedContent from "../components/LockedContent";
-import LockedSteps from "../components/LockedSteps";
-import { shuffled } from "../utils/publicIngredients";
 import SourceNote from "../components/SourceNote";
 import { checkPassword, decryptJSON } from "../utils/crypto";
 import StepsGate from "../components/StepsGate";
@@ -25,24 +23,11 @@ function RecipePage() {
 
   const [servings, setServings] = useState(recipe ? recipe.servings : 1);
   const [printPhoto, setPrintPhoto] = useState(false);
-  // Kookboekrecepten: ingrediënten openbaar (als ze erin staan), bereiding versleuteld
-  const publicContent = (r) =>
-    !r ? null
-    : !r.locked ? { ingredients: r.ingredients, instructions: r.instructions || [] }
-    : r.ingredients ? { ingredients: r.ingredients, instructions: [] }
-    : null;
-  const [content, setContent] = useState(() => publicContent(recipe));
+  // Kookboekrecepten: zonder wachtwoord is alles vergrendeld (ingrediënten en bereiding)
+  const [content, setContent] = useState(
+    recipe && !recipe.locked ? { ingredients: recipe.ingredients, instructions: recipe.instructions || [] } : null
+  );
   const [bookOpen, setBookOpen] = useState(false);
-  // Niet ontgrendeld: openbare ingrediënten elke keer in een andere volgorde
-  // (pas na het laden, zodat de vooraf gebouwde HTML gelijk blijft)
-  const showShuffled = useCallback(() => {
-    if (recipe?.locked && recipe.ingredients) {
-      setContent({ ingredients: shuffled(recipe.ingredients), instructions: [] });
-    }
-  }, [recipe]);
-  useEffect(() => {
-    if (!getPassword()) showShuffled();
-  }, [showShuffled]);
   const gated = isGated(recipe);
   const [stepsVisible, setStepsVisible] = useState(!gated);
   useEffect(() => {
@@ -118,12 +103,12 @@ function RecipePage() {
         setContent(data);
         setBookOpen(true);
       })
-      .catch(() => !cancelled && showShuffled())
+      .catch(() => {})
       .finally(() => !cancelled && setBusy(false));
     return () => {
       cancelled = true;
     };
-  }, [recipe, showShuffled]);
+  }, [recipe]);
 
   // Afgeschermde bereiding: met een onthouden wachtwoord meteen tonen
   useEffect(() => {
@@ -170,8 +155,7 @@ function RecipePage() {
 
   function lock() {
     forgetPassword();
-    setContent(publicContent(recipe));
-    showShuffled();
+    setContent(null);
     setBookOpen(false);
   }
 
@@ -182,8 +166,6 @@ function RecipePage() {
   const image = imageUrl(recipe.image);
   const unlocked = Boolean(content);
   const stepsKnown = recipe.locked ? bookOpen : stepsReady;
-  // Kookboekrecept zonder wachtwoord: alleen de namen van de ingrediënten
-  const namesOnly = Boolean(recipe.locked) && !bookOpen;
   // Bring! leest een openbare pagina: de receptpagina, of bij kookboekrecepten
   // de verborgen Bring!-pagina met hoeveelheden
   const bringable = !recipe.locked || Boolean(recipe.bringIngredients);
@@ -221,7 +203,7 @@ function RecipePage() {
 
           {unlocked && (
             <div className="recipe-tools no-print">
-              {!namesOnly && <ServingsSelector servings={servings} setServings={setServings} />}
+              <ServingsSelector servings={servings} setServings={setServings} />
               <div className="print-tools">
                 <button type="button" className="btn-print" onClick={() => window.print()}>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -290,11 +272,8 @@ function RecipePage() {
           instructions={content.instructions}
           servings={servings}
           factor={factor}
-          namesOnly={namesOnly}
           stepsReplacement={
-            recipe.locked && !bookOpen ? (
-              <LockedSteps source={recipe.source} onUnlock={unlock} error={unlockError} busy={busy} />
-            ) : stepsVisible && stepsReady ? null : (
+            stepsVisible && stepsReady ? null : (
               <StepsGate
                 source={recipe.source}
                 onVisit={visitPost}

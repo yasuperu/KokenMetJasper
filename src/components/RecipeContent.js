@@ -23,7 +23,7 @@ export function renderInstruction(text, ingredientsById, factor) {
   });
 }
 
-function RecipeContent({ ingredients, instructions, servings, factor, stepsReplacement, namesOnly }) {
+function RecipeContent({ ingredients, instructions, servings, factor, stepsReplacement }) {
   const ingredientsById = Object.fromEntries(ingredients.map((i) => [i.id, i]));
 
   return (
@@ -32,22 +32,11 @@ function RecipeContent({ ingredients, instructions, servings, factor, stepsRepla
         <h2>
           <Leaf className="h2-icon" /> Ingrediënten
         </h2>
-        {namesOnly ? (
-          <p className="ingredients-for">hoeveelheden met wachtwoord</p>
-        ) : (
-          <p className="ingredients-for">
-            voor {servings} {servings === 1 ? "persoon" : "personen"}
-          </p>
-        )}
+        <p className="ingredients-for">
+          voor {servings} {servings === 1 ? "persoon" : "personen"}
+        </p>
         <ul>
           {ingredients.map((ingredient, index) => {
-            if (namesOnly) {
-              return (
-                <li key={ingredient.id} className="name-only">
-                  <span className="ing-name">{ingredient.name}</span>
-                </li>
-              );
-            }
             const p = ingredientParts(ingredient, factor);
             const group = ingredient.group || "";
             const newGroup = group && group !== (ingredients[index - 1]?.group || "");

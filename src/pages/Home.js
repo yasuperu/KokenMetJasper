@@ -32,7 +32,8 @@ function Home() {
         recipe.source?.creator,
         recipe.description,
         ...(recipe.tags || []),
-        ...(recipe.ingredients || []).map((i) => i.name),
+        // kookboekrecepten niet op ingrediënt, dat zou verraden wat erin zit
+        ...(recipe.locked ? [] : recipe.ingredients || []).map((i) => i.name),
       ].join(" ");
       return normalize(haystack).includes(query);
     })

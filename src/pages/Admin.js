@@ -451,7 +451,7 @@ function Admin() {
         done++;
       }
       setMessage(
-        `Bij ${done} kookboekrecept(en) staan nu de namen van de ingrediënten openbaar en werkt "Naar Bring!". Hoeveelheden en bereiding zie je met het wachtwoord.`
+        `Bij ${done} kookboekrecept(en) werkt nu "Naar Bring!". Voor bezoekers blijft alles vergrendeld.`
       );
       setDeployTrigger((n) => n + 1);
       await load();
@@ -520,9 +520,8 @@ function Admin() {
             <div className="panel panel-compact">
               <h2>Kookboekrecepten bijwerken</h2>
               <p className="hint">
-                {oldBookRecipes.length} kookboekrecept(en) zijn nog in de oude vorm. Zet ze om: bezoekers zien dan de
-                namen van de ingrediënten (zonder hoeveelheden) en &ldquo;Naar Bring!&rdquo; werkt. Hoeveelheden en
-                bereiding blijven achter het wachtwoord.
+                {oldBookRecipes.length} kookboekrecept(en) zijn nog in de oude vorm. Zet ze om, dan werkt
+                &ldquo;Naar Bring!&rdquo; ook bij deze recepten. Voor bezoekers blijft alles vergrendeld.
               </p>
               <button type="button" className="btn-primary" onClick={publishBookIngredients} disabled={converting}>
                 {converting ? "Bezig…" : `Omzetten (${oldBookRecipes.length})`}

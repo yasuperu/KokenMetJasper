@@ -22,7 +22,8 @@ Heb je een recept van iemand anders zelf aangepast? Vink dan *Ik heb het recept 
 Vink *Dit recept komt uit een kookboek* aan en vul titel, auteur en pagina in.
 
 - De ingrediënten en bereiding worden **in je browser versleuteld** (AES-256-GCM, sleutel afgeleid van je wachtwoord) voordat ze worden opgeslagen. In de repo en op de site staat alleen versleutelde tekst.
-- Bezoekers zien titel, foto, bronvermelding en alleen de **namen** van de ingrediënten: zonder hoeveelheden, groepen of toelichtingen, elke keer in een willekeurige volgorde. Met het wachtwoord zie je het volledige recept.
+- Bezoekers zien titel, foto en bronvermelding; ingrediënten en bereiding zijn vervaagd met een slot. Met het wachtwoord zie je het volledige recept. Zoeken op de homepage kijkt bij kookboekrecepten niet naar ingrediënten.
+- In de repo staan de namen van de ingrediënten neutraal (zonder hoeveelheden, groepen of toelichtingen, alfabetisch); ze worden op de site niet getoond.
 - **Naar Bring!** werkt ook bij kookboekrecepten. De hoeveelheden staan in de repo versleuteld met een sitesleutel (`bringIngredients`); `scripts/prerender.js` maakt daarmee per recept een niet-gelinkte, niet-geïndexeerde pagina (`/bring/<code>/`) die Bring! inleest. Dat is bewust schijnveiligheid: de sleutel zit in de site. De bereiding is wél echt versleuteld met het wachtwoord.
 - Oudere kookboekrecepten zet je in het beheer om met *Kookboekrecepten bijwerken*.
 - Alle boekrecepten gebruiken hetzelfde wachtwoord; `src/data/lock.json` controleert dat. **Ben je het wachtwoord kwijt, dan zijn die recepten niet meer te lezen.**
