@@ -10,6 +10,8 @@ function ShoppingPanel({ recipe, ingredients, selected, setSelected, servings, f
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState(null); // { type, text, link }
 
+  const hasToken = Boolean(readToken());
+  const pageLink = recipe.locked ? null : bringDeeplinkForPage(recipe, servings);
   const chosen = ingredients.filter((i) => selected.has(i.id));
   const lines = chosen.map((i) => bringLine(i, factor));
   const canShare = typeof navigator !== "undefined" && typeof navigator.share === "function";
@@ -69,9 +71,17 @@ function ShoppingPanel({ recipe, ingredients, selected, setSelected, servings, f
         </button>
       </div>
       <div className="shopping-actions">
-        <button type="button" className="btn-primary" onClick={toBring} disabled={busy || !lines.length}>
-          {busy ? "Bezig…" : `Naar Bring! (${lines.length})`}
-        </button>
+        {hasToken ? (
+          <button type="button" className="btn-primary" onClick={toBring} disabled={busy || !lines.length}>
+            {busy ? "Bezig…" : `Naar Bring! (${lines.length})`}
+          </button>
+        ) : (
+          pageLink && (
+            <a className="btn-primary" href={pageLink} target="_blank" rel="noopener noreferrer">
+              Naar Bring!
+            </a>
+          )
+        )}
         <button type="button" className="btn-secondary" onClick={copy} disabled={!lines.length}>
           Kopieer lijst
         </button>
@@ -81,10 +91,22 @@ function ShoppingPanel({ recipe, ingredients, selected, setSelected, servings, f
           </button>
         )}
       </div>
-      {!recipe.locked && (
+      {!hasToken && pageLink && (
+        <p className="hint">
+          Bring! krijgt het hele recept voor {servings} {servings === 1 ? "persoon" : "personen"}; kies daar welke
+          ingrediënten je wilt. Je selectie hier gebruik je met kopiëren of delen.
+        </p>
+      )}
+      {!hasToken && !pageLink && (
+        <p className="hint">
+          De ingrediënten van kookboekrecepten staan niet openbaar, dus Bring! kan ze niet zelf ophalen. Kopieer of
+          deel je selectie en plak die in Bring!.
+        </p>
+      )}
+      {hasToken && pageLink && (
         <p className="hint">
           Werkt het niet?{" "}
-          <a href={bringDeeplinkForPage(recipe, servings)} target="_blank" rel="noopener noreferrer">
+          <a href={pageLink} target="_blank" rel="noopener noreferrer">
             Stuur het hele recept naar Bring!
           </a>{" "}
           en kies daar welke ingrediënten je wilt.

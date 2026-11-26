@@ -33,11 +33,16 @@ function RecipePage() {
   }, [gated, recipe]);
   const [gateError, setGateError] = useState("");
 
-  // Boodschappen: alleen voor wie via het beheer met GitHub is ingelogd
+  // Boodschappen: alleen als het wachtwoord op dit apparaat is onthouden
+  // (of als je via het beheer met GitHub bent ingelogd)
   const [loggedIn, setLoggedIn] = useState(false);
   const [shopping, setShopping] = useState(false);
   const [selected, setSelected] = useState(() => new Set());
-  useEffect(() => setLoggedIn(Boolean(readToken())), []);
+  useEffect(() => {
+    if (readToken()) return setLoggedIn(true);
+    const saved = getPassword();
+    if (saved) checkPassword(passwordLock, saved).then((ok) => ok && setLoggedIn(true));
+  }, []);
 
   function openShopping() {
     setSelected(new Set((content?.ingredients || []).map((i) => i.id)));
@@ -124,6 +129,7 @@ function RecipePage() {
     if (ok) {
       setPassword(password, true);
       setStepsVisible(true);
+      setLoggedIn(true);
     } else {
       setGateError("Dat wachtwoord klopt niet.");
     }
@@ -136,6 +142,7 @@ function RecipePage() {
       const data = await decryptJSON(recipe.locked, password);
       setPassword(password, remember);
       setContent(data);
+      setLoggedIn(true);
     } catch {
       setUnlockError("Dat wachtwoord klopt niet.");
     } finally {
