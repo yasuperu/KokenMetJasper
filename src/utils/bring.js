@@ -45,3 +45,31 @@ export function bringDeeplinkForPage(recipe, servings) {
   });
   return `${DEEPLINK}?${params}`;
 }
+
+/*
+  Kookboekrecepten: op de receptpagina staan alleen de namen van de
+  ingrediënten. Bring! krijgt een eigen, niet gelinkte pagina met de
+  hoeveelheden (gemaakt door scripts/prerender.js). Het adres is lastig te
+  raden, maar niet geheim: schijnveiligheid, net als de sitesleutel.
+*/
+const BRING_SALT = "kmj-bring-2026";
+
+export function bringPagePath(recipeId) {
+  let h = 0x811c9dc5;
+  for (const c of `${BRING_SALT}:${recipeId}`) {
+    h ^= c.charCodeAt(0);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return `/bring/${h.toString(36)}/`;
+}
+
+/** Kookboekrecept naar Bring!, via de verborgen pagina */
+export function bringDeeplinkForBook(recipe, servings) {
+  const params = new URLSearchParams({
+    url: absoluteUrl(bringPagePath(recipe.id)),
+    source: "web",
+    baseQuantity: String(recipe.servings),
+    requestedQuantity: String(servings),
+  });
+  return `${DEEPLINK}?${params}`;
+}

@@ -22,6 +22,11 @@ export function decryptSteps(payload) {
   return decryptJSON(payload, SITE_KEY);
 }
 
+// Zelfde sitesleutel voor andere "slot op de deur"-gegevens, zoals de
+// hoeveelheden van kookboekrecepten voor Bring!
+export const encryptWithSiteKey = encryptSteps;
+export const decryptWithSiteKey = decryptSteps;
+
 const KEY = "kmj-post-bezocht";
 
 export function isGated(recipe) {

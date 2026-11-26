@@ -9,7 +9,7 @@ import { shuffled } from "../utils/publicIngredients";
 import SourceNote from "../components/SourceNote";
 import { checkPassword, decryptJSON } from "../utils/crypto";
 import StepsGate from "../components/StepsGate";
-import { bringDeeplinkForPage, bringLine } from "../utils/bring";
+import { bringDeeplinkForBook, bringDeeplinkForPage, bringLine } from "../utils/bring";
 import { readToken } from "../utils/githubToken";
 import { decryptSteps, hasVisitedPost, isGated, markPostVisited } from "../utils/gate";
 import passwordLock from "../data/lock.json";
@@ -182,8 +182,12 @@ function RecipePage() {
   const image = imageUrl(recipe.image);
   const unlocked = Boolean(content);
   const stepsKnown = recipe.locked ? bookOpen : stepsReady;
-  // Bring! leest de openbare pagina; kan dus als de ingrediënten openbaar zijn
-  const bringable = !recipe.locked || Boolean(recipe.ingredients);
+  // Kookboekrecept zonder wachtwoord: alleen de namen van de ingrediënten
+  const namesOnly = Boolean(recipe.locked) && !bookOpen;
+  // Bring! leest een openbare pagina: de receptpagina, of bij kookboekrecepten
+  // de verborgen Bring!-pagina met hoeveelheden
+  const bringable = !recipe.locked || Boolean(recipe.bringIngredients);
+  const bringHref = recipe.locked ? bringDeeplinkForBook(recipe, servings) : bringDeeplinkForPage(recipe, servings);
 
   return (
     <main className={printPhoto ? "recipe-page print-photo" : "recipe-page"}>
@@ -217,7 +221,7 @@ function RecipePage() {
 
           {unlocked && (
             <div className="recipe-tools no-print">
-              <ServingsSelector servings={servings} setServings={setServings} />
+              {!namesOnly && <ServingsSelector servings={servings} setServings={setServings} />}
               <div className="print-tools">
                 <button type="button" className="btn-print" onClick={() => window.print()}>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -234,7 +238,7 @@ function RecipePage() {
                 {loggedIn && bringable && (
                   <a
                     className="btn-print"
-                    href={bringDeeplinkForPage(recipe, servings)}
+                    href={bringHref}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -286,6 +290,7 @@ function RecipePage() {
           instructions={content.instructions}
           servings={servings}
           factor={factor}
+          namesOnly={namesOnly}
           stepsReplacement={
             recipe.locked && !bookOpen ? (
               <LockedSteps source={recipe.source} onUnlock={unlock} error={unlockError} busy={busy} />

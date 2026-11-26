@@ -1804,6 +1804,11 @@ code {
   color: var(--ink-soft);
 }
 
+/* kookboekrecept zonder wachtwoord: alleen namen */
+.ingredients li.name-only {
+  display: block;
+}
+
 /* =============================================================
    PRINT
    Eén nette A4 met de hoeveelheden voor het gekozen aantal

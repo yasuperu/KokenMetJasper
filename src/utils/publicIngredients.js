@@ -21,6 +21,11 @@ export function publicIngredients(ingredients) {
     .map((ing, i) => ({ id: `i${i + 1}`, ...ing }));
 }
 
+/** Alleen de namen (voor bezoekers zonder wachtwoord) */
+export function ingredientNames(neutral) {
+  return (neutral || []).map(({ id, name }) => ({ id, name }));
+}
+
 /** Willekeurige volgorde (Fisher–Yates), elke keer anders */
 export function shuffled(list) {
   const out = [...list];

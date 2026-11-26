@@ -402,7 +402,7 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
           {[
             ["own", "Eigen recept", "Gewoon openbaar op de site."],
             ["social", "Social media of website", "Openbaar, met een link naar het origineel."],
-            ["book", "Uit een kookboek", "Ingrediënten openbaar, bereiding versleuteld."],
+            ["book", "Uit een kookboek", "Alleen namen openbaar, de rest met wachtwoord."],
           ].map(([value, label, help]) => (
             <label key={value} className={draft.sourceType === value ? "source-option active" : "source-option"}>
               <input
@@ -476,8 +476,9 @@ function RecipeEditor({ draft, setDraft, onSave, onCancel, saving, bookUnlocked,
               </label>
             </div>
             <p className="hint">
-              Openbaar zichtbaar: titel, categorie, tags, foto, omschrijving, bronvermelding en de
-              ingrediënten. De bereiding wordt met je wachtwoord versleuteld voordat hij wordt opgeslagen.
+              Openbaar zichtbaar: titel, categorie, tags, foto, omschrijving, bronvermelding en de namen van de
+              ingrediënten (zonder hoeveelheden, in willekeurige volgorde). Hoeveelheden en bereiding zie je met
+              je wachtwoord.
             </p>
           </>
         )}

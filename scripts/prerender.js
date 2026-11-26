@@ -171,4 +171,40 @@ write(
     .join("\n")}\n</urlset>\n`
 );
 
-console.log(`Prerender: homepage, ${recipes.length} recepten, 404 en sitemap geschreven.`);
+/* ---------------- verborgen Bring!-pagina's (kookboekrecepten) ---------------- */
+// Niet gelinkt en noindex. Bevat de hoeveelheden, ontsleuteld met de
+// sitesleutel, zodat Bring! (dat geen JavaScript draait) ze kan inlezen.
+
+const { decryptWithSiteKey } = require(path.join(SRC, "utils/gate.js"));
+const { bringPagePath } = require(path.join(SRC, "utils/bring.js"));
+const { formatIngredient } = require(path.join(SRC, "utils/formatIngredient.js"));
+
+(async () => {
+  let bringPages = 0;
+  for (const r of recipes.filter((x) => x.bringIngredients)) {
+    const neutral = await decryptWithSiteKey(r.bringIngredients);
+    const lines = neutral.map((i) => formatIngredient(i, 1));
+    const ld = {
+      "@context": "https://schema.org",
+      "@type": "Recipe",
+      name: r.title,
+      image: [seo.absoluteImage(r.image)],
+      recipeYield: `${r.servings} personen`,
+      recipeIngredient: lines,
+    };
+    write(
+      `${bringPagePath(r.id).replace(/^\//, "")}index.html`,
+      `<!doctype html><html lang="nl"><head><meta charset="utf-8">` +
+        `<meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">` +
+        `<title>${esc(r.title)} – boodschappen</title>` +
+        `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>` +
+        `</head><body><h1>${esc(r.title)}</h1><p>Voor ${r.servings} personen.</p>` +
+        `<ul>${lines.map((l) => `<li>${esc(l)}</li>`).join("")}</ul></body></html>`
+    );
+    bringPages++;
+  }
+  console.log(`Prerender: homepage, ${recipes.length} recepten, ${bringPages} Bring!-pagina's, 404 en sitemap geschreven.`);
+})().catch((e) => {
+  console.error("Bring!-pagina's maken mislukt:", e.message);
+  process.exit(1);
+});

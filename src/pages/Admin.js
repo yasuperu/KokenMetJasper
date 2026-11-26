@@ -8,9 +8,9 @@ import { slugify } from "../utils/recipeTools";
 import RecipeEditor, { draftIngredients, recipeToDraft } from "../components/admin/RecipeEditor";
 import useSeo from "../hooks/useSeo";
 import { recipePath } from "../utils/seo";
-import { decryptSteps, encryptSteps } from "../utils/gate";
+import { decryptSteps, encryptSteps, encryptWithSiteKey } from "../utils/gate";
 import { cleanUrl } from "../utils/source";
-import { publicIngredients } from "../utils/publicIngredients";
+import { ingredientNames, publicIngredients } from "../utils/publicIngredients";
 
 import { readToken, TOKEN_KEY } from "../utils/githubToken";
 
@@ -369,8 +369,11 @@ function Admin() {
 
       if (draft.sourceType === "book") {
         recipe.source = { type: "book", ...pick(["book", "author", "page", "url"]), ...adaptation() };
-        // Ingrediënten openbaar (ook voor Bring! en Google), bereiding versleuteld
-        recipe.ingredients = publicIngredients(ingredients);
+        // Openbaar: alleen de namen (neutraal). Hoeveelheden voor Bring! met de
+        // sitesleutel; het volledige recept met je wachtwoord.
+        const neutral = publicIngredients(ingredients);
+        recipe.ingredients = ingredientNames(neutral);
+        recipe.bringIngredients = await encryptWithSiteKey(neutral);
         recipe.locked = await encryptJSON({ ingredients, instructions }, bookPassword);
       } else {
         const gate = draft.sourceType === "social" && draft.gate;
@@ -424,7 +427,7 @@ function Admin() {
 
   /* ---- kookboekrecepten: ingrediënten openbaar maken ---- */
 
-  const oldBookRecipes = (recipes || []).filter((e) => e.data.locked && !e.data.ingredients);
+  const oldBookRecipes = (recipes || []).filter((e) => e.data.locked && !e.data.bringIngredients);
   const [converting, setConverting] = useState(false);
 
   async function publishBookIngredients() {
@@ -434,15 +437,22 @@ function Admin() {
     try {
       for (const entry of oldBookRecipes) {
         const content = await decryptJSON(entry.data.locked, bookPassword);
+        const neutral = publicIngredients(content.ingredients);
         const updated = {};
         for (const [k, v] of Object.entries(entry.data)) {
-          if (k === "locked") updated.ingredients = publicIngredients(content.ingredients);
+          if (k === "ingredients" || k === "bringIngredients") continue;
+          if (k === "locked") {
+            updated.ingredients = ingredientNames(neutral);
+            updated.bringIngredients = await encryptWithSiteKey(neutral);
+          }
           updated[k] = v;
         }
         await client.writeJSON(entry.path, updated, `Ingrediënten openbaar: ${entry.data.title}`, entry.sha);
         done++;
       }
-      setMessage(`Ingrediënten van ${done} kookboekrecept(en) staan nu openbaar. De bereiding blijft versleuteld.`);
+      setMessage(
+        `Bij ${done} kookboekrecept(en) staan nu de namen van de ingrediënten openbaar en werkt "Naar Bring!". Hoeveelheden en bereiding zie je met het wachtwoord.`
+      );
       setDeployTrigger((n) => n + 1);
       await load();
     } catch (err) {
@@ -508,10 +518,11 @@ function Admin() {
 
           {bookPassword && oldBookRecipes.length > 0 && (
             <div className="panel panel-compact">
-              <h2>Ingrediënten van kookboekrecepten openbaar maken</h2>
+              <h2>Kookboekrecepten bijwerken</h2>
               <p className="hint">
-                {oldBookRecipes.length} kookboekrecept(en) hebben nog geheel versleutelde ingrediënten. Maak ze
-                openbaar, zodat bezoekers ze zien en &ldquo;Naar Bring!&rdquo; werkt. De bereiding blijft versleuteld.
+                {oldBookRecipes.length} kookboekrecept(en) zijn nog in de oude vorm. Zet ze om: bezoekers zien dan de
+                namen van de ingrediënten (zonder hoeveelheden) en &ldquo;Naar Bring!&rdquo; werkt. Hoeveelheden en
+                bereiding blijven achter het wachtwoord.
               </p>
               <button type="button" className="btn-primary" onClick={publishBookIngredients} disabled={converting}>
                 {converting ? "Bezig…" : `Omzetten (${oldBookRecipes.length})`}
