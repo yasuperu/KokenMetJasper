@@ -28,12 +28,10 @@ Vink *Dit recept komt uit een kookboek* aan en vul titel, auteur en pagina in.
 
 ## Boodschappen naar Bring!
 
-Alleen zichtbaar als het kookboek-wachtwoord op dit apparaat is onthouden (of als je via `/jk` met GitHub bent ingelogd). Op een receptpagina: **Boodschappen** → vink uit wat je al hebt → **Naar Bring!**.
+Zichtbaar als het kookboek-wachtwoord op dit apparaat is onthouden (of als je via `/jk` met GitHub bent ingelogd).
 
-- Met alleen het wachtwoord stuurt **Naar Bring!** het hele recept (gekozen aantal personen); in Bring! kies je welke ingrediënten je wilt. Bij kookboekrecepten: kopiëren of delen.
-- Ook via `/jk` ingelogd? Dan gaan precies de aangevinkte ingrediënten mee: de gekozen ingrediënten (voor het gekozen aantal personen, als boodschappenlijst: stuks naar boven afgerond, lepels en snufjes zonder hoeveelheid) worden als klein `.json`-recept op de branch `boodschappen` gezet (`lijsten/`). Bring! importeert dat bestand via `api.getbring.com/rest/bringrecipes/deeplink`. Lijsten ouder dan een dag worden opgeruimd.
-- De branch is openbaar, net als de repo; er staan alleen ingrediëntnamen in.
-- Reserve: **Kopieer lijst**, **Delen** (telefoon) of **het hele recept naar Bring!** (leest de receptgegevens van de openbare pagina; niet voor kookboekrecepten).
+- **Naar Bring!** (naast "Recept printen") opent de import van Bring! (`api.getbring.com/rest/bringrecipes/deeplink`) met de openbare receptpagina en het gekozen aantal personen. Bring! leest de ingrediënten uit de receptgegevens; in de app kies je wat je nodig hebt.
+- Kookboekrecepten zijn versleuteld, dus Bring! kan ze niet ophalen. Daar staat **Kopieer boodschappen**: stuks naar boven afgerond, gewicht/inhoud blijft, lepels en snufjes zonder hoeveelheid.
 
 ## Vindbaarheid (SEO)
 

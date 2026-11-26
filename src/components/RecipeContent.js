@@ -23,8 +23,7 @@ export function renderInstruction(text, ingredientsById, factor) {
   });
 }
 
-function RecipeContent({ ingredients, instructions, servings, factor, stepsReplacement, selected, onToggle }) {
-  const selectable = Boolean(selected);
+function RecipeContent({ ingredients, instructions, servings, factor, stepsReplacement }) {
   const ingredientsById = Object.fromEntries(ingredients.map((i) => [i.id, i]));
 
   return (
@@ -44,16 +43,7 @@ function RecipeContent({ ingredients, instructions, servings, factor, stepsRepla
             return (
               <Fragment key={ingredient.id}>
               {newGroup && <li className="ing-group">{group}</li>}
-              <li className={selectable ? (selected.has(ingredient.id) ? "selectable" : "selectable unselected") : undefined}>
-                {selectable && (
-                  <input
-                    type="checkbox"
-                    className="shop-check no-print"
-                    checked={selected.has(ingredient.id)}
-                    onChange={() => onToggle(ingredient.id)}
-                    aria-label={`${p.name} op de boodschappenlijst`}
-                  />
-                )}
+              <li>
                 <span className="qty">
                   {p.amount} {p.unit}
                 </span>
