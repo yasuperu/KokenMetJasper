@@ -19,6 +19,91 @@
     "adapted": true,
     "adaptation": "met agavesiroop, flatbread en gedroogde dille, zonder extra sriracha en verse kruiden"
   },
+  "ingredients": [
+    {
+      "id": "i1",
+      "name": "agavesiroop"
+    },
+    {
+      "id": "i2",
+      "name": "aubergine"
+    },
+    {
+      "id": "i3",
+      "name": "citroenrasp"
+    },
+    {
+      "id": "i4",
+      "name": "citroensap"
+    },
+    {
+      "id": "i5",
+      "name": "feta"
+    },
+    {
+      "id": "i6",
+      "name": "flatbread"
+    },
+    {
+      "id": "i7",
+      "name": "gedroogde dille"
+    },
+    {
+      "id": "i8",
+      "name": "gerookte paprikapoeder"
+    },
+    {
+      "id": "i9",
+      "name": "Griekse yoghurt"
+    },
+    {
+      "id": "i10",
+      "name": "knoflookpoeder"
+    },
+    {
+      "id": "i11",
+      "name": "kokend water"
+    },
+    {
+      "id": "i12",
+      "name": "komkommer"
+    },
+    {
+      "id": "i13",
+      "name": "olijfolie"
+    },
+    {
+      "id": "i14",
+      "name": "rijstazijn"
+    },
+    {
+      "id": "i15",
+      "name": "sriracha"
+    },
+    {
+      "id": "i16",
+      "name": "suiker"
+    },
+    {
+      "id": "i17",
+      "name": "tomatenpuree"
+    },
+    {
+      "id": "i18",
+      "name": "zout"
+    },
+    {
+      "id": "i19",
+      "name": "zout en peper"
+    }
+  ],
+  "bringIngredients": {
+    "v": 1,
+    "iterations": 1000,
+    "salt": "waIg2Eo55zY9cnpVwKxAdg==",
+    "iv": "uMxC2jgV2Uw+kZWf",
+    "data": "pXbqIbz5ufhaOmiPm6Oan69MAbWhEVYVvxDEZrOGscyhaqneae6VlfmyU6hjXhLKPx09dFcyIEtTT1GUWJceajHmpg3xGMFmjegGWBUdU7Two9vMUIbaAHdzId9ow/60pq8xxkJkfyf0C9BGPm7bgNThOUhQmi5nuNgI6bA/LrVo6kENTxrJa7C8QxnuyMa+JIs59ywPYe6rKz822Zf0KTUoEZ6SMYvODOmeA7C8j+HqYO8DtYWVmPL+uDTHtyZrNL8krCLT8f+Ymy1Qpx7ywh1YbOldNCEwgPw8Sj0CNFvclh0n41Zfc3UikzHl48HaBjv+PXJblUwQprU9QvdoM8vo8DV/wW+AMMahEgkK4lv74gXMhtSHovKtvEAGTBntZFX/A4XY1aXLDwQ+YeLkSJ9PwaGRxzIiWpebAJcbpmd0c1CWA1A58RHSV9TFRUvvtgL+dbEmSwd02qclEAZuGIqofJ50iU+HZZaiHKguRUhGcDKE1stdYdZ589wKZy9aj3OAhvv75rRR+5REKdTMErUy2Ulf++niwXSrVWiyBo1S9qfZqLnerj32MDAMiQI0k6WQJckqMIyRLZBxxf9EAhe96aM/8wBZUCNgIz5IzSt/Q8qkopvAZjsME6MDhpdSv6rw3SCuFj/UgK5VWoPsaEEJ4SZeAQxvKxYTY7S4kitDA9Bae2B+y8BwKSKf5PSanQ4yTVAlrZJ6MNeijZCFpBg/vjE0J20aHrFCWWKkIjjLBAvwirGBP/gH6N0LGLBDMzXu2++pwcSBL3KPjUNpStPtNlyiZkURsh/9p0iXx5MIBCmN0y5SMbvvxWWQ7JVKjM0cU5/iyRRZeETxdQbJiFSvAjLRfmFlLFP+z9xjZ8tvGw8XCI+1sevMMOgw+jkd6KZ5yYQNY5Zp8zvNMfFxCVO/AlcR/6FEpQNVMv64oaoPVCyahFpTOnMiihvjYexfGqoWJ1KqbEZP9tzkLb7IeOapZ5FTUi3PvP87Lxz/CNGZ0HSGH0nlRX+e6BhBQb+5PRsiKWT4NWomNFoFEPHjv/nMPYvjMlWVI/I7P7YxXtss568oH+iD8K+JQBP6BS5uEuOamIMuIIQTJ7UGf4Lgb82ziOT8QW4YZR0tnuSkWzIPRNr59mJf6Q6gxawp6mi72cE1PkeI9ec2DHLrp8lYaDHKeKGL399R7+d3iyQMwd3FW94OAJr93wYiUV99MVL3BF+PDc1dB96P90iuwpMdAB+OsebQ1GmyiBD6/7zC49kjMg+N44r2IvH5m21WT5JgGyP4WpczTWqF4hLAYbkWYnNSDQ8AGPHMqufr2oKtCRt/8vkRnKOn7kdPFKz3o7dRxob671q1bYIw2SRWadFEHAeY0jQZxw5EbqYInmBe5EQ="
+  },
   "locked": {
     "v": 1,
     "iterations": 250000,
